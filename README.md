@@ -1,7 +1,7 @@
 # VendingMachine
 Программное обеспечение Вендинг аппарата
 
-#### git clone https://github.com/AleksandrElizarov/VendingMachine.git - клонирование с GITHUB
+#### git clone - клонирование с GITHUB
 #### git pull origin https://github.com/AleksandrElizarov/VendingMachine.git - обновление с GITHUB
 #### git status - увидеть, какие файлы были изменены, добавлены или удалены
 #### git diff- просмотреть конкретные изменения в файлах
