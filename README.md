@@ -1,7 +1,7 @@
 # VendingMachine
 Программное обеспечение Вендинг аппарата
 
-## Среда разработки Arduino IDE 2.2.1
+## Среда разработки Arduino IDE 2.3.0
 
 #### git clone https://github.com/AleksandrElizarov/VendingMachine.git - клонирование с GITHUB
 #### git pull origin  - обновление с GITHUB
