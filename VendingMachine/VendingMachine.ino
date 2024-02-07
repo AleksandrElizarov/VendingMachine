@@ -17,13 +17,10 @@ void loop() {
     byte receivedResponse[sizeof(poll_command)];
     Serial1.readBytes(receivedResponse, sizeof(poll_command));
 
-    // Печать ответа в терминале через UART0
-    Serial.print("Response from bill acceptor: ");
-    for (int i = 0; i < sizeof(poll_command); i++) {
-      Serial.print(receivedResponse[i]);
-      Serial.print(" ");
-    }
-    Serial.println(); // Печать новой строки
+    // Отправка ответа в терминал через UART0 с использованием Serial.write
+    Serial.write("Response from bill acceptor: ");
+    Serial.write(receivedResponse, sizeof(poll_command));
+    Serial.write("\n"); // Перевод строки
   }
   
   delay(1000); // Пауза перед следующей отправкой команды
