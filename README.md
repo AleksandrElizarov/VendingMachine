@@ -1,7 +1,16 @@
 # VendingMachine
 Программное обеспечение Вендинг аппарата
 
-## Среда разработки Arduino IDE 2.3.0
+## Среда разработки и развертывания Raspberry PI 3 Model B
+
+#### sudo apt update
+#### sudo apt apgrade
+#### sudo apt install python3.9.2
+
+#### sudo apt install git
+
+#### pip install git+https://github.com/Minege/eSSP
+
 
 #### git clone https://github.com/AleksandrElizarov/VendingMachine.git - клонирование с GITHUB
 #### git pull origin  - обновление с GITHUB
