@@ -5,30 +5,10 @@ from time import sleep
 
 #  Create a new object ( Validator Object ) and initialize it ( In debug mode, so it will print debug infos )
 validator = eSSP(com_port="/dev/ttyUSB0", ssp_address="0", nv11=False, debug=True)
+(note, currency,event) = validator.get_last_event()
+#event == Status.SSP_POLL_CREDIT
+#event == Status.SSP_POLL_READ
 
-
-def event_loop():
-    while True:
-                    # ---- Example of interaction with events ---- #
-        if validator.nv11: # If the model is an NV11, put every 100 note in the storage, and others in the stack(cashbox), but that's just for this example
-            (note, currency,event) = validator.get_last_event()
-            if note == 0 or currency == 0 or event == 0:
-                pass  # Operation that do not send money info, we don't do anything with it
-            else:
-                if note != 4 and event == Status.SSP_POLL_CREDIT:
-                    validator.print_debug("NOT A 100 NOTE")
-                    validator.nv11_stack_next_note()
-                    validator.enable_validator()
-                elif note == 4 and event == Status.SSP_POLL_READ:
-                    validator.print_debug("100 NOTE")
-                    validator.set_route_storage(100)  # Route to storage
-                    validator.do_actions()
-                    validator.set_route_cashbox(50)  # Everything under or equal to 50 to cashbox ( NV11 )
-        sleep(0.5)
-
-t1 = threading.Thread(target=event_loop)  # Create a new thread on the Validator System Loop ( needed for the signal )
-t1.setDaemon(True)  # Set the thread as daemon because it don't catch the KeyboardInterrupt, so it will stop when we cut the main thread
-t1.start()  # Start the validator system loop thread ( Needed for starting sending action )
 
 try:  # Command Interpreter
     while True:
