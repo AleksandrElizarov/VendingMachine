@@ -3,15 +3,20 @@ from eSSP.constants import Status
 from eSSP import eSSP  # Import the library
 from time import sleep
 
+import spidev
+
 #  Create a new object ( Validator Object ) and initialize it ( In debug mode, so it will print debug infos )
 validator = eSSP(com_port="/dev/ttyUSB0", ssp_address="0", nv11=False, debug=True)
-(note, currency,event) = validator.get_last_event()
+
 #event == Status.SSP_POLL_CREDIT
 #event == Status.SSP_POLL_READ
 
 
 try:  # Command Interpreter
     while True:
+        #if validator.response_data:
+        #(note, currency,event) = validator.get_last_event()
+        print(f'Input_cash:{validator.enable_validator}')
         choice = input("")
         if choice == "p":  # Payout "choice" value bill ( 10, 20, 50, 100, etc. )
             choice = input("")
