@@ -2,6 +2,10 @@ import threading
 from eSSP.constants import Status
 from eSSP import eSSP  # Import the library
 from time import sleep
+import logging
+
+log_file_path = '//home/pi/Desktop/VendingMachine/log_file.log'
+logging.basicConfig(filename=log_file_path,level=logging.DEBUG)
 
 import spidev
 
@@ -10,13 +14,17 @@ validator = eSSP(com_port="/dev/ttyUSB0", ssp_address="0", nv11=False, debug=Tru
 
 #event == Status.SSP_POLL_CREDIT
 #event == Status.SSP_POLL_READ
-
+val = 1
 
 try:  # Command Interpreter
     while True:
+        sleep(0.1)
+        val = val + 1
         #if validator.response_data:
-        #(note, currency,event) = validator.get_last_event()
-        print(f'Input_cash:{validator.enable_validator}')
+        (note, currency,event) = validator.get_last_event()
+        print(f'Input_cash:{note}')
+        #logging.info(f"Data:{val}")
+        '''
         choice = input("")
         if choice == "p":  # Payout "choice" value bill ( 10, 20, 50, 100, etc. )
             choice = input("")
@@ -45,7 +53,7 @@ try:  # Command Interpreter
             validator.get_note_amount(int(choice))
             sleep(1)
             print("Number of bills of %s : %s"%(choice, validator.response_data['getnoteamount_response']))
-
+            '''
 except KeyboardInterrupt:  # If user do CTRL+C
     validator.close()  # Close the connection with the validator
     print("Exiting")
