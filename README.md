@@ -9,7 +9,8 @@
 
 #### sudo apt install git
 
-#### pip install git+https://github.com/Minege/eSSP
+#### pip install git+https://github.com/Minege/eSSP.git
+#### pip install git+https://github.com/JMW95/pyST7920.git
 
 
 #### git clone https://github.com/AleksandrElizarov/VendingMachine.git - клонирование с GITHUB
