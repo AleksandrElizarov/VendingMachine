@@ -41189,3 +41189,45 @@ INFO:root:Data:106
 INFO:root:Data:107
 INFO:root:Data:108
 INFO:root:Data:109
+DEBUG:parso.python.diff:diff parser start
+DEBUG:parso.python.diff:line_lengths old: 67; new: 67
+DEBUG:parso.python.diff:-> code[equal] old[1:6] new[1:6]
+DEBUG:parso.python.diff:copy old[1:6] new[1:6]
+DEBUG:parso.python.diff:-> code[replace] old[7:7] new[7:7]
+DEBUG:parso.python.diff:parse_part from 7 to 7 (to 7 in part parser)
+DEBUG:parso.python.diff:-> code[equal] old[8:67] new[8:67]
+DEBUG:parso.python.diff:copy old[8:23] new[8:23]
+DEBUG:parso.python.diff:parse_part from 24 to 66 (to 66 in part parser)
+DEBUG:parso.python.diff:diff parser end
+DEBUG:parso.python.diff:diff parser start
+DEBUG:parso.python.diff:line_lengths old: 67; new: 67
+DEBUG:parso.python.diff:-> code[equal] old[1:6] new[1:6]
+DEBUG:parso.python.diff:copy old[1:6] new[1:6]
+DEBUG:parso.python.diff:-> code[replace] old[7:7] new[7:7]
+DEBUG:parso.python.diff:parse_part from 7 to 7 (to 7 in part parser)
+DEBUG:parso.python.diff:-> code[equal] old[8:67] new[8:67]
+DEBUG:parso.python.diff:copy old[8:23] new[8:23]
+DEBUG:parso.python.diff:parse_part from 24 to 66 (to 66 in part parser)
+DEBUG:parso.python.diff:diff parser end
+DEBUG:parso.python.diff:diff parser start
+DEBUG:parso.python.diff:line_lengths old: 67; new: 67
+DEBUG:parso.python.diff:-> code[equal] old[1:6] new[1:6]
+DEBUG:parso.python.diff:copy old[1:6] new[1:6]
+DEBUG:parso.python.diff:-> code[replace] old[7:7] new[7:7]
+DEBUG:parso.python.diff:parse_part from 7 to 7 (to 7 in part parser)
+DEBUG:parso.python.diff:-> code[equal] old[8:67] new[8:67]
+DEBUG:parso.python.diff:copy old[8:23] new[8:23]
+DEBUG:parso.python.diff:parse_part from 24 to 66 (to 66 in part parser)
+DEBUG:parso.python.diff:diff parser end
+DEBUG:parso.python.diff:diff parser start
+DEBUG:parso.python.diff:line_lengths old: 67; new: 67
+DEBUG:parso.python.diff:-> code[equal] old[1:6] new[1:6]
+DEBUG:parso.python.diff:copy old[1:6] new[1:6]
+DEBUG:parso.python.diff:-> code[replace] old[7:7] new[7:7]
+DEBUG:parso.python.diff:parse_part from 7 to 7 (to 7 in part parser)
+DEBUG:parso.python.diff:-> code[equal] old[8:67] new[8:67]
+DEBUG:parso.python.diff:copy old[8:23] new[8:23]
+DEBUG:parso.python.diff:parse_part from 24 to 66 (to 66 in part parser)
+DEBUG:parso.python.diff:diff parser end
+DEBUG:parso.cache:pickle loaded: /usr/lib/python3/dist-packages/jedi/third_party/typeshed/stdlib/2and3/builtins.pyi
+DEBUG:parso.cache:pickle loaded: /usr/lib/python3/dist-packages/jedi/third_party/typeshed/stdlib/3/sys.pyi
