@@ -145,3 +145,4 @@ class ST7920:
 					self._send_line(row, dx1, dx2)
 					self.currentlydisplayedfbuff[row][dx1//8:(dx2//8)+1] = self.fbuff[row][dx1//8:(dx2//8)+1]
 
+
