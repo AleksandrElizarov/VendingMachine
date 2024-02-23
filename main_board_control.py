@@ -1,35 +1,27 @@
 import threading
-from eSSP.constants import Status
-from eSSP import eSSP  # Import the library
 from time import sleep
 import logging
+
+from eSSP.constants import Status
+from eSSP import eSSP  # Import the library
 from st7920 import ST7920
 
-#log_file_path = '//home/pi/Desktop/VendingMachine/log_file.log'
-#logging.basicConfig(filename=log_file_path,level=logging.DEBUG)
 
-# Initialize the LCD
-lcd = ST7920()
-lcd.clear()
-# Display "Hello, world!" on the LCD
-lcd.put_text("Hello, world!", 0, 0)
-lcd.redraw()
+MILLILITRE_PULSE = 0.17 #параметры датчика потока воды 1000мл=5880пульов или 0,17мл=1пульс
+available_volume = 0 #оплаченный обьем для выдачи
 
-#  Create a new object ( Validator Object ) and initialize it ( In debug mode, so it will print debug infos )
+#Экемпляр купюроприемника
 validator = eSSP(com_port="/dev/ttyUSB0", ssp_address="0", nv11=False, debug=True)
 
-#event == Status.SSP_POLL_CREDIT
-#event == Status.SSP_POLL_READ
-val = 1
+total_sum = 0
 
-try:  # Command Interpreter
+try:  # MAIN LOOP
     while True:
-        sleep(0.1)
-        val = val + 1
-        #if validator.response_data:
-        (note, currency,event) = validator.get_last_event()
-        print(f'Input_cash:{note}')
-        #logging.info(f"Data:{val}")
+        sleep(3)
+        total_sum = total_sum + validator.get_last_credit_cash()
+        print(f'Общая сумма: {total_sum} сом')
+        
+        
         
 except KeyboardInterrupt:  # If user do CTRL+C
     validator.close()  # Close the connection with the validator
