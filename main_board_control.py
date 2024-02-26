@@ -15,9 +15,21 @@ validator = eSSP(com_port="/dev/ttyUSB0", ssp_address="0", nv11=False, debug=Tru
 
 total_sum = 0
 
+from st7920 import ST7920
+
+# Initialize the LCD
+
+
 try:  # MAIN LOOP
     while True:
         sleep(3)
+        
+        lcd = ST7920()
+        lcd.clear()
+        # Display "Hello, world!" on the LCD
+        lcd.put_text("Hello, world!", 0, 0)
+        lcd.redraw()
+        
         total_sum = total_sum + validator.get_last_credit_cash()
         print(f'Общая сумма: {total_sum} сом')
         
