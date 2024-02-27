@@ -25,7 +25,7 @@ if __name__ == '__main__':
         while True:
 
             #lcd.display_text("Hello, World!", position=(50, 50), font_size=30, text_color=(255, 0, 0))
-            
+            time.sleep(1)
             print('Drawing image')
             lcd.display(image)
             time.sleep(1)
