@@ -297,3 +297,14 @@ class ILI9486:
         self.command(CMD_SLPOUT)
         time.sleep(0.005)
         return self
+
+
+
+
+    def display_text(self, text, font_size=20, position=(0, 0), text_color=(255, 255, 255), background_color=(0, 0, 0)):
+        """Displays text on the screen."""
+        font = ImageFont.load_default()  # You can use other fonts if needed
+        image = Image.new('RGB', (self.__width, self.__height), background_color)
+        draw = ImageDraw.Draw(image)
+        draw.text(position, text, font=font, fill=text_color)
+        self.display(image)
