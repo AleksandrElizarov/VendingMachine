@@ -23,6 +23,9 @@ if __name__ == '__main__':
         partial = image.resize((width // 2, height // 2))
 
         while True:
+
+            #lcd.display_text("Hello, World!", position=(50, 50), font_size=30, text_color=(255, 0, 0))
+            
             print('Drawing image')
             lcd.display(image)
             time.sleep(1)
