@@ -11,18 +11,17 @@ MILLILITRE_PULSE = 0.17 #параметры датчика потока воды
 available_volume = 0 #оплаченный обьем для выдачи
 
 #Экемпляр купюроприемника
-validator = eSSP(com_port="/dev/ttyUSB0", ssp_address="0", nv11=False, debug=True)
+#validator = eSSP(com_port="/dev/ttyUSB0", ssp_address="0", nv11=False, debug=True)
+
 
 total_sum = 0
 
-from st7920 import ST7920
 
-# Initialize the LCD
 
 
 try:  # MAIN LOOP
     while True:
-        sleep(3)
+        sleep(1)
         
         lcd = ST7920()
         lcd.clear()
@@ -30,7 +29,7 @@ try:  # MAIN LOOP
         lcd.put_text("Hello, world!", 0, 0)
         lcd.redraw()
         
-        total_sum = total_sum + validator.get_last_credit_cash()
+        total_sum = total_sum + 5#validator.get_last_credit_cash()
         print(f'Общая сумма: {total_sum} сом')
         
         
