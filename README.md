@@ -15,7 +15,6 @@ pip install git+https://github.com/Minege/eSSP.git
 pip install pillow
 pip install RPi.GPIO
 pip install numpy
-pip install adafruit-circuitpython-rgb-display
 ````
 КОМАНДЫ ДЛЯ GIT:  
 клонирование с GITHUB
