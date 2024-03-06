@@ -15,6 +15,7 @@ pip install git+https://github.com/Minege/eSSP.git
 pip install pillow
 pip install RPi.GPIO
 pip install numpy
+pip install pygame
 ````
 КОМАНДЫ ДЛЯ GIT:  
 клонирование с GITHUB
