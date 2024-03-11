@@ -8,9 +8,9 @@ import time
 from pygame.locals import *
 import pygame
 
-from eSSP.constants import Status
-from eSSP import eSSP
-import RPi.GPIO as GPIO
+#from eSSP.constants import Status
+#from eSSP import eSSP
+#import RPi.GPIO as GPIO
 
 
 PRICE_WATER = 30 #Цена за 1литр
@@ -26,24 +26,26 @@ PIN_OUTPUT_OZON = 35 # Пин включения озонатора
 MILLILITRE_PULSE = 0.00222 #параметры датчика потока воды 1000мл=450пульов или 0,0022мл=1пульс
 
 liquid_available = 1 #оплаченный обьем для выдачи
-ozon_available = False #доступ для включению озонатора
 
-validator = None
+validator = 1
+
+ozon_running = False
+duration_ozon_running = 10
 
 # Установка времени работы программы
 start_time = time.time()
-duration = 15  # время работы программы в секундах
+duration = 25  # время работы программы в секундах
 
 
 FONT_SIZE = 120  # Размер шрифта
 
-BACKGROUND_COLOR = (0, 0, 128)  # Цвет фона синий (0, 0, 128)
+BACKGROUND_COLOR = (242, 242, 240)  # Цвет фона синий (0, 0, 128)
 BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
 
 TEXT_COLOR = (255, 255, 255)  # Цвет шрифта белый (255, 255, 255)
 TEXT_COLOR_ALARM = (255, 255, 0)  # Цвет шрифта желтый
 
-
+'''
 # Инициализация GPIO
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -61,7 +63,7 @@ GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
 
 GPIO.setup(PIN_OUTPUT_OZON, GPIO.OUT) # Пин озонатора
 GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
-
+'''
 # Функция, которая будет вызываться по прерыванию RAISING от датчика потока жижкости
 def count_liquid(channel):
     global liquid_available
@@ -70,57 +72,39 @@ def count_liquid(channel):
     if(liquid_available <= 0):
         liquid_available = 0
         #Выключаем нагрузки
-        GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-        GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+        #GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
+        #GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
         
 #Функция для обработки кнопки СТОП
 def stop_flow(channel):
     print('STOP_valve')
-    GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
+    #GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
     
     
 #Функция для обработки кнопки СТАРТ
 def start_flow(channel):
     if(liquid_available > 0):
         print('START_valve')
-        GPIO.output(PIN_OUTPUT_VALVE, GPIO.HIGH)
+        #GPIO.output(PIN_OUTPUT_VALVE, GPIO.HIGH)
         
-        
-#Функция для обработки кнопки ОЗОНАТОР
-def ozon_pass(channel):
-    if(ozon_available):
-        toggle_ozon_thread = threading.Thread(target=toggle_ozon)
-        toggle_ozon_thread.daemon = True
-        toggle_ozon_thread.start()
-        
-        
-#Функция включени Озонатора в отдельном потоек
-def toggle_ozon():
-    if(ozon_available):
-        print('OZON')
-        GPIO.output(PIN_OUTPUT_OZON, GPIO.HIGH)
-        sleep(10)
-        GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)        
-        
-        
+                               
     
-    
-
+'''
 # Настройка прерывания
 GPIO.add_event_detect(PIN_INPUT_SENSOR_FLOW, GPIO.FALLING, callback=count_liquid, bouncetime=5)
 
 GPIO.add_event_detect(PIN_INPUT_OZON, GPIO.FALLING, callback=ozon_pass, bouncetime=300)
 GPIO.add_event_detect(PIN_INPUT_START, GPIO.FALLING, callback=start_flow, bouncetime=300)
 GPIO.add_event_detect(PIN_INPUT_STOP, GPIO.FALLING, callback=stop_flow, bouncetime=300)
-
+'''
 # Инициализация Pygame
 pygame.init()
 # Фиксированный размер шрифта
 font = pygame.font.SysFont(None, FONT_SIZE)
 
 # Установка размера экрана
-screen_width = 1000
-screen_height = 320
+screen_width = 1300
+screen_height = 350
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 #screen = pygame.display.set_mode((0, 0), FULLSCREEN)
@@ -128,18 +112,27 @@ pygame.display.set_caption('Vending Machine Display')
 
 
 
-
+input_state_bt_ozon = False #GPIO.input(PIN_INPUT_OZON) #КОД ДОЛЖЕН ПЕРЕНЕСЕН В  if(liquid_available > 0):
 # Основной цикл программы
-while True:
+main_loop_running = True
+while main_loop_running:
     
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            # Обработка события закрытия окна
+            main_loop_running = False
+        elif event.type == pygame.KEYDOWN:
+            # Обработка события нажатия клавиши (например, ESC)
+            if event.key == pygame.K_ESCAPE:
+                main_loop_running = False    
     
     try:
         #Экемпляр купюроприемника
-        if(validator == None):
+        if(validator == 1):
             validator = eSSP(com_port=COM_PORT, ssp_address="0", nv11=False, debug=True)
             
         #Если внесена оплата, то вывести на диспле сумму и увеличить доступный обьем
-        credit_cash = validator.get_last_credit_cash()
+        credit_cash = 0#validator.get_last_credit_cash()
         if(credit_cash > 0):
             liquid_available = liquid_available + credit_cash/PRICE_WATER
             # Создание текста
@@ -157,8 +150,33 @@ while True:
         
         #Если произведена оплата и предоставлен доступный обьем воды для выдачи
         if(liquid_available > 0):
-            ozon_available = True    
             
+            #Нажата кнопка ОЗОНАТОР
+            if(input_state_bt_ozon == False):
+                ozon_running = True
+                #GPIO.output(PIN_OUTPUT_OZON, GPIO.HIGH) #Включаем Озонатор
+                time_ozon = duration_ozon_running
+                sleep(0.5) #Дребезг контактов
+                input_state_bt_ozon = True # УБРАТЬ В RASPBERRY
+                
+            if(ozon_running):
+                # Создание текста
+                text_ozonator = f"Озонатор работает, {time_ozon} сек."
+                text_surface_ozonator = font.render(text_ozonator, True, TEXT_COLOR) 
+                # Определение координат для текста
+                text_ozonator_rect = text_surface_ozonator.get_rect(topleft=(130, 150))  # координаты
+                time_ozon = time_ozon - 1
+                if(time_ozon < 0):
+                    ozon_running = False
+                    #GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW) #Выключаем Озонатор
+                sleep(1)    
+            else:
+                # Создание текста
+                text_ozonator = "Используйте озонатор"
+                text_surface_ozonator = font.render(text_ozonator, True, TEXT_COLOR) 
+                # Определение координат для текста
+                text_ozonator_rect = text_surface_ozonator.get_rect(topleft=(130, 150))  # координаты 
+
             # Создание текста
             text_credit_cash1 = f"ДОСТУПНО:  {round(liquid_available, 2)} л."
             text_surface_credit_cash1 = font.render(text_credit_cash1, True, TEXT_COLOR) 
@@ -167,15 +185,15 @@ while True:
             # Заполнение экрана
             screen.fill(BACKGROUND_COLOR)
             # Рисование текста на экране
+            screen.blit(text_surface_ozonator, text_ozonator_rect)
             screen.blit(text_surface_credit_cash1, text_credit_cash_rect1)
             # Обновление экрана
             pygame.display.flip()
             
         else:
-            ozon_available = False
             #Выключаем нагрузки
-            GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-            GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+            #GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
+            #GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
             # Создание текста
             text_line1 = "Добро пожаловать!"
             text_line2 = f"Стоимость: 1 литра = {PRICE_WATER} сома"
@@ -203,8 +221,8 @@ while True:
         
     except Exception as e:
         #Выключаем нагрузки
-        GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-        GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+        #GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
+        #GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
         # Создание текста
         text_alarm_line_1 = "Временные"
         text_alarm_line_1_surface = font.render(text_alarm_line_1, True, TEXT_COLOR_ALARM) 
@@ -228,16 +246,24 @@ while True:
         
         # Обновление экрана
         pygame.display.flip()
-        sleep(duration)
-        
         print(f'Exception-{e}')
+        sleep(1)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                # Обработка события закрытия окна
+                main_loop_running = False
+            elif event.type == pygame.KEYDOWN:
+                # Обработка события нажатия клавиши (например, ESC)
+                if event.key == pygame.K_ESCAPE:
+                    main_loop_running = False 
         
     # Проверка времени работы программы
     if time.time() - start_time >= duration:
         break
 #Выключаем нагрузки    
-GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+#GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
+#GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
 pygame.quit()
 sys.exit()
 validator.close()  # Close the connection with the validator
