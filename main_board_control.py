@@ -8,9 +8,9 @@ import time
 from pygame.locals import *
 import pygame
 
-#from eSSP.constants import Status
-#from eSSP import eSSP
-#import RPi.GPIO as GPIO
+from eSSP.constants import Status
+from eSSP import eSSP
+import RPi.GPIO as GPIO
 
 
 PRICE_WATER = 30 #Цена за 1литр
@@ -25,16 +25,16 @@ PIN_OUTPUT_OZON = 35 # Пин включения озонатора
 
 MILLILITRE_PULSE = 0.00222 #параметры датчика потока воды 1000мл=450пульов или 0,0022мл=1пульс
 
-liquid_available = 1 #оплаченный обьем для выдачи
+liquid_available = 0 #оплаченный обьем для выдачи
 
-validator = 1
+validator = None
 
 ozon_running = False
-duration_ozon_running = 10
+duration_ozon_running = 10 #Время в секундах работы озонатора
 
 # Установка времени работы программы
 start_time = time.time()
-duration = 25  # время работы программы в секундах
+duration = 50  # время работы программы в секундах
 
 
 FONT_SIZE = 120  # Размер шрифта
@@ -45,14 +45,14 @@ BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
 TEXT_COLOR = (255, 255, 255)  # Цвет шрифта белый (255, 255, 255)
 TEXT_COLOR_ALARM = (255, 255, 0)  # Цвет шрифта желтый
 
-'''
+
 # Инициализация GPIO
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 
 # Настройка пина как вход
 GPIO.setup(PIN_INPUT_SENSOR_FLOW, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин датчика жидкости
-GPIO.setup(PIN_INPUT_OZON, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки озонатора
+GPIO.setup(PIN_INPUT_OZON, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки Озонатора
 GPIO.setup(PIN_INPUT_START, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки СТАРТ
 GPIO.setup(PIN_INPUT_STOP, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки СТОП
 
@@ -63,7 +63,7 @@ GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
 
 GPIO.setup(PIN_OUTPUT_OZON, GPIO.OUT) # Пин озонатора
 GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
-'''
+
 # Функция, которая будет вызываться по прерыванию RAISING от датчика потока жижкости
 def count_liquid(channel):
     global liquid_available
@@ -72,31 +72,28 @@ def count_liquid(channel):
     if(liquid_available <= 0):
         liquid_available = 0
         #Выключаем нагрузки
-        #GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-        #GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+        GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
+        GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
         
 #Функция для обработки кнопки СТОП
 def stop_flow(channel):
     print('STOP_valve')
-    #GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-    
+    GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
     
 #Функция для обработки кнопки СТАРТ
 def start_flow(channel):
     if(liquid_available > 0):
         print('START_valve')
-        #GPIO.output(PIN_OUTPUT_VALVE, GPIO.HIGH)
+        GPIO.output(PIN_OUTPUT_VALVE, GPIO.HIGH)
         
                                
     
-'''
 # Настройка прерывания
 GPIO.add_event_detect(PIN_INPUT_SENSOR_FLOW, GPIO.FALLING, callback=count_liquid, bouncetime=5)
 
-GPIO.add_event_detect(PIN_INPUT_OZON, GPIO.FALLING, callback=ozon_pass, bouncetime=300)
 GPIO.add_event_detect(PIN_INPUT_START, GPIO.FALLING, callback=start_flow, bouncetime=300)
 GPIO.add_event_detect(PIN_INPUT_STOP, GPIO.FALLING, callback=stop_flow, bouncetime=300)
-'''
+
 # Инициализация Pygame
 pygame.init()
 # Фиксированный размер шрифта
@@ -112,7 +109,7 @@ pygame.display.set_caption('Vending Machine Display')
 
 
 
-input_state_bt_ozon = False #GPIO.input(PIN_INPUT_OZON) #КОД ДОЛЖЕН ПЕРЕНЕСЕН В  if(liquid_available > 0):
+ 
 # Основной цикл программы
 main_loop_running = True
 while main_loop_running:
@@ -150,14 +147,14 @@ while main_loop_running:
         
         #Если произведена оплата и предоставлен доступный обьем воды для выдачи
         if(liquid_available > 0):
+            input_state_bt_ozon = GPIO.input(PIN_INPUT_OZON)
             
             #Нажата кнопка ОЗОНАТОР
             if(input_state_bt_ozon == False):
                 ozon_running = True
-                #GPIO.output(PIN_OUTPUT_OZON, GPIO.HIGH) #Включаем Озонатор
+                GPIO.output(PIN_OUTPUT_OZON, GPIO.HIGH) #Включаем Озонатор
                 time_ozon = duration_ozon_running
                 sleep(0.5) #Дребезг контактов
-                input_state_bt_ozon = True # УБРАТЬ В RASPBERRY
                 
             if(ozon_running):
                 # Создание текста
@@ -192,8 +189,8 @@ while main_loop_running:
             
         else:
             #Выключаем нагрузки
-            #GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-            #GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+            GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
+            GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
             # Создание текста
             text_line1 = "Добро пожаловать!"
             text_line2 = f"Стоимость: 1 литра = {PRICE_WATER} сома"
@@ -221,8 +218,8 @@ while main_loop_running:
         
     except Exception as e:
         #Выключаем нагрузки
-        #GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-        #GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+        GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
+        GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
         # Создание текста
         text_alarm_line_1 = "Временные"
         text_alarm_line_1_surface = font.render(text_alarm_line_1, True, TEXT_COLOR_ALARM) 
@@ -262,8 +259,8 @@ while main_loop_running:
     if time.time() - start_time >= duration:
         break
 #Выключаем нагрузки    
-#GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-#GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
+GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
 pygame.quit()
 sys.exit()
 validator.close()  # Close the connection with the validator
