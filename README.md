@@ -2,6 +2,8 @@
 Программное обеспечение Вендинг аппарата
 Среда разработки и развертывания Raspberry PI 3 Model B
 
+#### параметры датчика потока воды 1000мл=5880пульов или 0,17мл=1пульс
+
 ````bash
 sudo apt update
 sudo apt apgrade
@@ -57,5 +59,48 @@ git branch
 git push origin
 ````
 
-#### параметры датчика потока воды 1000мл=5880пульов или 0,17мл=1пульс
+Настройка демона для автоматической загрузки скрипта
+````bash
+which python3.9
+locate python3.9
+````
+Обычно, он может быть что-то вроде /usr/bin/python3.9 или /usr/local/bin/python3.9, либо использовать команду dpkg -L python3.9
+
+Создание служебного файла
+````bash
+sudo nano /etc/systemd/system/vending_machine.service
+````
+
+В данный файл добавить код
+````bash
+[Unit]
+Description=Vending Machine Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/vending_machine.py
+WorkingDirectory=/home/pi
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
+
+````
+
+А затем выполнить команды
+````bash
+sudo systemctl daemon-reload
+sudo systemctl enable vending_machine.service
+sudo systemctl start vending_machine.service
+````
+
+Для проверки состояния службы
+````bash
+sudo systemctl status vending_machine.service
+sudo journalctl -u vending_machine.service
+````
+
+
+
 
