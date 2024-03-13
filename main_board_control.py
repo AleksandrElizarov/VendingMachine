@@ -1,5 +1,3 @@
-#pigpio
-
 import threading
 from time import sleep
 import logging
@@ -13,7 +11,7 @@ from eSSP import eSSP
 import RPi.GPIO as GPIO
 
 
-PRICE_WATER = 30 #Цена за 1литр
+PRICE_WATER = 3 #Цена за 1литр
 COM_PORT = "/dev/ttyUSB0" # Название последовательного порта
 PIN_INPUT_SENSOR_FLOW = 32 # Пин датчика жидкости
 PIN_INPUT_OZON = 40 # Пин датчика жидкости
@@ -34,12 +32,12 @@ duration_ozon_running = 10 #Время в секундах работы озон
 
 # Установка времени работы программы
 start_time = time.time()
-duration = 50  # время работы программы в секундах
+duration = 100  # время работы программы в секундах
 
 
 FONT_SIZE = 120  # Размер шрифта
 
-BACKGROUND_COLOR = (242, 242, 240)  # Цвет фона синий (0, 0, 128)
+BACKGROUND_COLOR = (0, 0, 128)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
 BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
 
 TEXT_COLOR = (255, 255, 255)  # Цвет шрифта белый (255, 255, 255)
@@ -102,9 +100,9 @@ font = pygame.font.SysFont(None, FONT_SIZE)
 # Установка размера экрана
 screen_width = 1300
 screen_height = 350
-screen = pygame.display.set_mode((screen_width, screen_height))
+#screen = pygame.display.set_mode((screen_width, screen_height))
 
-#screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+screen = pygame.display.set_mode((0, 0), FULLSCREEN)
 pygame.display.set_caption('Vending Machine Display')
 
 
@@ -125,11 +123,16 @@ while main_loop_running:
     
     try:
         #Экемпляр купюроприемника
-        if(validator == 1):
+        if(validator == None):
             validator = eSSP(com_port=COM_PORT, ssp_address="0", nv11=False, debug=True)
+        else:
+            if(validator.running == False):
+                raise Exception("Validator disconnected")
+                
+            
             
         #Если внесена оплата, то вывести на диспле сумму и увеличить доступный обьем
-        credit_cash = 0#validator.get_last_credit_cash()
+        credit_cash = validator.get_last_credit_cash()
         if(credit_cash > 0):
             liquid_available = liquid_available + credit_cash/PRICE_WATER
             # Создание текста
@@ -165,7 +168,7 @@ while main_loop_running:
                 time_ozon = time_ozon - 1
                 if(time_ozon < 0):
                     ozon_running = False
-                    #GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW) #Выключаем Озонатор
+                    GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW) #Выключаем Озонатор
                 sleep(1)    
             else:
                 # Создание текста
@@ -244,16 +247,6 @@ while main_loop_running:
         # Обновление экрана
         pygame.display.flip()
         print(f'Exception-{e}')
-        sleep(1)
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                # Обработка события закрытия окна
-                main_loop_running = False
-            elif event.type == pygame.KEYDOWN:
-                # Обработка события нажатия клавиши (например, ESC)
-                if event.key == pygame.K_ESCAPE:
-                    main_loop_running = False 
         
     # Проверка времени работы программы
     if time.time() - start_time >= duration:
