@@ -32,7 +32,7 @@ duration_ozon_running = 10 #Время в секундах работы озон
 
 # Установка времени работы программы
 start_time = time.time()
-duration = 100  # время работы программы в секундах
+duration = 50  # время работы программы в секундах
 
 
 FONT_SIZE = 120  # Размер шрифта
@@ -157,7 +157,7 @@ while main_loop_running:
                 ozon_running = True
                 GPIO.output(PIN_OUTPUT_OZON, GPIO.HIGH) #Включаем Озонатор
                 time_ozon = duration_ozon_running
-                sleep(0.5) #Дребезг контактов
+                sleep(0.1) #Дребезг контактов
                 
             if(ozon_running):
                 # Создание текста
