@@ -249,8 +249,10 @@ while main_loop_running:
         print(f'Exception-{e}')
         
     # Проверка времени работы программы
+    '''
     if time.time() - start_time >= duration:
         break
+    '''
 #Выключаем нагрузки    
 GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
 GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)

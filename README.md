@@ -78,7 +78,7 @@ Description=Vending Machine Service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /home/pi/vending_machine.py
+ExecStart=/usr/bin/python3.9 /home/pi/VendingMachine/main_board_control.py
 WorkingDirectory=/home/pi
 Restart=always
 User=pi
