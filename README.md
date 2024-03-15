@@ -80,6 +80,8 @@ After=network.target
 [Service]
 ExecStart=/usr/bin/python3.9 /home/pi/VendingMachine/main_board_control.py
 WorkingDirectory=/home/pi
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/home/pi/.Xauthority"
 Restart=always
 User=pi
 
@@ -98,6 +100,12 @@ WantedBy=multi-user.target
 Если вы внесли изменения и не сохранили их (не использовали Ctrl + O), 
 nano спросит вас, хотите ли вы сохранить изменения перед выходом. 
 Нажмите Y (для подтверждения) или N (для отмены сохранения) в соответствии с вашими предпочтениями.
+
+Также, убедитесь, что ваш пользователь (например, pi) принадлежит к группе video. 
+Вы можете добавить пользователя в группу video командой:
+````bash
+sudo usermod -aG video pi
+````
 
 А затем выполнить команды
 ````bash

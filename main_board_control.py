@@ -32,7 +32,10 @@ duration_ozon_running = 10 #Время в секундах работы озон
 
 # Установка времени работы программы
 start_time = time.time()
-duration = 50  # время работы программы в секундах
+duration = 25  # время работы программы в секундах
+
+debug_flow_sensor_vision = True
+number_pulse_sensor = 0
 
 
 FONT_SIZE = 120  # Размер шрифта
@@ -65,10 +68,13 @@ GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
 # Функция, которая будет вызываться по прерыванию RAISING от датчика потока жижкости
 def count_liquid(channel):
     global liquid_available
+    global number_pulse_sensor
     if(liquid_available > 0):
         liquid_available = liquid_available - MILLILITRE_PULSE
+        number_pulse_sensor = number_pulse_sensor + 1
     if(liquid_available <= 0):
         liquid_available = 0
+        number_pulse_sensor = 0
         #Выключаем нагрузки
         GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
         GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
@@ -182,11 +188,23 @@ while main_loop_running:
             text_surface_credit_cash1 = font.render(text_credit_cash1, True, TEXT_COLOR) 
             # Определение координат для текста
             text_credit_cash_rect1 = text_surface_credit_cash1.get_rect(topleft=(130, 300))  # координаты 
+            
+            if(debug_flow_sensor_vision):
+                # Создание текста
+                text_number_pulse = f"Импульсы: {number_pulse_sensor}"
+                text_surface_number_pulse = font.render(text_number_pulse, True, TEXT_COLOR) 
+                # Определение координат для текста
+                text_text_number_pulse_rect = text_surface_number_pulse.get_rect(topleft=(130, 500))  # координаты 
+            
+                
             # Заполнение экрана
             screen.fill(BACKGROUND_COLOR)
             # Рисование текста на экране
             screen.blit(text_surface_ozonator, text_ozonator_rect)
             screen.blit(text_surface_credit_cash1, text_credit_cash_rect1)
+            if(debug_flow_sensor_vision):
+                screen.blit(text_surface_number_pulse, text_text_number_pulse_rect)
+            
             # Обновление экрана
             pygame.display.flip()
             
