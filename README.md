@@ -120,6 +120,14 @@ sudo systemctl status vending_machine.service
 sudo journalctl -u vending_machine.service
 ````
 
+НАСТРОЙКА И УСТАНОВКА ДРАЙВЕРОВ ДЛЯ LCD 3.5'
+````bash
+sudo rm -rf LCD-show
+git clone https://github.com/goodtft/LCD-show.git
+chmod -R 755 LCD-show
+cd LCD-show/
+sudo ./LCD35-show
+````
 
 
 
