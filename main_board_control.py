@@ -10,6 +10,8 @@ from eSSP.constants import Status
 from eSSP import eSSP
 import RPi.GPIO as GPIO
 
+from CoinPulse import CoinPulse
+
 
 PRICE_WATER = 3 #Цена за 1литр
 COM_PORT = "/dev/ttyUSB0" # Название последовательного порта
@@ -17,6 +19,7 @@ PIN_INPUT_SENSOR_FLOW = 32 # Пин датчика жидкости
 PIN_INPUT_OZON = 40 # Пин датчика жидкости
 PIN_INPUT_START = 38 # Пин кнопки старт
 PIN_INPUT_STOP = 36 # Пин кнопики стоп
+PIN_INPUT_COIN_ACCEPTOR = 31 # Пин монетоприемника
 
 PIN_OUTPUT_VALVE = 37 # Пин клапана для выдачи воды
 PIN_OUTPUT_OZON = 35 # Пин включения озонатора
@@ -30,9 +33,10 @@ validator = None
 ozon_running = False
 duration_ozon_running = 10 #Время в секундах работы озонатора
 
+
 # Установка времени работы программы
 start_time = time.time()
-duration = 25  # время работы программы в секундах
+duration = 15  # время работы программы в секундах
 
 debug_flow_sensor_vision = True
 number_pulse_sensor = 0
@@ -81,15 +85,14 @@ def count_liquid(channel):
         
 #Функция для обработки кнопки СТОП
 def stop_flow(channel):
-    print('STOP_valve')
     GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
     
 #Функция для обработки кнопки СТАРТ
 def start_flow(channel):
     if(liquid_available > 0):
-        print('START_valve')
         GPIO.output(PIN_OUTPUT_VALVE, GPIO.HIGH)
-        
+ 
+    
                                
     
 # Настройка прерывания
@@ -105,10 +108,10 @@ font = pygame.font.SysFont(None, FONT_SIZE)
 
 # Установка размера экрана
 screen_width = 1300
-screen_height = 350
-#screen = pygame.display.set_mode((screen_width, screen_height))
+screen_height = 250
+screen = pygame.display.set_mode((screen_width, screen_height))
 
-screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+#screen = pygame.display.set_mode((0, 0), FULLSCREEN)
 pygame.display.set_caption('Vending Machine Display')
 
 
@@ -131,6 +134,7 @@ while main_loop_running:
         #Экемпляр купюроприемника
         if(validator == None):
             validator = eSSP(com_port=COM_PORT, ssp_address="0", nv11=False, debug=True)
+            coin_pulse = CoinPulse(GPIO_board_port=31)
         else:
             if(validator.running == False):
                 raise Exception("Validator disconnected")
@@ -241,6 +245,7 @@ while main_loop_running:
         #Выключаем нагрузки
         GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
         GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+        #GPIO.cleanup();
         # Создание текста
         text_alarm_line_1 = "Временные"
         text_alarm_line_1_surface = font.render(text_alarm_line_1, True, TEXT_COLOR_ALARM) 
@@ -267,13 +272,14 @@ while main_loop_running:
         print(f'Exception-{e}')
         
     # Проверка времени работы программы
-    '''
+    
     if time.time() - start_time >= duration:
         break
-    '''
+    
 #Выключаем нагрузки    
 GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
 GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+#GPIO.cleanup();
 pygame.quit()
 sys.exit()
 validator.close()  # Close the connection with the validator
