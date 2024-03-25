@@ -50,7 +50,7 @@ class CoinPulse(object):
                     self.count_pulse = 0
                     self.coin_running = False
 
-    def get_last_credit_cash_from_list(self):
+    def get_last_credit_coin(self):
         pass
 
                     
