@@ -19,7 +19,7 @@ pip install RPi.GPIO
 pip install numpy
 pip install pygame
 ````
-В директории заменить файл eSSP.py
+В директории заменить содержимое файла eSSP.py из файла for_change_eSSP.py
 ````bash
 /home/pi/.local/lib/python3.9/site-packages/eSSP
 ````
