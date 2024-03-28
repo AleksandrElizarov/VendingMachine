@@ -19,6 +19,11 @@ pip install RPi.GPIO
 pip install numpy
 pip install pygame
 ````
+В директории заменить файл eSSP.py
+````bash
+/home/pi/.local/lib/python3.9/site-packages/eSSP
+````
+
 КОМАНДЫ ДЛЯ GIT:  
 клонирование с GITHUB
 ````bash

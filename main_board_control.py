@@ -36,7 +36,7 @@ duration_ozon_running = 10 #Время в секундах работы озон
 
 # Установка времени работы программы
 start_time = time.time()
-duration = 15  # время работы программы в секундах
+duration = 50  # время работы программы в секундах
 
 debug_flow_sensor_vision = True
 number_pulse_sensor = 0
@@ -109,12 +109,13 @@ font = pygame.font.SysFont(None, FONT_SIZE)
 # Установка размера экрана
 screen_width = 1300
 screen_height = 250
-screen = pygame.display.set_mode((screen_width, screen_height))
+#screen = pygame.display.set_mode((screen_width, screen_height))
 
-#screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+screen = pygame.display.set_mode((0, 0), FULLSCREEN)
 pygame.display.set_caption('Vending Machine Display')
 
-
+# Скрытие курсора мыши
+pygame.mouse.set_visible(False)
 
  
 # Основной цикл программы
@@ -141,7 +142,7 @@ while main_loop_running:
                 
             
             
-        #Если внесена оплата, то вывести на диспле сумму и увеличить доступный обьем
+        #Если внесена оплата купюрой, то вывести на диспле сумму и увеличить доступный обьем
         credit_cash = validator.get_last_credit_cash()
         if(credit_cash > 0):
             liquid_available = liquid_available + credit_cash/PRICE_WATER
@@ -156,7 +157,24 @@ while main_loop_running:
             screen.blit(text_surface_credit_cash1, text_credit_cash_rect1)
             # Обновление экрана
             pygame.display.flip()
-            sleep(3)
+            sleep(2)
+            
+        #Если внесена оплата монетой, то вывести на диспле сумму и увеличить доступный обьем
+        credit_coin = coin_pulse.get_last_credit_coin()
+        if(credit_coin > 0):
+            liquid_available = liquid_available + credit_coin/PRICE_WATER
+            # Создание текста
+            text_credit_coin1 = f"ВНЕСЕНО:  {credit_coin} сом"
+            text_surface_credit_coin1 = font.render(text_credit_coin1, True, TEXT_COLOR) 
+            # Определение координат для текста
+            text_credit_coin_rect1 = text_surface_credit_coin1.get_rect(topleft=(130, 300))  # координаты 
+            # Заполнение экрана
+            screen.fill(BACKGROUND_COLOR)
+            # Рисование текста на экране
+            screen.blit(text_surface_credit_coin1, text_credit_coin_rect1)
+            # Обновление экрана
+            pygame.display.flip()
+            sleep(2)    
         
         #Если произведена оплата и предоставлен доступный обьем воды для выдачи
         if(liquid_available > 0):
@@ -270,12 +288,11 @@ while main_loop_running:
         # Обновление экрана
         pygame.display.flip()
         print(f'Exception-{e}')
-        
+    '''    
     # Проверка времени работы программы
-    
     if time.time() - start_time >= duration:
         break
-    
+    '''
 #Выключаем нагрузки    
 GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
 GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)

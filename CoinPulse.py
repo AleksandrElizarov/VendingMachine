@@ -15,7 +15,7 @@ class CoinPulse(object):
         
         self.coin_running = False
         self.count_pulse = 0
-        self.duration_pulses = 2 # Максимальная длительность в течение, которой ппоступают импульсы
+        self.duration_pulses = 1.7 # Максимальная длительность в течение, которой поступают импульсы
         self.last_time_pulse = 0
 
         self.start_time_from_pulse = 0
@@ -51,7 +51,13 @@ class CoinPulse(object):
                     self.coin_running = False
 
     def get_last_credit_coin(self):
-        pass
+        """Get the last credit coin and delete from the credit list"""
+        credit_coin = 0
+        if(len(self.credit_coin_list) >= 1):
+            credit_coin = self.credit_coin_list[len(self.credit_coin_list) - 1]
+            self.credit_coin_list.pop(len(self.credit_coin_list) - 1)
+        return credit_coin
+        
 
                     
 
