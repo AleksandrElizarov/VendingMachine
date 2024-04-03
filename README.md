@@ -6,7 +6,7 @@
 
 ````bash
 sudo apt update
-sudo apt apgrade
+sudo apt upgrade
 sudo apt install python3.9.2
 sudo apt install git
 ````
