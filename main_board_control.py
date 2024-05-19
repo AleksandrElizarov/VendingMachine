@@ -28,7 +28,8 @@ MILLILITRE_PULSE = 0.00222 #параметры датчика потока во�
 
 liquid_available = 0 #оплаченный обьем для выдачи
 
-validator = None
+#validator = None
+coin_pulse = None
 
 ozon_running = False
 duration_ozon_running = 10 #Время в секундах работы озонатора
@@ -132,10 +133,14 @@ while main_loop_running:
                 main_loop_running = False    
     
     try:
+        #Экемпляр монетоприемника
+        if coin_pulse is None:
+            coin_pulse = CoinPulse(GPIO_board_port=31)
+        
+        '''
         #Экемпляр купюроприемника
         if(validator == None):
             validator = eSSP(com_port=COM_PORT, ssp_address="0", nv11=False, debug=True)
-            coin_pulse = CoinPulse(GPIO_board_port=31)
         else:
             if(validator.running == False):
                 raise Exception("Validator disconnected")
@@ -158,7 +163,7 @@ while main_loop_running:
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
-            
+        '''    
         #Если внесена оплата монетой, то вывести на диспле сумму и увеличить доступный обьем
         credit_coin = coin_pulse.get_last_credit_coin()
         if(credit_coin > 0):

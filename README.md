@@ -133,6 +133,7 @@ chmod -R 755 LCD-show
 cd LCD-show/
 sudo ./LCD35-show
 ````
+Разрешение экрана 1280*720
 
 
 
