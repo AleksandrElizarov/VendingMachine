@@ -5,12 +5,24 @@ import sys
 import time
 from pygame.locals import *
 import pygame
+import requests
 
 from eSSP.constants import Status
 from eSSP import eSSP
 import RPi.GPIO as GPIO
 
 from CoinPulse import CoinPulse
+
+
+
+SERIAL_NUMBER_MACHINE = '1111111'
+
+#URL get QR-code by GET-method query str 'serial_number_machine'
+url_get_qr_code = 'https://monitorvending.pythonanywhere.com/get_qr_code/'
+#URL refresh states alarm and get info about amount mwallet GET-method query str 'serial_number_machine','main_power',open_door',low_water'
+url_refresh_states_alarm_get_mwallet_amount = 'https://monitorvending.pythonanywhere.com/refresh_states_alarm_machine/'
+#URL create coin/cash transaction in DataBase POST method {"serial_number_machine": "64-number", "cash_amount": cash_amount}
+url_create_coin_cash_transaction = 'https://monitorvending.pythonanywhere.com/create_transaction/'
 
 
 PRICE_WATER = 3 #Цена за 1литр
@@ -37,7 +49,7 @@ duration_ozon_running = 10 #Время в секундах работы озон
 
 # Установка времени работы программы
 start_time = time.time()
-duration = 50  # время работы программы в секундах
+
 
 debug_flow_sensor_vision = True
 number_pulse_sensor = 0
@@ -147,7 +159,7 @@ while main_loop_running:
                 
             
             
-        #Если внесена оплата купюрой, то вывести на диспле сумму и увеличить доступный обьем
+        #Если внесена оплата купюрой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_cash = validator.get_last_credit_cash()
         if(credit_cash > 0):
             liquid_available = liquid_available + credit_cash/PRICE_WATER
@@ -164,7 +176,7 @@ while main_loop_running:
             pygame.display.flip()
             sleep(2)
         '''    
-        #Если внесена оплата монетой, то вывести на диспле сумму и увеличить доступный обьем
+        #Если внесена оплата монетой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_coin = coin_pulse.get_last_credit_coin()
         if(credit_coin > 0):
             liquid_available = liquid_available + credit_coin/PRICE_WATER
@@ -179,7 +191,44 @@ while main_loop_running:
             screen.blit(text_surface_credit_coin1, text_credit_coin_rect1)
             # Обновление экрана
             pygame.display.flip()
-            sleep(2)    
+            sleep(2)
+            
+        #Если внесена оплата через Мобильный кошелек, то вывести на дисплей сумму и увеличить доступный обьем
+        #Опрос сервера происходит каждые duration секунд
+        duration = 2
+        if time.time() - start_time >= duration:
+            try:
+                params = {
+                   'serial_number_machine': SERIAL_NUMBER_MACHINE,
+                    'main_power': 'true',
+                    'open_door': 'false',
+                    'low_water': 'true'
+                   }
+                response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params, timeout=1)
+                data = response.json()
+        
+            except Exception as e:
+                print(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
+            
+            amount_mwallet = float(data['m_transactions_amount'])
+            if(amount_mwallet > 0):
+                liquid_available = liquid_available + amount_mwallet/PRICE_WATER
+                # Создание текста
+                text_amount_mwallet1 = f"ВНЕСЕНО:  {amount_mwallet} сом"
+                text_surface_amount_mwallet1 = font.render(text_amount_mwallet1, True, TEXT_COLOR) 
+                # Определение координат для текста
+                text_amount_mwallet_rect1 = text_surface_amount_mwallet1.get_rect(topleft=(130, 300))  # координаты 
+                # Заполнение экрана
+                screen.fill(BACKGROUND_COLOR)
+                # Рисование текста на экране
+                screen.blit(text_surface_amount_mwallet1, text_amount_mwallet_rect1)
+                # Обновление экрана
+                pygame.display.flip()
+                sleep(2)
+            
+            start_time = time.time()
+            
+            
         
         #Если произведена оплата и предоставлен доступный обьем воды для выдачи
         if(liquid_available > 0):
