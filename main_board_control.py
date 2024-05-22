@@ -1,12 +1,14 @@
 import threading
 from time import sleep
 import logging
+import json
 import sys
 import time
-from io import BytesIO
+import io
 from pygame.locals import *
 import pygame
 import requests
+from PIL import Image
 
 from eSSP.constants import Status
 from eSSP import eSSP
@@ -301,37 +303,32 @@ while main_loop_running:
             duration_qrcode = 1
             if time.time() - start_time_qrcode >= duration_qrcode:            
                 try:
-                    # Загрузка изображения QR-кода по URL
+                    # Получение URL для QR кода
                     params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
                     response = requests.get(url_get_qr_code, params=params, timeout=1)
-                    data = response.json()
 
-                    qr_url = data['qr_code']
-                    response = requests.get(qr_url)
-                    response.raise_for_status()  # Проверка успешности запроса
-                    qr_buffer = BytesIO(response.content)
-                    qr_image = pygame.image.load(qr_buffer)
-                    qr_loaded = True
+                    data = json.loads(response)
+
+                    # Загрузка изображения QR-кода по URL
+                    if data['success']:
+                        qr_url = data['qr_code']
+                        #Проверка наличия QR кода у аппарата
+                        if qr_url == "":
+                            qr_loaded = False
+                        else:
+                            response = requests.get(qr_url)
+                            qr_image = Image.open(io.BytesIO(response.content))
+                            # Изменение размера изображения до 40x40 пикселей
+                            qr_image = qr_image.resize((40,40), Image.Resampling.LANCZOS)
+                            # Сохранение временного файла для использования в Pygame
+                            qr_image.save("resized_qrcode.png")
+                            
+                            qr_loaded = True
                 except Exception as e:
                     error_message = str(e)
             start_time_qrcode = time.time()
             
-            
-            if qr_loaded:
-                # Отображение изображения QR-кода на экране
-                screen.blit(qr_image, qr_rect)
-            else:
-                # Отображение сообщения об ошибке на экране
-                font = pygame.font.Font(None, 36)
-                text_surface = font.render("Failed to load QR code.", True, error_color)
-                text_rect = text_surface.get_rect(center=(screen_width // 2, screen_height // 2))
-                screen.blit(text_surface, text_rect)
-                # Отображение текста ошибки
-                error_surface = font.render(error_message, True, error_color)
-                error_rect = error_surface.get_rect(center=(screen_width // 2, screen_height // 2 + 40))
-                screen.blit(error_surface, error_rect)
-            
-            
+        
             # Создание текста
             text_line1 = "Добро пожаловать!"
             text_line2 = f"Стоимость: 1 литра = {PRICE_WATER} сома"
@@ -360,6 +357,12 @@ while main_loop_running:
             screen.blit(text_surface2, text_rect2)
             screen.blit(text_surface3, text_rect3)
             screen.blit(text_surface4, text_rect4)
+
+            if qr_loaded:
+                # Загрузка изображения QR-кода в Pygame
+                qr_surface = pygame.image.load("resized_qrcode.png")
+                # Отображение изображения QR-кода 
+                screen.blit(qr_surface, (250, 250))
 
             # Обновление экрана
             pygame.display.flip()
