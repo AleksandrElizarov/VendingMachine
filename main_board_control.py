@@ -3,6 +3,7 @@ from time import sleep
 import logging
 import sys
 import time
+from io import BytesIO
 from pygame.locals import *
 import pygame
 import requests
@@ -48,7 +49,8 @@ duration_ozon_running = 10 #Время в секундах работы озон
 
 
 # Установка времени работы программы
-start_time = time.time()
+start_time_wwallet = time.time()
+start_time_qrcode = time.time()
 
 
 debug_flow_sensor_vision = True
@@ -56,6 +58,8 @@ number_pulse_sensor = 0
 
 
 FONT_SIZE = 120  # Размер шрифта
+FONT_small_SIZE = 80  # Размер шрифта
+
 
 BACKGROUND_COLOR = (0, 0, 128)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
 BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
@@ -118,6 +122,7 @@ GPIO.add_event_detect(PIN_INPUT_STOP, GPIO.FALLING, callback=stop_flow, bounceti
 pygame.init()
 # Фиксированный размер шрифта
 font = pygame.font.SysFont(None, FONT_SIZE)
+small_font = pygame.font.SysFont(None, FONT_small_SIZE)
 
 # Установка размера экрана
 screen_width = 1300
@@ -194,9 +199,9 @@ while main_loop_running:
             sleep(2)
             
         #Если внесена оплата через Мобильный кошелек, то вывести на дисплей сумму и увеличить доступный обьем
-        #Опрос сервера происходит каждые duration секунд
-        duration = 2
-        if time.time() - start_time >= duration:
+        #Опрос сервера о поступлении оплаты или нет происходит каждые duration секунд
+        duration_wwallet = 3
+        if time.time() - start_time_wwallet >= duration_wwallet:
             try:
                 params = {
                    'serial_number_machine': SERIAL_NUMBER_MACHINE,
@@ -206,6 +211,7 @@ while main_loop_running:
                    }
                 response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params, timeout=1)
                 data = response.json()
+                print(data)
         
             except Exception as e:
                 print(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
@@ -226,7 +232,7 @@ while main_loop_running:
                 pygame.display.flip()
                 sleep(2)
             
-            start_time = time.time()
+            start_time_wwallet = time.time()
             
             
         
@@ -288,18 +294,63 @@ while main_loop_running:
             #Выключаем нагрузки
             GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
             GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+            
+            # Флаг успешной загрузки QR-кода
+            qr_loaded = False
+            #Опрос сервера о qr коде каждые duration секунд
+            duration_qrcode = 1
+            if time.time() - start_time_qrcode >= duration_qrcode:            
+                try:
+                    # Загрузка изображения QR-кода по URL
+                    params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
+                    response = requests.get(url_get_qr_code, params=params, timeout=1)
+                    data = response.json()
+
+                    qr_url = data['qr_code']
+                    response = requests.get(qr_url)
+                    response.raise_for_status()  # Проверка успешности запроса
+                    qr_buffer = BytesIO(response.content)
+                    qr_image = pygame.image.load(qr_buffer)
+                    qr_loaded = True
+                except Exception as e:
+                    error_message = str(e)
+            start_time_qrcode = time.time()
+            
+            
+            if qr_loaded:
+                # Отображение изображения QR-кода на экране
+                screen.blit(qr_image, qr_rect)
+            else:
+                # Отображение сообщения об ошибке на экране
+                font = pygame.font.Font(None, 36)
+                text_surface = font.render("Failed to load QR code.", True, error_color)
+                text_rect = text_surface.get_rect(center=(screen_width // 2, screen_height // 2))
+                screen.blit(text_surface, text_rect)
+                # Отображение текста ошибки
+                error_surface = font.render(error_message, True, error_color)
+                error_rect = error_surface.get_rect(center=(screen_width // 2, screen_height // 2 + 40))
+                screen.blit(error_surface, error_rect)
+            
+            
             # Создание текста
             text_line1 = "Добро пожаловать!"
             text_line2 = f"Стоимость: 1 литра = {PRICE_WATER} сома"
             text_line3 = "Пожалуста, внесите оплату."
+            text_line4 = "QR-код для оплаты"
+            
+            
             text_surface1 = font.render(text_line1, True, TEXT_COLOR)  
             text_surface2 = font.render(text_line2, True, TEXT_COLOR)
             text_surface3 = font.render(text_line3, True, TEXT_COLOR)
+            text_surface4 = small_font.render(text_line4, True, TEXT_COLOR)
+            
+            
 
             # Определение координат для текста
-            text_rect1 = text_surface1.get_rect(topleft=(250, 100))  # координаты 
-            text_rect2 = text_surface2.get_rect(topleft=(70, 300))  # координаты
-            text_rect3 = text_surface3.get_rect(topleft=(70, 500))  # координаты 
+            text_rect1 = text_surface1.get_rect(topleft=(250, 50))  # координаты 
+            text_rect2 = text_surface2.get_rect(topleft=(70, 150))  # координаты
+            text_rect3 = text_surface3.get_rect(topleft=(70, 250))  # координаты
+            text_rect4 = text_surface4.get_rect(topleft=(20, 500))  # координаты 
 
             # Заполнение экрана
             screen.fill(BACKGROUND_COLOR) 
@@ -308,6 +359,7 @@ while main_loop_running:
             screen.blit(text_surface1, text_rect1)
             screen.blit(text_surface2, text_rect2)
             screen.blit(text_surface3, text_rect3)
+            screen.blit(text_surface4, text_rect4)
 
             # Обновление экрана
             pygame.display.flip()
