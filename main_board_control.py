@@ -4,6 +4,7 @@ import logging
 import json
 import sys
 import time
+from datetime import datetime
 import io
 from pygame.locals import *
 import pygame
@@ -43,6 +44,9 @@ MILLILITRE_PULSE = 0.00222 #параметры датчика потока во�
 
 liquid_available = 0 #оплаченный обьем для выдачи
 
+# Флаг успешной загрузки QR-кода
+qr_loaded = False
+
 #validator = None
 coin_pulse = None
 
@@ -63,7 +67,7 @@ FONT_SIZE = 120  # Размер шрифта
 FONT_small_SIZE = 80  # Размер шрифта
 
 
-BACKGROUND_COLOR = (0, 0, 128)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
+BACKGROUND_COLOR = (242, 242, 240)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
 BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
 
 TEXT_COLOR = (255, 255, 255)  # Цвет шрифта белый (255, 255, 255)
@@ -128,10 +132,11 @@ small_font = pygame.font.SysFont(None, FONT_small_SIZE)
 
 # Установка размера экрана
 screen_width = 1300
-screen_height = 250
-#screen = pygame.display.set_mode((screen_width, screen_height))
+screen_height = 500
 
-screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+screen = pygame.display.set_mode((screen_width, screen_height))
+#screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+
 pygame.display.set_caption('Vending Machine Display')
 
 # Скрытие курсора мыши
@@ -202,8 +207,9 @@ while main_loop_running:
             
         #Если внесена оплата через Мобильный кошелек, то вывести на дисплей сумму и увеличить доступный обьем
         #Опрос сервера о поступлении оплаты или нет происходит каждые duration секунд
-        duration_wwallet = 3
+        duration_wwallet = 1
         if time.time() - start_time_wwallet >= duration_wwallet:
+            print("Start_get_wwallet:", datetime.now().strftime("%H:%M:%S"))
             try:
                 params = {
                    'serial_number_machine': SERIAL_NUMBER_MACHINE,
@@ -211,14 +217,16 @@ while main_loop_running:
                     'open_door': 'false',
                     'low_water': 'true'
                    }
-                response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params, timeout=1)
+                response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params)
                 data = response.json()
+                amount_mwallet = float(data['m_transactions_amount'])
                 print(data)
         
             except Exception as e:
+                amount_mwallet = 0
                 print(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
+            print("Stop_time_get_wwallet:", datetime.now().strftime("%H:%M:%S"))    
             
-            amount_mwallet = float(data['m_transactions_amount'])
             if(amount_mwallet > 0):
                 liquid_available = liquid_available + amount_mwallet/PRICE_WATER
                 # Создание текста
@@ -297,15 +305,15 @@ while main_loop_running:
             GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
             GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
             
-            # Флаг успешной загрузки QR-кода
-            qr_loaded = False
+            
             #Опрос сервера о qr коде каждые duration секунд
             duration_qrcode = 1
-            if time.time() - start_time_qrcode >= duration_qrcode:            
+            if time.time() - start_time_qrcode >= duration_qrcode:
+                print("Start_get_qr-code:", datetime.now().strftime("%H:%M:%S"))
                 try:
                     # Получение URL для QR кода
                     params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
-                    response = requests.get(url_get_qr_code, params=params, timeout=1)
+                    response = requests.get(url_get_qr_code, params=params)
 
                     data = response.json()
                     print(data)
@@ -321,13 +329,15 @@ while main_loop_running:
                             print(response.content)
                             qr_image = Image.open(io.BytesIO(response.content))
                             # Изменение размера изображения до 40x40 пикселей
-                            qr_image = qr_image.resize((350,350), Image.Resampling.LANCZOS)
+                            qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
                             # Сохранение временного файла для использования в Pygame
                             qr_image.save("resized_qrcode.png")
                             
                             qr_loaded = True
                 except Exception as e:
                     error_message = str(e)
+                print("Stop_time_get_qr-code:", datetime.now().strftime("%H:%M:%S"))    
+                    
             
             
         
