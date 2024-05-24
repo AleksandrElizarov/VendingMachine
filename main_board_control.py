@@ -307,7 +307,8 @@ while main_loop_running:
                     params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
                     response = requests.get(url_get_qr_code, params=params, timeout=1)
 
-                    data = json.loads(response)
+                    data = response.json()
+                    print(data)
 
                     # Загрузка изображения QR-кода по URL
                     if data['success']:
@@ -317,16 +318,17 @@ while main_loop_running:
                             qr_loaded = False
                         else:
                             response = requests.get(qr_url)
+                            print(response.content)
                             qr_image = Image.open(io.BytesIO(response.content))
                             # Изменение размера изображения до 40x40 пикселей
-                            qr_image = qr_image.resize((40,40), Image.Resampling.LANCZOS)
+                            qr_image = qr_image.resize((350,350), Image.Resampling.LANCZOS)
                             # Сохранение временного файла для использования в Pygame
                             qr_image.save("resized_qrcode.png")
                             
                             qr_loaded = True
                 except Exception as e:
                     error_message = str(e)
-            start_time_qrcode = time.time()
+            
             
         
             # Создание текста
@@ -362,10 +364,11 @@ while main_loop_running:
                 # Загрузка изображения QR-кода в Pygame
                 qr_surface = pygame.image.load("resized_qrcode.png")
                 # Отображение изображения QR-кода 
-                screen.blit(qr_surface, (250, 250))
+                screen.blit(qr_surface, (700, 350))
 
             # Обновление экрана
             pygame.display.flip()
+            #start_time_qrcode = time.time()
             
         
     except Exception as e:
