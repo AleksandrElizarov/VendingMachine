@@ -1,5 +1,6 @@
 import threading
 from time import sleep
+from typing import Callable
 import logging
 import json
 import sys
@@ -11,11 +12,54 @@ import pygame
 import requests
 from PIL import Image
 
-from eSSP.constants import Status
-from eSSP import eSSP
-import RPi.GPIO as GPIO
+import platform
+##### Проверяем на какой операционной системе запущен скрипт, и соответственно импортируем модули #####
+# Получаем имя операционной системы
+os_name = platform.system()
 
-from CoinPulse import CoinPulse
+if os_name == "Linux":
+    print("Скрипт запущен на Linux")
+    from eSSP.constants import Status
+    from eSSP import eSSP
+    import RPi.GPIO as GPIO
+    from CoinPulse import CoinPulse
+  
+elif os_name == "Windows":
+    print("Скрипт запущен на Windows")
+    class GPIO():
+        '''Класс заглушка для RP.GPIO'''
+        HIGH = 1
+        LOW = 0
+        BOARD = 1
+        IN = 1
+        OUT = 0
+        PUD_UP = 1
+        PUD_DOWN = 0
+        FALLING = 0
+        RISING = 1
+
+        def output(pin, state):
+            print(f'output GPIO работает заглушка ')
+        def setmode(board):
+            print(f'setmode GPIO работает заглушка ')
+        def setwarnings(boolean):
+            print(f'setwarnings GPIO работает заглушка ')
+        def setup(pin, pin_in_out, pull_up_down=PUD_DOWN):
+            print(f'setup GPIO работает заглушка ')
+        def add_event_detect(pin, edge, callbacb, bouncetime):
+            print(f'add_event_detect GPIO работает заглушка ')
+        def input(pin_input):
+            print(f'input GPIO работает заглушка ')
+            return 0
+
+else:
+    print("Скрипт запущен на другой операционной системе")    
+
+
+
+
+
+
 
 
 
@@ -74,26 +118,42 @@ TEXT_COLOR = (255, 255, 255)  # Цвет шрифта белый (255, 255, 255)
 TEXT_COLOR_ALARM = (255, 255, 0)  # Цвет шрифта желтый
 
 
-# Инициализация GPIO
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
 
-# Настройка пина как вход
-GPIO.setup(PIN_INPUT_SENSOR_FLOW, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин датчика жидкости
-GPIO.setup(PIN_INPUT_OZON, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки Озонатора
-GPIO.setup(PIN_INPUT_START, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки СТАРТ
-GPIO.setup(PIN_INPUT_STOP, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки СТОП
+            
+
+##################### FUNCTION FUNCTION FUNCTION #####################
+def init_GPIO():
+    '''Инициализация всех GPIO портов'''
+
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setwarnings(False)
+
+    # Настройка пина как вход
+    GPIO.setup(PIN_INPUT_SENSOR_FLOW, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин датчика жидкости
+    GPIO.setup(PIN_INPUT_OZON, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки Озонатора
+    GPIO.setup(PIN_INPUT_START, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки СТАРТ
+    GPIO.setup(PIN_INPUT_STOP, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки СТОП
+
+    # Настройка пина как выход
+    GPIO.setup(PIN_OUTPUT_VALVE, GPIO.OUT) # Пин клапана для выдачи воды
+    GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
+
+    GPIO.setup(PIN_OUTPUT_OZON, GPIO.OUT) # Пин озонатора
+    GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+
+   
+def set_output_GPIO(pin_input_board: int, gpio_state: str):
+    '''Функция установки PIN'а в высокое или низкое состояние: LOW/HIGH'''
+    if(gpio_state == "HIGH"):
+        GPIO.output(pin_input_board, GPIO.HIGH)
+    else:
+        GPIO.output(pin_input_board, GPIO.LOW)
 
 
-# Настройка пина как выход
-GPIO.setup(PIN_OUTPUT_VALVE, GPIO.OUT) # Пин клапана для выдачи воды
-GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-
-GPIO.setup(PIN_OUTPUT_OZON, GPIO.OUT) # Пин озонатора
-GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
-
-# Функция, которая будет вызываться по прерыванию RAISING от датчика потока жижкости
 def count_liquid(channel):
+    '''
+    Функция, которая будет вызываться по прерыванию RAISING/FALLING от датчика потока жижкости
+    '''
     global liquid_available
     global number_pulse_sensor
     if(liquid_available > 0):
@@ -103,26 +163,28 @@ def count_liquid(channel):
         liquid_available = 0
         number_pulse_sensor = 0
         #Выключаем нагрузки
-        GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-        GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+        set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW')
+        set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
         
-#Функция для обработки кнопки СТОП
-def stop_flow(channel):
-    GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-    
-#Функция для обработки кнопки СТАРТ
-def start_flow(channel):
-    if(liquid_available > 0):
-        GPIO.output(PIN_OUTPUT_VALVE, GPIO.HIGH)
- 
-    
-                               
-    
-# Настройка прерывания
-GPIO.add_event_detect(PIN_INPUT_SENSOR_FLOW, GPIO.FALLING, callback=count_liquid, bouncetime=5)
 
-GPIO.add_event_detect(PIN_INPUT_START, GPIO.FALLING, callback=start_flow, bouncetime=300)
-GPIO.add_event_detect(PIN_INPUT_STOP, GPIO.FALLING, callback=stop_flow, bouncetime=300)
+def stop_flow(channel):
+    '''Функция для обработки кнопки СТОП'''
+    set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW')
+    
+
+def start_flow(channel):
+    '''Функция для обработки кнопки СТАРТ'''
+    if(liquid_available > 0):
+        set_output_GPIO(PIN_OUTPUT_VALVE, 'HIGH')
+ 
+                         
+def add_event_detect_GPIO(pin_input_board: int, edge: str, callback: Callable[[int], None], bouncetime: int) -> None:
+    '''Настройка прерывания на портах GPIO''' 
+    if(edge == 'RISING'):
+        GPIO.add_event_detect(pin_input_board, GPIO.RISING, callback, bouncetime)
+    else:
+         GPIO.add_event_detect(pin_input_board, GPIO.FALLING, callback, bouncetime)   
+
 
 # Инициализация Pygame
 pygame.init()
@@ -145,6 +207,13 @@ pygame.mouse.set_visible(False)
  
 # Основной цикл программы
 main_loop_running = True
+
+init_GPIO()
+add_event_detect_GPIO(pin_input_board=PIN_INPUT_SENSOR_FLOW, edge='FALLING', callback=count_liquid, bouncetime=5)
+add_event_detect_GPIO(pin_input_board=PIN_INPUT_START, edge='FALLING', callback=count_liquid, bouncetime=300)
+add_event_detect_GPIO(pin_input_board=PIN_INPUT_STOP, edge='FALLING', callback=count_liquid, bouncetime=300)
+
+
 while main_loop_running:
     
     for event in pygame.event.get():
@@ -157,11 +226,12 @@ while main_loop_running:
                 main_loop_running = False    
     
     try:
+
+        '''
         #Экемпляр монетоприемника
         if coin_pulse is None:
             coin_pulse = CoinPulse(GPIO_board_port=31)
         
-        '''
         #Экемпляр купюроприемника
         if(validator == None):
             validator = eSSP(com_port=COM_PORT, ssp_address="0", nv11=False, debug=True)
@@ -187,7 +257,7 @@ while main_loop_running:
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
-        '''    
+            
         #Если внесена оплата монетой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_coin = coin_pulse.get_last_credit_coin()
         if(credit_coin > 0):
@@ -204,6 +274,7 @@ while main_loop_running:
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
+        '''    
             
         #Если внесена оплата через Мобильный кошелек, то вывести на дисплей сумму и увеличить доступный обьем
         #Опрос сервера о поступлении оплаты или нет происходит каждые duration секунд
@@ -253,7 +324,7 @@ while main_loop_running:
             #Нажата кнопка ОЗОНАТОР
             if(input_state_bt_ozon == False):
                 ozon_running = True
-                GPIO.output(PIN_OUTPUT_OZON, GPIO.HIGH) #Включаем Озонатор
+                set_output_GPIO(PIN_OUTPUT_OZON, 'HIGH') #Включаем Озонатор
                 time_ozon = duration_ozon_running
                 sleep(0.1) #Дребезг контактов
                 
@@ -266,7 +337,7 @@ while main_loop_running:
                 time_ozon = time_ozon - 1
                 if(time_ozon < 0):
                     ozon_running = False
-                    GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW) #Выключаем Озонатор
+                    set_output_GPIO(PIN_OUTPUT_OZON, 'LOW') #Выключаем Озонатор
                 sleep(1)    
             else:
                 # Создание текста
@@ -302,9 +373,9 @@ while main_loop_running:
             
         else:
             #Выключаем нагрузки
-            GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-            GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
-            
+            set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW')
+            set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
+
             
             #Опрос сервера о qr коде каждые duration секунд
             duration_qrcode = 1
@@ -383,8 +454,9 @@ while main_loop_running:
         
     except Exception as e:
         #Выключаем нагрузки
-        GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-        GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+        set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW')
+        set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
+
         #GPIO.cleanup();
         # Создание текста
         text_alarm_line_1 = "Временные"
@@ -415,9 +487,10 @@ while main_loop_running:
     if time.time() - start_time >= duration:
         break
     '''
-#Выключаем нагрузки    
-GPIO.output(PIN_OUTPUT_VALVE, GPIO.LOW)
-GPIO.output(PIN_OUTPUT_OZON, GPIO.LOW)
+#Выключаем нагрузки   
+set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW')
+set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
+
 #GPIO.cleanup();
 pygame.quit()
 sys.exit()
