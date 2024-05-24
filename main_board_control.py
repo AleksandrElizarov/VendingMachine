@@ -7,7 +7,6 @@ import sys
 import time
 from datetime import datetime
 import io
-from pygame.locals import *
 import pygame
 import requests
 from PIL import Image
