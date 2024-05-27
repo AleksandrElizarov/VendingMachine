@@ -372,41 +372,44 @@ while main_loop_running:
             
         else:
             #Выключаем нагрузки
-            set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW')
-            set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
+            if os_name == "Linux":
+                print("Скрипт запущен на Linux")
+                set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW') 
+                set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
+            
+            
 
             
-            #Опрос сервера о qr коде каждые duration секунд
-            duration_qrcode = 1
-            if time.time() - start_time_qrcode >= duration_qrcode:
-                print("Start_get_qr-code:", datetime.now().strftime("%H:%M:%S"))
-                try:
-                    # Получение URL для QR кода
-                    params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
-                    response = requests.get(url_get_qr_code, params=params)
+        #Опрос сервера о qr коде каждые duration секунд
+        duration_qrcode = 3
+        if time.time() - start_time_qrcode >= duration_qrcode:
+            print("Start_get_qr-code:", datetime.now().strftime("%H:%M:%S"))
+            try:
+                # Получение URL для QR кода
+                params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
+                response = requests.get(url_get_qr_code, params=params)
 
-                    data = response.json()
-                    print(data)
+                data = response.json()
+                print(data)
 
-                    # Загрузка изображения QR-кода по URL
-                    if data['success']:
-                        qr_url = data['qr_code']
-                        #Проверка наличия QR кода у аппарата
-                        if qr_url == "":
-                            qr_loaded = False
-                        else:
-                            response = requests.get(qr_url)
-                            print(response.content)
-                            qr_image = Image.open(io.BytesIO(response.content))
-                            # Изменение размера изображения до 40x40 пикселей
-                            qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
-                            # Сохранение временного файла для использования в Pygame
-                            qr_image.save("resized_qrcode.png")
+                # Загрузка изображения QR-кода по URL
+                if data['success']:
+                    qr_url = data['qr_code']
+                    #Проверка наличия QR кода у аппарата
+                    if qr_url == "":
+                        qr_loaded = False
+                    else:
+                        response = requests.get(qr_url)
+                        qr_image = Image.open(io.BytesIO(response.content))
+                        # Изменение размера изображения до 40x40 пикселей
+                        qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
+                        # Сохранение временного файла для использования в Pygame
+                        qr_image.save("resized_qrcode.png")
                             
-                            qr_loaded = True
-                except Exception as e:
-                    error_message = str(e)
-                print("Stop_time_get_qr-code:", datetime.now().strftime("%H:%M:%S"))    
+                        qr_loaded = True
+            except Exception as e:
+                error_message = str(e)
+            print("Stop_time_get_qr-code:", datetime.now().strftime("%H:%M:%S"))    
                     
             
             
@@ -448,7 +451,7 @@ while main_loop_running:
 
             # Обновление экрана
             pygame.display.flip()
-            #start_time_qrcode = time.time()
+            start_time_qrcode = time.time()
             
         
     except Exception as e:
