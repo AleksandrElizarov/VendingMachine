@@ -1,6 +1,6 @@
 import threading
 from time import sleep
-from typing import Callable
+from typing import Callable, Tuple
 import logging
 import json
 import sys
@@ -60,8 +60,6 @@ else:
 
 
 
-
-
 SERIAL_NUMBER_MACHINE = '1111111'
 
 #URL get QR-code by GET-method query str 'serial_number_machine'
@@ -87,8 +85,8 @@ MILLILITRE_PULSE = 0.00222 #параметры датчика потока во�
 
 liquid_available = 0 #оплаченный обьем для выдачи
 
-# Флаг успешной загрузки QR-кода
-qr_loaded = False
+
+qr_loaded = False # Флаг успешной загрузки QR-кода
 
 #validator = None
 coin_pulse = None
@@ -101,11 +99,12 @@ duration_ozon_running = 10 #Время в секундах работы озон
 start_time_wwallet = time.time()
 start_time_qrcode = time.time()
 
-
+# Режим для мониторинга количества импульсов датчика жидкости
 debug_flow_sensor_vision = True
 number_pulse_sensor = 0
 
 
+##################### FONT SIZE #####################
 FONT_SIZE = 120  # Размер шрифта
 FONT_small_SIZE = 80  # Размер шрифта
 
@@ -117,8 +116,6 @@ TEXT_COLOR = (255, 255, 255)  # Цвет шрифта белый (255, 255, 255)
 TEXT_COLOR_ALARM = (255, 255, 0)  # Цвет шрифта желтый
 
 
-
-            
 
 ##################### FUNCTION FUNCTION FUNCTION #####################
 def init_GPIO():
@@ -182,10 +179,21 @@ def add_event_detect_GPIO(pin_input_board: int, edge: str, callback: Callable[[i
     if(edge == 'RISING'):
         GPIO.add_event_detect(pin_input_board, GPIO.RISING, callback, bouncetime)
     else:
-         GPIO.add_event_detect(pin_input_board, GPIO.FALLING, callback, bouncetime)   
+         GPIO.add_event_detect(pin_input_board, GPIO.FALLING, callback, bouncetime)  
 
 
-# Инициализация Pygame
+def render_text_pygame(text: str, font, text_color: Tuple[int, int, int], background_color: Tuple[int, int, int], topleft_point_position: Tuple[int, int]):
+    # Создание текста
+    text_surface = font.render(text, True, text_color) 
+    # Определение координат для текста
+    text_rect = text_surface.get_rect(topleft=topleft_point_position)  # координаты 
+    # Заполнение экрана
+    screen.fill(background_color)
+    # Рисование текста на экране
+    screen.blit(text_surface, text_rect)          
+
+
+##################### INITIALIZATION PYGAME #####################
 pygame.init()
 # Фиксированный размер шрифта
 font = pygame.font.SysFont(None, FONT_SIZE)
@@ -300,6 +308,8 @@ while main_loop_running:
             if(amount_mwallet > 0):
                 liquid_available = liquid_available + amount_mwallet/PRICE_WATER
                 # Создание текста
+                render_text_pygame(f"ВНЕСЕНО:  {amount_mwallet} сом", font, TEXT_COLOR, BACKGROUND_COLOR, (130, 300))
+                '''
                 text_amount_mwallet1 = f"ВНЕСЕНО:  {amount_mwallet} сом"
                 text_surface_amount_mwallet1 = font.render(text_amount_mwallet1, True, TEXT_COLOR) 
                 # Определение координат для текста
@@ -308,6 +318,7 @@ while main_loop_running:
                 screen.fill(BACKGROUND_COLOR)
                 # Рисование текста на экране
                 screen.blit(text_surface_amount_mwallet1, text_amount_mwallet_rect1)
+                '''
                 # Обновление экрана
                 pygame.display.flip()
                 sleep(2)
@@ -413,7 +424,7 @@ while main_loop_running:
                     
             
             
-        
+            '''
             # Создание текста
             text_line1 = "Добро пожаловать!"
             text_line2 = f"Стоимость: 1 литра = {PRICE_WATER} сома"
@@ -442,6 +453,11 @@ while main_loop_running:
             screen.blit(text_surface2, text_rect2)
             screen.blit(text_surface3, text_rect3)
             screen.blit(text_surface4, text_rect4)
+            '''
+            render_text_pygame("Добро пожаловать!", font, TEXT_COLOR, BACKGROUND_COLOR, (250, 50))
+            render_text_pygame(f"Стоимость: 1 литра = {PRICE_WATER} сома", font, TEXT_COLOR, BACKGROUND_COLOR, (70, 150))
+            render_text_pygame("Пожалуста, внесите оплату", font, TEXT_COLOR, BACKGROUND_COLOR, (70, 250))
+            render_text_pygame("QR-код для оплаты", small_font, TEXT_COLOR, BACKGROUND_COLOR, (20, 500))
 
             if qr_loaded:
                 # Загрузка изображения QR-кода в Pygame
