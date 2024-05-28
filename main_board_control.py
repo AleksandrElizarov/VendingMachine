@@ -49,7 +49,7 @@ elif os_name == "Windows":
             print(f'add_event_detect GPIO работает заглушка ')
         def input(pin_input):
             print(f'input GPIO работает заглушка ')
-            return 0
+            return False
 
 else:
     print("Скрипт запущен на другой операционной системе")    
@@ -182,13 +182,11 @@ def add_event_detect_GPIO(pin_input_board: int, edge: str, callback: Callable[[i
          GPIO.add_event_detect(pin_input_board, GPIO.FALLING, callback, bouncetime)  
 
 
-def render_text_pygame(text: str, font, text_color: Tuple[int, int, int], background_color: Tuple[int, int, int], topleft_point_position: Tuple[int, int]):
+def render_text_pygame(text: str, font, text_color: Tuple[int, int, int], topleft_point_position: Tuple[int, int]):
     # Создание текста
     text_surface = font.render(text, True, text_color) 
     # Определение координат для текста
     text_rect = text_surface.get_rect(topleft=topleft_point_position)  # координаты 
-    # Заполнение экрана
-    screen.fill(background_color)
     # Рисование текста на экране
     screen.blit(text_surface, text_rect)          
 
@@ -252,15 +250,8 @@ while main_loop_running:
         credit_cash = validator.get_last_credit_cash()
         if(credit_cash > 0):
             liquid_available = liquid_available + credit_cash/PRICE_WATER
-            # Создание текста
-            text_credit_cash1 = f"ВНЕСЕНО:  {credit_cash} сом"
-            text_surface_credit_cash1 = font.render(text_credit_cash1, True, TEXT_COLOR) 
-            # Определение координат для текста
-            text_credit_cash_rect1 = text_surface_credit_cash1.get_rect(topleft=(130, 300))  # координаты 
-            # Заполнение экрана
             screen.fill(BACKGROUND_COLOR)
-            # Рисование текста на экране
-            screen.blit(text_surface_credit_cash1, text_credit_cash_rect1)
+            render_text_pygame(f"ВНЕСЕНО:  {credit_cash} сом", font, TEXT_COLOR, (130, 300))
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
@@ -269,15 +260,8 @@ while main_loop_running:
         credit_coin = coin_pulse.get_last_credit_coin()
         if(credit_coin > 0):
             liquid_available = liquid_available + credit_coin/PRICE_WATER
-            # Создание текста
-            text_credit_coin1 = f"ВНЕСЕНО:  {credit_coin} сом"
-            text_surface_credit_coin1 = font.render(text_credit_coin1, True, TEXT_COLOR) 
-            # Определение координат для текста
-            text_credit_coin_rect1 = text_surface_credit_coin1.get_rect(topleft=(130, 300))  # координаты 
-            # Заполнение экрана
             screen.fill(BACKGROUND_COLOR)
-            # Рисование текста на экране
-            screen.blit(text_surface_credit_coin1, text_credit_coin_rect1)
+            render_text_pygame(f"ВНЕСЕНО:  {credit_coin} сом", font, TEXT_COLOR, (130, 300))
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
@@ -307,18 +291,8 @@ while main_loop_running:
             
             if(amount_mwallet > 0):
                 liquid_available = liquid_available + amount_mwallet/PRICE_WATER
-                # Создание текста
-                render_text_pygame(f"ВНЕСЕНО:  {amount_mwallet} сом", font, TEXT_COLOR, BACKGROUND_COLOR, (130, 300))
-                '''
-                text_amount_mwallet1 = f"ВНЕСЕНО:  {amount_mwallet} сом"
-                text_surface_amount_mwallet1 = font.render(text_amount_mwallet1, True, TEXT_COLOR) 
-                # Определение координат для текста
-                text_amount_mwallet_rect1 = text_surface_amount_mwallet1.get_rect(topleft=(130, 300))  # координаты 
-                # Заполнение экрана
                 screen.fill(BACKGROUND_COLOR)
-                # Рисование текста на экране
-                screen.blit(text_surface_amount_mwallet1, text_amount_mwallet_rect1)
-                '''
+                render_text_pygame(f"ВНЕСЕНО:  {amount_mwallet} сом", font, TEXT_COLOR, (130, 300))
                 # Обновление экрана
                 pygame.display.flip()
                 sleep(2)
@@ -330,6 +304,7 @@ while main_loop_running:
         #Если произведена оплата и предоставлен доступный обьем воды для выдачи
         if(liquid_available > 0):
             input_state_bt_ozon = GPIO.input(PIN_INPUT_OZON)
+            screen.fill(BACKGROUND_COLOR)
             
             #Нажата кнопка ОЗОНАТОР
             if(input_state_bt_ozon == False):
@@ -339,44 +314,19 @@ while main_loop_running:
                 sleep(0.1) #Дребезг контактов
                 
             if(ozon_running):
-                # Создание текста
-                text_ozonator = f"Озонатор работает, {time_ozon} сек."
-                text_surface_ozonator = font.render(text_ozonator, True, TEXT_COLOR) 
-                # Определение координат для текста
-                text_ozonator_rect = text_surface_ozonator.get_rect(topleft=(130, 150))  # координаты
+                render_text_pygame(f"Озонатор работает, {time_ozon} сек.", font, TEXT_COLOR, (130, 150))
                 time_ozon = time_ozon - 1
                 if(time_ozon < 0):
                     ozon_running = False
                     set_output_GPIO(PIN_OUTPUT_OZON, 'LOW') #Выключаем Озонатор
                 sleep(1)    
             else:
-                # Создание текста
-                text_ozonator = "Используйте озонатор"
-                text_surface_ozonator = font.render(text_ozonator, True, TEXT_COLOR) 
-                # Определение координат для текста
-                text_ozonator_rect = text_surface_ozonator.get_rect(topleft=(130, 150))  # координаты 
+                render_text_pygame("Используйте озонатор", font, TEXT_COLOR, (130, 150))
 
-            # Создание текста
-            text_credit_cash1 = f"ДОСТУПНО:  {round(liquid_available, 2)} л."
-            text_surface_credit_cash1 = font.render(text_credit_cash1, True, TEXT_COLOR) 
-            # Определение координат для текста
-            text_credit_cash_rect1 = text_surface_credit_cash1.get_rect(topleft=(130, 300))  # координаты 
-            
+            render_text_pygame(f"ДОСТУПНО:  {round(liquid_available, 2)} л.", font, TEXT_COLOR, (130, 300))
+            #Если используется debug_flow_sensor_vision, то можно видеть количество импульсов с датчика жидкости 
             if(debug_flow_sensor_vision):
-                # Создание текста
-                text_number_pulse = f"Импульсы: {number_pulse_sensor}"
-                text_surface_number_pulse = font.render(text_number_pulse, True, TEXT_COLOR) 
-                # Определение координат для текста
-                text_text_number_pulse_rect = text_surface_number_pulse.get_rect(topleft=(130, 500))  # координаты 
-            
-                
-            # Заполнение экрана
-            screen.fill(BACKGROUND_COLOR)
-            # Рисование текста на экране
-            screen.blit(text_surface_ozonator, text_ozonator_rect)
-            screen.blit(text_surface_credit_cash1, text_credit_cash_rect1)
-            if(debug_flow_sensor_vision):
-                screen.blit(text_surface_number_pulse, text_text_number_pulse_rect)
+                render_text_pygame(f"Импульсы: {number_pulse_sensor}", font, TEXT_COLOR, (130, 500))
             
             # Обновление экрана
             pygame.display.flip()
@@ -387,87 +337,54 @@ while main_loop_running:
                 print("Скрипт запущен на Linux")
                 set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW') 
                 set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
-            
-            
+    
+            #Опрос сервера о qr коде каждые duration секунд
+            duration_qrcode = 3
+            if time.time() - start_time_qrcode >= duration_qrcode:
+                print("Start_get_qr-code:", datetime.now().strftime("%H:%M:%S"))
+                try:
+                    # Получение URL для QR кода
+                    params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
+                    response = requests.get(url_get_qr_code, params=params)
 
-            
-        #Опрос сервера о qr коде каждые duration секунд
-        duration_qrcode = 3
-        if time.time() - start_time_qrcode >= duration_qrcode:
-            print("Start_get_qr-code:", datetime.now().strftime("%H:%M:%S"))
-            try:
-                # Получение URL для QR кода
-                params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
-                response = requests.get(url_get_qr_code, params=params)
+                    data = response.json()
+                    print(data)
 
-                data = response.json()
-                print(data)
+                    # Загрузка изображения QR-кода по URL
+                    if data['success']:
+                        qr_url = data['qr_code']
+                        #Проверка наличия QR кода у аппарата
+                        if qr_url == "":
+                            qr_loaded = False
+                        else:
+                            response = requests.get(qr_url)
+                            qr_image = Image.open(io.BytesIO(response.content))
+                            # Изменение размера изображения до 40x40 пикселей
+                            qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
+                            # Сохранение временного файла для использования в Pygame
+                            qr_image.save("resized_qrcode.png")
+                                
+                            qr_loaded = True
+                except Exception as e:
+                    error_message = str(e)
+                print("Stop_time_get_qr-code:", datetime.now().strftime("%H:%M:%S"))    
+                        
+                
+                screen.fill(BACKGROUND_COLOR) 
+                render_text_pygame("Добро пожаловать!", font, TEXT_COLOR, (250, 50))
+                render_text_pygame(f"Стоимость: 1 литра = {PRICE_WATER} сома", font, TEXT_COLOR, (70, 150))
+                render_text_pygame("Пожалуста, внесите оплату", font, TEXT_COLOR, (70, 250))
+                render_text_pygame("QR-код для оплаты", small_font, TEXT_COLOR, (20, 500))
 
-                # Загрузка изображения QR-кода по URL
-                if data['success']:
-                    qr_url = data['qr_code']
-                    #Проверка наличия QR кода у аппарата
-                    if qr_url == "":
-                        qr_loaded = False
-                    else:
-                        response = requests.get(qr_url)
-                        qr_image = Image.open(io.BytesIO(response.content))
-                        # Изменение размера изображения до 40x40 пикселей
-                        qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
-                        # Сохранение временного файла для использования в Pygame
-                        qr_image.save("resized_qrcode.png")
-                            
-                        qr_loaded = True
-            except Exception as e:
-                error_message = str(e)
-            print("Stop_time_get_qr-code:", datetime.now().strftime("%H:%M:%S"))    
-                    
-            
-            
-            '''
-            # Создание текста
-            text_line1 = "Добро пожаловать!"
-            text_line2 = f"Стоимость: 1 литра = {PRICE_WATER} сома"
-            text_line3 = "Пожалуста, внесите оплату."
-            text_line4 = "QR-код для оплаты"
-            
-            
-            text_surface1 = font.render(text_line1, True, TEXT_COLOR)  
-            text_surface2 = font.render(text_line2, True, TEXT_COLOR)
-            text_surface3 = font.render(text_line3, True, TEXT_COLOR)
-            text_surface4 = small_font.render(text_line4, True, TEXT_COLOR)
-            
-            
+                if qr_loaded:
+                    # Загрузка изображения QR-кода в Pygame
+                    qr_surface = pygame.image.load("resized_qrcode.png")
+                    # Отображение изображения QR-кода 
+                    screen.blit(qr_surface, (700, 350))
 
-            # Определение координат для текста
-            text_rect1 = text_surface1.get_rect(topleft=(250, 50))  # координаты 
-            text_rect2 = text_surface2.get_rect(topleft=(70, 150))  # координаты
-            text_rect3 = text_surface3.get_rect(topleft=(70, 250))  # координаты
-            text_rect4 = text_surface4.get_rect(topleft=(20, 500))  # координаты 
-
-            # Заполнение экрана
-            screen.fill(BACKGROUND_COLOR) 
-                      
-            # Рисование текста на экране
-            screen.blit(text_surface1, text_rect1)
-            screen.blit(text_surface2, text_rect2)
-            screen.blit(text_surface3, text_rect3)
-            screen.blit(text_surface4, text_rect4)
-            '''
-            render_text_pygame("Добро пожаловать!", font, TEXT_COLOR, BACKGROUND_COLOR, (250, 50))
-            render_text_pygame(f"Стоимость: 1 литра = {PRICE_WATER} сома", font, TEXT_COLOR, BACKGROUND_COLOR, (70, 150))
-            render_text_pygame("Пожалуста, внесите оплату", font, TEXT_COLOR, BACKGROUND_COLOR, (70, 250))
-            render_text_pygame("QR-код для оплаты", small_font, TEXT_COLOR, BACKGROUND_COLOR, (20, 500))
-
-            if qr_loaded:
-                # Загрузка изображения QR-кода в Pygame
-                qr_surface = pygame.image.load("resized_qrcode.png")
-                # Отображение изображения QR-кода 
-                screen.blit(qr_surface, (700, 350))
-
-            # Обновление экрана
-            pygame.display.flip()
-            start_time_qrcode = time.time()
+                # Обновление экрана
+                pygame.display.flip()
+                start_time_qrcode = time.time()
             
         
     except Exception as e:
@@ -475,27 +392,12 @@ while main_loop_running:
         set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW')
         set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
 
-        #GPIO.cleanup();
-        # Создание текста
-        text_alarm_line_1 = "Временные"
-        text_alarm_line_1_surface = font.render(text_alarm_line_1, True, TEXT_COLOR_ALARM) 
-        text_alarm_line_2 = "технические"
-        text_alarm_line_2_surface = font.render(text_alarm_line_2, True, TEXT_COLOR_ALARM)
-        text_alarm_line_3 = "неполадки"
-        text_alarm_line_3_surface = font.render(text_alarm_line_3, True, TEXT_COLOR_ALARM)
-
-        # Определение координат для текста
-        text_alarm_line_1_rect = text_alarm_line_1_surface.get_rect(topleft=(380, 200))  
-        text_alarm_line_2_rect = text_alarm_line_2_surface.get_rect(topleft=(380, 300)) 
-        text_alarm_line_3_rect = text_alarm_line_3_surface.get_rect(topleft=(380, 400))   
-
+        #GPIO.cleanup();  
         # Заполнение экрана
         screen.fill(BACKGROUND_COLOR_ALARM)
-        
-        # Рисование текста на экране
-        screen.blit(text_alarm_line_1_surface, text_alarm_line_1_rect)
-        screen.blit(text_alarm_line_2_surface, text_alarm_line_2_rect)
-        screen.blit(text_alarm_line_3_surface, text_alarm_line_3_rect)
+        render_text_pygame("Временные", font, TEXT_COLOR, (380, 200))
+        render_text_pygame("технические", font, TEXT_COLOR, (380, 300))
+        render_text_pygame("неполадки", font, TEXT_COLOR, (380, 400))
         
         # Обновление экрана
         pygame.display.flip()
