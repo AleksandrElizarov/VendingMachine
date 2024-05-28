@@ -56,11 +56,9 @@ else:
 
 
 
-
-
-
-
+##################### VERIABLES GLOBAL #####################
 SERIAL_NUMBER_MACHINE = '1111111'
+PRICE_WATER = 3 #Цена за 1литр
 
 #URL get QR-code by GET-method query str 'serial_number_machine'
 url_get_qr_code = 'https://monitorvending.pythonanywhere.com/get_qr_code/'
@@ -69,21 +67,28 @@ url_refresh_states_alarm_get_mwallet_amount = 'https://monitorvending.pythonanyw
 #URL create coin/cash transaction in DataBase POST method {"serial_number_machine": "64-number", "cash_amount": cash_amount}
 url_create_coin_cash_transaction = 'https://monitorvending.pythonanywhere.com/create_transaction/'
 
-
-PRICE_WATER = 3 #Цена за 1литр
 COM_PORT = "/dev/ttyUSB0" # Название последовательного порта
 PIN_INPUT_SENSOR_FLOW = 32 # Пин датчика жидкости
-PIN_INPUT_OZON = 40 # Пин датчика жидкости
+PIN_INPUT_COIN_ACCEPTOR = 31 # Пин монетоприемника
+
+PIN_INPUT_OZON = 40 # Пин кнопки Озонатора
 PIN_INPUT_START = 38 # Пин кнопки старт
 PIN_INPUT_STOP = 36 # Пин кнопики стоп
-PIN_INPUT_COIN_ACCEPTOR = 31 # Пин монетоприемника
 
 PIN_OUTPUT_VALVE = 37 # Пин клапана для выдачи воды
 PIN_OUTPUT_OZON = 35 # Пин включения озонатора
 
 MILLILITRE_PULSE = 0.00222 #параметры датчика потока воды 1000мл=450пульов или 0,0022мл=1пульс
 
-liquid_available = 0 #оплаченный обьем для выдачи
+LIQUID_AVAILABLE = 0 # оплаченный обьем для выдачи
+
+AMOUNT_MWALLET = 0 # сумма оплаченная через Мобильный кошелек
+
+### VERIABLES ALARMS ###
+MAIN_POWER = 'true'
+OPEN_DOOR = 'false'
+LOW_WATER = 'false'
+
 
 
 qr_loaded = False # Флаг успешной загрузки QR-кода
@@ -91,12 +96,12 @@ qr_loaded = False # Флаг успешной загрузки QR-кода
 #validator = None
 coin_pulse = None
 
-ozon_running = False
+ozon_running = False # Флаг включения Озонатора
 duration_ozon_running = 10 #Время в секундах работы озонатора
 
 
 # Установка времени работы программы
-start_time_wwallet = time.time()
+
 start_time_qrcode = time.time()
 
 # Режим для мониторинга количества импульсов датчика жидкости
@@ -107,7 +112,6 @@ number_pulse_sensor = 0
 ##################### FONT SIZE #####################
 FONT_SIZE = 120  # Размер шрифта
 FONT_small_SIZE = 80  # Размер шрифта
-
 
 BACKGROUND_COLOR = (242, 242, 240)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
 BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
@@ -150,13 +154,13 @@ def count_liquid(channel):
     '''
     Функция, которая будет вызываться по прерыванию RAISING/FALLING от датчика потока жижкости
     '''
-    global liquid_available
+    global LIQUID_AVAILABLE
     global number_pulse_sensor
-    if(liquid_available > 0):
-        liquid_available = liquid_available - MILLILITRE_PULSE
+    if(LIQUID_AVAILABLE > 0):
+        LIQUID_AVAILABLE = LIQUID_AVAILABLE - MILLILITRE_PULSE
         number_pulse_sensor = number_pulse_sensor + 1
-    if(liquid_available <= 0):
-        liquid_available = 0
+    if(LIQUID_AVAILABLE <= 0):
+        LIQUID_AVAILABLE = 0
         number_pulse_sensor = 0
         #Выключаем нагрузки
         set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW')
@@ -170,7 +174,7 @@ def stop_flow(channel):
 
 def start_flow(channel):
     '''Функция для обработки кнопки СТАРТ'''
-    if(liquid_available > 0):
+    if(LIQUID_AVAILABLE > 0):
         set_output_GPIO(PIN_OUTPUT_VALVE, 'HIGH')
  
                          
@@ -188,7 +192,39 @@ def render_text_pygame(text: str, font, text_color: Tuple[int, int, int], toplef
     # Определение координат для текста
     text_rect = text_surface.get_rect(topleft=topleft_point_position)  # координаты 
     # Рисование текста на экране
-    screen.blit(text_surface, text_rect)          
+    screen.blit(text_surface, text_rect)
+
+def loop_get_mwallet_push_alarm():
+        '''Функция получения суммы оплаты через Мобильный кошелек и отправка состояния аварий'''
+        global SERIAL_NUMBER_MACHINE
+        global AMOUNT_MWALLET
+        global url_refresh_states_alarm_get_mwallet_amount
+        global MAIN_POWER
+        global OPEN_DOOR 
+        global LOW_WATER
+        start_time_wwallet = time.time()
+        duration_wwallet = 1
+        while True:
+            if time.time() - start_time_wwallet >= duration_wwallet:
+                print("Start_get_wwallet:", datetime.now().strftime("%H:%M:%S"))
+                try:
+                    params = {
+                    'serial_number_machine': SERIAL_NUMBER_MACHINE,
+                        'main_power': MAIN_POWER,
+                        'open_door': OPEN_DOOR,
+                        'low_water': LOW_WATER
+                    }
+                    response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params)
+                    data = response.json()
+                    AMOUNT_MWALLET = float(data['m_transactions_amount'])
+                    print(data)
+            
+                except Exception as e:
+                    AMOUNT_MWALLET = 0
+                    print(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
+                print("Stop_time_get_wwallet:", datetime.now().strftime("%H:%M:%S"))   
+                start_time_wwallet = time.time()
+
 
 
 ##################### INITIALIZATION PYGAME #####################
@@ -210,15 +246,19 @@ pygame.display.set_caption('Vending Machine Display')
 pygame.mouse.set_visible(False)
 
  
-# Основной цикл программы
-main_loop_running = True
-
 init_GPIO()
 add_event_detect_GPIO(pin_input_board=PIN_INPUT_SENSOR_FLOW, edge='FALLING', callback=count_liquid, bouncetime=5)
 add_event_detect_GPIO(pin_input_board=PIN_INPUT_START, edge='FALLING', callback=count_liquid, bouncetime=300)
 add_event_detect_GPIO(pin_input_board=PIN_INPUT_STOP, edge='FALLING', callback=count_liquid, bouncetime=300)
 
+####### LOOP THREADS #######
+system_loop_get_mwallet_push_alarm = threading.Thread(target=loop_get_mwallet_push_alarm)
+system_loop_get_mwallet_push_alarm.setDaemon(True)
+system_loop_get_mwallet_push_alarm.start()
 
+
+# Основной цикл программы
+main_loop_running = True
 while main_loop_running:
     
     for event in pygame.event.get():
@@ -249,7 +289,7 @@ while main_loop_running:
         #Если внесена оплата купюрой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_cash = validator.get_last_credit_cash()
         if(credit_cash > 0):
-            liquid_available = liquid_available + credit_cash/PRICE_WATER
+            LIQUID_AVAILABLE = LIQUID_AVAILABLE + credit_cash/PRICE_WATER
             screen.fill(BACKGROUND_COLOR)
             render_text_pygame(f"ВНЕСЕНО:  {credit_cash} сом", font, TEXT_COLOR, (130, 300))
             # Обновление экрана
@@ -259,50 +299,27 @@ while main_loop_running:
         #Если внесена оплата монетой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_coin = coin_pulse.get_last_credit_coin()
         if(credit_coin > 0):
-            liquid_available = liquid_available + credit_coin/PRICE_WATER
+            LIQUID_AVAILABLE = LIQUID_AVAILABLE + credit_coin/PRICE_WATER
             screen.fill(BACKGROUND_COLOR)
             render_text_pygame(f"ВНЕСЕНО:  {credit_coin} сом", font, TEXT_COLOR, (130, 300))
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
         '''    
-            
-        #Если внесена оплата через Мобильный кошелек, то вывести на дисплей сумму и увеличить доступный обьем
-        #Опрос сервера о поступлении оплаты или нет происходит каждые duration секунд
-        duration_wwallet = 1
-        if time.time() - start_time_wwallet >= duration_wwallet:
-            print("Start_get_wwallet:", datetime.now().strftime("%H:%M:%S"))
-            try:
-                params = {
-                   'serial_number_machine': SERIAL_NUMBER_MACHINE,
-                    'main_power': 'true',
-                    'open_door': 'false',
-                    'low_water': 'true'
-                   }
-                response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params)
-                data = response.json()
-                amount_mwallet = float(data['m_transactions_amount'])
-                print(data)
         
-            except Exception as e:
-                amount_mwallet = 0
-                print(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
-            print("Stop_time_get_wwallet:", datetime.now().strftime("%H:%M:%S"))    
             
-            if(amount_mwallet > 0):
-                liquid_available = liquid_available + amount_mwallet/PRICE_WATER
-                screen.fill(BACKGROUND_COLOR)
-                render_text_pygame(f"ВНЕСЕНО:  {amount_mwallet} сом", font, TEXT_COLOR, (130, 300))
-                # Обновление экрана
-                pygame.display.flip()
-                sleep(2)
-            
-            start_time_wwallet = time.time()
-            
+        if(AMOUNT_MWALLET > 0):
+            LIQUID_AVAILABLE = LIQUID_AVAILABLE + AMOUNT_MWALLET/PRICE_WATER
+            screen.fill(BACKGROUND_COLOR)
+            render_text_pygame(f"ВНЕСЕНО:  {AMOUNT_MWALLET} сом", font, TEXT_COLOR, (130, 300))
+            AMOUNT_MWALLET = 0
+            # Обновление экрана
+            pygame.display.flip()
+            sleep(2)
             
         
         #Если произведена оплата и предоставлен доступный обьем воды для выдачи
-        if(liquid_available > 0):
+        if(LIQUID_AVAILABLE > 0):
             input_state_bt_ozon = GPIO.input(PIN_INPUT_OZON)
             screen.fill(BACKGROUND_COLOR)
             
@@ -323,7 +340,7 @@ while main_loop_running:
             else:
                 render_text_pygame("Используйте озонатор", font, TEXT_COLOR, (130, 150))
 
-            render_text_pygame(f"ДОСТУПНО:  {round(liquid_available, 2)} л.", font, TEXT_COLOR, (130, 300))
+            render_text_pygame(f"ДОСТУПНО:  {round(LIQUID_AVAILABLE, 2)} л.", font, TEXT_COLOR, (130, 300))
             #Если используется debug_flow_sensor_vision, то можно видеть количество импульсов с датчика жидкости 
             if(debug_flow_sensor_vision):
                 render_text_pygame(f"Импульсы: {number_pulse_sensor}", font, TEXT_COLOR, (130, 500))
