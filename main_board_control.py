@@ -91,7 +91,7 @@ LOW_WATER = 'false'
 
 
 
-qr_loaded = False # Флаг успешной загрузки QR-кода
+QR_LOADED = False # Флаг успешной загрузки QR-кода
 
 #validator = None
 coin_pulse = None
@@ -99,10 +99,6 @@ coin_pulse = None
 ozon_running = False # Флаг включения Озонатора
 duration_ozon_running = 10 #Время в секундах работы озонатора
 
-
-# Установка времени работы программы
-
-start_time_qrcode = time.time()
 
 # Режим для мониторинга количества импульсов датчика жидкости
 debug_flow_sensor_vision = True
@@ -194,6 +190,7 @@ def render_text_pygame(text: str, font, text_color: Tuple[int, int, int], toplef
     # Рисование текста на экране
     screen.blit(text_surface, text_rect)
 
+
 def loop_get_mwallet_push_alarm():
         '''Функция получения суммы оплаты через Мобильный кошелек и отправка состояния аварий'''
         global SERIAL_NUMBER_MACHINE
@@ -226,6 +223,47 @@ def loop_get_mwallet_push_alarm():
                 start_time_wwallet = time.time()
 
 
+def loop_get_qr_code():
+            '''Функция получения qr кода для оплаты'''
+            global SERIAL_NUMBER_MACHINE
+            global QR_LOADED
+            global url_get_qr_code
+
+            start_time_qrcode = time.time()
+            duration_qrcode = 3
+            while True:
+                if time.time() - start_time_qrcode >= duration_qrcode:
+                    print("Start_get_qr-code:", datetime.now().strftime("%H:%M:%S"))
+                    try:
+                        # Получение URL для QR кода
+                        params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
+                        response = requests.get(url_get_qr_code, params=params)
+
+                        data = response.json()
+                        print(data)
+
+                        # Загрузка изображения QR-кода по URL
+                        if data['success']:
+                            qr_url = data['qr_code']
+                            #Проверка наличия QR кода у аппарата
+                            if qr_url == "":
+                                QR_LOADED = False
+                            else:
+                                response = requests.get(qr_url)
+                                qr_image = Image.open(io.BytesIO(response.content))
+                                # Изменение размера изображения до 40x40 пикселей
+                                qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
+                                # Сохранение временного файла для использования в Pygame
+                                qr_image.save("resized_qrcode.png")
+                                    
+                                QR_LOADED = True
+                    except Exception as e:
+                        QR_LOADED = False
+                        print(f'get_qr_code_exception: {e}')
+                    print("Stop_time_get_qr-code:", datetime.now().strftime("%H:%M:%S")) 
+                    start_time_qrcode = time.time()                   
+
+
 
 ##################### INITIALIZATION PYGAME #####################
 pygame.init()
@@ -253,8 +291,12 @@ add_event_detect_GPIO(pin_input_board=PIN_INPUT_STOP, edge='FALLING', callback=c
 
 ####### LOOP THREADS #######
 system_loop_get_mwallet_push_alarm = threading.Thread(target=loop_get_mwallet_push_alarm)
-system_loop_get_mwallet_push_alarm.setDaemon(True)
+system_loop_get_mwallet_push_alarm.daemon = True
 system_loop_get_mwallet_push_alarm.start()
+
+system_loop_get_qr_code = threading.Thread(target=loop_get_qr_code)
+system_loop_get_qr_code.daemon = True
+system_loop_get_qr_code.start()
 
 
 # Основной цикл программы
@@ -355,53 +397,23 @@ while main_loop_running:
                 set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW') 
                 set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
     
-            #Опрос сервера о qr коде каждые duration секунд
-            duration_qrcode = 3
-            if time.time() - start_time_qrcode >= duration_qrcode:
-                print("Start_get_qr-code:", datetime.now().strftime("%H:%M:%S"))
-                try:
-                    # Получение URL для QR кода
-                    params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
-                    response = requests.get(url_get_qr_code, params=params)
 
-                    data = response.json()
-                    print(data)
-
-                    # Загрузка изображения QR-кода по URL
-                    if data['success']:
-                        qr_url = data['qr_code']
-                        #Проверка наличия QR кода у аппарата
-                        if qr_url == "":
-                            qr_loaded = False
-                        else:
-                            response = requests.get(qr_url)
-                            qr_image = Image.open(io.BytesIO(response.content))
-                            # Изменение размера изображения до 40x40 пикселей
-                            qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
-                            # Сохранение временного файла для использования в Pygame
-                            qr_image.save("resized_qrcode.png")
-                                
-                            qr_loaded = True
-                except Exception as e:
-                    error_message = str(e)
-                print("Stop_time_get_qr-code:", datetime.now().strftime("%H:%M:%S"))    
                         
                 
-                screen.fill(BACKGROUND_COLOR) 
-                render_text_pygame("Добро пожаловать!", font, TEXT_COLOR, (250, 50))
-                render_text_pygame(f"Стоимость: 1 литра = {PRICE_WATER} сома", font, TEXT_COLOR, (70, 150))
-                render_text_pygame("Пожалуста, внесите оплату", font, TEXT_COLOR, (70, 250))
-                render_text_pygame("QR-код для оплаты", small_font, TEXT_COLOR, (20, 500))
+            screen.fill(BACKGROUND_COLOR) 
+            render_text_pygame("Добро пожаловать!", font, TEXT_COLOR, (250, 50))
+            render_text_pygame(f"Стоимость: 1 литра = {PRICE_WATER} сома", font, TEXT_COLOR, (70, 150))
+            render_text_pygame("Пожалуста, внесите оплату", font, TEXT_COLOR, (70, 250))
+            render_text_pygame("QR-код для оплаты", small_font, TEXT_COLOR, (20, 500))
 
-                if qr_loaded:
-                    # Загрузка изображения QR-кода в Pygame
-                    qr_surface = pygame.image.load("resized_qrcode.png")
-                    # Отображение изображения QR-кода 
-                    screen.blit(qr_surface, (700, 350))
+            if QR_LOADED:
+                # Загрузка изображения QR-кода в Pygame
+                qr_surface = pygame.image.load("resized_qrcode.png")
+                # Отображение изображения QR-кода 
+                screen.blit(qr_surface, (700, 350))
 
-                # Обновление экрана
-                pygame.display.flip()
-                start_time_qrcode = time.time()
+            # Обновление экрана
+            pygame.display.flip()
             
         
     except Exception as e:
