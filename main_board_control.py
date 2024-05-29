@@ -202,7 +202,6 @@ def loop_get_mwallet_push_alarm():
         global OPEN_DOOR 
         global LOW_WATER
         while True:
-            logger.info("Start_get_wwallet:", datetime.now().strftime("%H:%M:%S"))
             try:
                 params = {
                 'serial_number_machine': SERIAL_NUMBER_MACHINE,
@@ -218,7 +217,6 @@ def loop_get_mwallet_push_alarm():
             except Exception as e:
                 AMOUNT_MWALLET = 0
                 logger.exception(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
-            logger.info("Stop_time_get_wwallet:", datetime.now().strftime("%H:%M:%S")) 
             sleep(1)  
 
 
@@ -228,7 +226,6 @@ def loop_get_qr_code():
             global QR_LOADED
             global url_get_qr_code
             while True:
-                logger.info("Start_get_qr-code:", datetime.now().strftime("%H:%M:%S"))
                 try:
                     # Получение URL для QR кода
                     params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
@@ -245,19 +242,24 @@ def loop_get_qr_code():
                             QR_LOADED = False
                         else:
                             response = requests.get(qr_url)
-                            qr_image = Image.open(io.BytesIO(response.content))
+
+                            if response.status_code == 200:
+                                qr_image = Image.open(io.BytesIO(response.content))
+                            else:
+                                logger.error(f"Failed to retrieve QR code, status code: {response.status_code}")
+                                QR_LOADED = False
+
                             # Изменение размера изображения до 40x40 пикселей
                             qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
                             file_path = "resized_qrcode.png"
                             if not os.access(file_path, os.W_OK):
                                 # Сохранение временного файла для использования в Pygame
                                 qr_image.save("resized_qrcode.png")
+                                QR_LOADED = True
                                 
-                            QR_LOADED = True
                 except Exception as e:
                     QR_LOADED = False
-                    logger.exception(f'get_qr_code_exception: {e}')
-                logger.info("Stop_time_get_qr-code:", datetime.now().strftime("%H:%M:%S")) 
+                    logger.exception(f'get_qr_code_exception: {e}') 
                 sleep(3)                
 
 
@@ -299,6 +301,7 @@ system_loop_get_qr_code.start()
 # Основной цикл программы
 main_loop_running = True
 while main_loop_running:
+    sleep(0.1)
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -408,6 +411,7 @@ while main_loop_running:
                 qr_surface = pygame.image.load("resized_qrcode.png")
                 # Отображение изображения QR-кода 
                 screen.blit(qr_surface, (700, 350))
+                
 
             # Обновление экрана
             pygame.display.flip()
