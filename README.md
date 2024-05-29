@@ -18,6 +18,7 @@ pip install pillow
 pip install RPi.GPIO
 pip install numpy
 pip install pygame
+pip install loguru
 ````
 В директории заменить содержимое файла eSSP.py из файла for_change_eSSP.py
 ````bash
