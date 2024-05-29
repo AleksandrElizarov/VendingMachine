@@ -4,12 +4,14 @@ from typing import Callable, Tuple
 import logging
 import json
 import sys
+import os
 import time
 from datetime import datetime
 import io
 import pygame
 import requests
 from PIL import Image
+from loguru import logger
 
 import platform
 ##### Проверяем на какой операционной системе запущен скрипт, и соответственно импортируем модули #####
@@ -199,28 +201,25 @@ def loop_get_mwallet_push_alarm():
         global MAIN_POWER
         global OPEN_DOOR 
         global LOW_WATER
-        start_time_wwallet = time.time()
-        duration_wwallet = 1
         while True:
-            if time.time() - start_time_wwallet >= duration_wwallet:
-                print("Start_get_wwallet:", datetime.now().strftime("%H:%M:%S"))
-                try:
-                    params = {
-                    'serial_number_machine': SERIAL_NUMBER_MACHINE,
-                        'main_power': MAIN_POWER,
-                        'open_door': OPEN_DOOR,
-                        'low_water': LOW_WATER
-                    }
-                    response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params)
-                    data = response.json()
-                    AMOUNT_MWALLET = float(data['m_transactions_amount'])
-                    print(data)
-            
-                except Exception as e:
-                    AMOUNT_MWALLET = 0
-                    print(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
-                print("Stop_time_get_wwallet:", datetime.now().strftime("%H:%M:%S"))   
-                start_time_wwallet = time.time()
+            logger.info("Start_get_wwallet:", datetime.now().strftime("%H:%M:%S"))
+            try:
+                params = {
+                'serial_number_machine': SERIAL_NUMBER_MACHINE,
+                    'main_power': MAIN_POWER,
+                    'open_door': OPEN_DOOR,
+                    'low_water': LOW_WATER
+                }
+                response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params)
+                data = response.json()
+                AMOUNT_MWALLET = float(data['m_transactions_amount'])
+                logger.info(data)
+        
+            except Exception as e:
+                AMOUNT_MWALLET = 0
+                logger.exception(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
+            logger.info("Stop_time_get_wwallet:", datetime.now().strftime("%H:%M:%S")) 
+            sleep(1)  
 
 
 def loop_get_qr_code():
@@ -228,40 +227,38 @@ def loop_get_qr_code():
             global SERIAL_NUMBER_MACHINE
             global QR_LOADED
             global url_get_qr_code
-
-            start_time_qrcode = time.time()
-            duration_qrcode = 3
             while True:
-                if time.time() - start_time_qrcode >= duration_qrcode:
-                    print("Start_get_qr-code:", datetime.now().strftime("%H:%M:%S"))
-                    try:
-                        # Получение URL для QR кода
-                        params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
-                        response = requests.get(url_get_qr_code, params=params)
+                logger.info("Start_get_qr-code:", datetime.now().strftime("%H:%M:%S"))
+                try:
+                    # Получение URL для QR кода
+                    params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
+                    response = requests.get(url_get_qr_code, params=params)
 
-                        data = response.json()
-                        print(data)
+                    data = response.json()
+                    logger.info(data)
 
-                        # Загрузка изображения QR-кода по URL
-                        if data['success']:
-                            qr_url = data['qr_code']
-                            #Проверка наличия QR кода у аппарата
-                            if qr_url == "":
-                                QR_LOADED = False
-                            else:
-                                response = requests.get(qr_url)
-                                qr_image = Image.open(io.BytesIO(response.content))
-                                # Изменение размера изображения до 40x40 пикселей
-                                qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
+                    # Загрузка изображения QR-кода по URL
+                    if data['success']:
+                        qr_url = data['qr_code']
+                        #Проверка наличия QR кода у аппарата
+                        if qr_url == "":
+                            QR_LOADED = False
+                        else:
+                            response = requests.get(qr_url)
+                            qr_image = Image.open(io.BytesIO(response.content))
+                            # Изменение размера изображения до 40x40 пикселей
+                            qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
+                            file_path = "resized_qrcode.png"
+                            if not os.access(file_path, os.W_OK):
                                 # Сохранение временного файла для использования в Pygame
                                 qr_image.save("resized_qrcode.png")
-                                    
-                                QR_LOADED = True
-                    except Exception as e:
-                        QR_LOADED = False
-                        print(f'get_qr_code_exception: {e}')
-                    print("Stop_time_get_qr-code:", datetime.now().strftime("%H:%M:%S")) 
-                    start_time_qrcode = time.time()                   
+                                
+                            QR_LOADED = True
+                except Exception as e:
+                    QR_LOADED = False
+                    logger.exception(f'get_qr_code_exception: {e}')
+                logger.info("Stop_time_get_qr-code:", datetime.now().strftime("%H:%M:%S")) 
+                sleep(3)                
 
 
 
@@ -430,7 +427,7 @@ while main_loop_running:
         
         # Обновление экрана
         pygame.display.flip()
-        print(f'Exception-{e}')
+        logger.exception(f'Exception-{e}')
     '''    
     # Проверка времени работы программы
     if time.time() - start_time >= duration:
