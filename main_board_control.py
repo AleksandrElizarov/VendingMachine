@@ -209,7 +209,7 @@ def loop_get_mwallet_push_alarm():
                     'open_door': OPEN_DOOR,
                     'low_water': LOW_WATER
                 }
-                response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params)
+                response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params, timeout=5)
                 data = response.json()
                 AMOUNT_MWALLET = float(data['m_transactions_amount'])
                 logger.info(data)
@@ -229,7 +229,7 @@ def loop_get_qr_code():
                 try:
                     # Получение URL для QR кода
                     params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
-                    response = requests.get(url_get_qr_code, params=params)
+                    response = requests.get(url_get_qr_code, params=params, timeout=5)
 
                     data = response.json()
                     logger.info(data)
@@ -241,7 +241,7 @@ def loop_get_qr_code():
                         if qr_url == "":
                             QR_LOADED = False
                         else:
-                            response = requests.get(qr_url)
+                            response = requests.get(qr_url, timeout=2)
 
                             if response.status_code == 200:
                                 qr_image = Image.open(io.BytesIO(response.content))
@@ -260,7 +260,7 @@ def loop_get_qr_code():
                 except Exception as e:
                     QR_LOADED = False
                     logger.exception(f'get_qr_code_exception: {e}') 
-                sleep(3)                
+                sleep(5)                
 
 
 
