@@ -217,7 +217,8 @@ def loop_get_mwallet_push_alarm():
             except Exception as e:
                 AMOUNT_MWALLET = 0
                 logger.exception(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
-            sleep(1)  
+            sleep(2)    
+            
 
 
 def loop_get_qr_code():
@@ -229,7 +230,7 @@ def loop_get_qr_code():
                 try:
                     # Получение URL для QR кода
                     params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
-                    response = requests.get(url_get_qr_code, params=params, timeout=5)
+                    response = requests.get(url_get_qr_code, params=params, timeout=3)
 
                     data = response.json()
                     logger.info(data)
@@ -241,7 +242,7 @@ def loop_get_qr_code():
                         if qr_url == "":
                             QR_LOADED = False
                         else:
-                            response = requests.get(qr_url, timeout=2)
+                            response = requests.get(qr_url, timeout=3)
 
                             if response.status_code == 200:
                                 qr_image = Image.open(io.BytesIO(response.content))
@@ -254,13 +255,15 @@ def loop_get_qr_code():
                             file_path = "resized_qrcode.png"
                             if not os.access(file_path, os.W_OK):
                                 # Сохранение временного файла для использования в Pygame
-                                qr_image.save("resized_qrcode.png")
-                                QR_LOADED = True
+                                pass
+                            qr_image.save("resized_qrcode.png")
+                            logger.info("QR_image_SAVE")
+                            QR_LOADED = True
                                 
                 except Exception as e:
                     QR_LOADED = False
                     logger.exception(f'get_qr_code_exception: {e}') 
-                sleep(5)                
+                sleep(10)                
 
 
 
