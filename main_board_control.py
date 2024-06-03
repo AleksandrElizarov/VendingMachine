@@ -304,7 +304,7 @@ system_loop_get_qr_code.start()
 # Основной цикл программы
 main_loop_running = True
 while main_loop_running:
-    sleep(0.3)
+    sleep(0.1)
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
