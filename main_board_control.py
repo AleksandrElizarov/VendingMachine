@@ -254,13 +254,15 @@ def loop_get_qr_code():
                             file_path = "resized_qrcode.png"
                             if not os.access(file_path, os.W_OK):
                                 # Сохранение временного файла для использования в Pygame
-                                qr_image.save("resized_qrcode.png")
-                                QR_LOADED = True
+                                pass
+                            qr_image.save("resized_qrcode.png")
+                            logger.info("QR_image_SAVE")
+                            QR_LOADED = True
                                 
                 except Exception as e:
                     QR_LOADED = False
                     logger.exception(f'get_qr_code_exception: {e}') 
-                sleep(5)                
+                sleep(10)                
 
 
 
@@ -301,7 +303,7 @@ system_loop_get_qr_code.start()
 # Основной цикл программы
 main_loop_running = True
 while main_loop_running:
-    sleep(0.1)
+    sleep(0.3)
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -405,7 +407,7 @@ while main_loop_running:
             render_text_pygame(f"Стоимость: 1 литра = {PRICE_WATER} сома", font, TEXT_COLOR, (70, 150))
             render_text_pygame("Пожалуста, внесите оплату", font, TEXT_COLOR, (70, 250))
             render_text_pygame("QR-код для оплаты", small_font, TEXT_COLOR, (20, 500))
-
+        
             if QR_LOADED:
                 # Загрузка изображения QR-кода в Pygame
                 qr_surface = pygame.image.load("resized_qrcode.png")
