@@ -92,6 +92,8 @@ OPEN_DOOR = 'false'
 LOW_WATER = 'false'
 
 
+# Создание объекта блокировки
+file_lock = threading.Lock()
 
 QR_LOADED = False # Флаг успешной загрузки QR-кода
 
@@ -217,7 +219,7 @@ def loop_get_mwallet_push_alarm():
             except Exception as e:
                 AMOUNT_MWALLET = 0
                 logger.exception(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
-            sleep(2)    
+            sleep(1)    
             
 
 
@@ -252,18 +254,16 @@ def loop_get_qr_code():
 
                             # Изменение размера изображения до 40x40 пикселей
                             qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
-                            file_path = "resized_qrcode.png"
-                            if not os.access(file_path, os.W_OK):
-                                # Сохранение временного файла для использования в Pygame
-                                pass
-                            qr_image.save("resized_qrcode.png")
-                            logger.info("QR_image_SAVE")
-                            QR_LOADED = True
+                            
+                            with file_lock:
+                                qr_image.save("resized_qrcode.png")
+                                logger.info("QR_image_SAVE")
+                                QR_LOADED = True
                                 
                 except Exception as e:
                     QR_LOADED = False
                     logger.exception(f'get_qr_code_exception: {e}') 
-                sleep(10)                
+                sleep(5)                
 
 
 
@@ -411,9 +411,10 @@ while main_loop_running:
         
             if QR_LOADED:
                 # Загрузка изображения QR-кода в Pygame
-                qr_surface = pygame.image.load("resized_qrcode.png")
-                # Отображение изображения QR-кода 
-                screen.blit(qr_surface, (700, 350))
+                with file_lock:
+                    qr_surface = pygame.image.load("resized_qrcode.png")
+                    # Отображение изображения QR-кода 
+                    screen.blit(qr_surface, (700, 350))
                 
 
             # Обновление экрана
