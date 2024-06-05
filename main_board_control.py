@@ -92,10 +92,9 @@ OPEN_DOOR = 'false'
 LOW_WATER = 'false'
 
 
-# Создание объекта блокировки
-file_lock = threading.Lock()
-
+DATE_FILTER_UPDATE = '2024-06-01'
 QR_LOADED = False # Флаг успешной загрузки QR-кода
+
 
 #validator = None
 coin_pulse = None
@@ -109,15 +108,8 @@ debug_flow_sensor_vision = True
 number_pulse_sensor = 0
 
 
-##################### FONT SIZE #####################
-FONT_SIZE = 120  # Размер шрифта
-FONT_small_SIZE = 80  # Размер шрифта
-
-BACKGROUND_COLOR = (242, 242, 240)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
-BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
-
-TEXT_COLOR = (255, 255, 255)  # Цвет шрифта белый (255, 255, 255)
-TEXT_COLOR_ALARM = (255, 255, 0)  # Цвет шрифта желтый
+# Создание объекта блокировки
+file_lock = threading.Lock()
 
 
 
@@ -219,7 +211,7 @@ def loop_get_mwallet_push_alarm():
             except Exception as e:
                 AMOUNT_MWALLET = 0
                 logger.exception(f'refresh_states_alarm_get_mwallet_amount_exception: {e}')
-            sleep(1)    
+            sleep(2)    
             
 
 
@@ -227,24 +219,28 @@ def loop_get_qr_code():
             '''Функция получения qr кода для оплаты'''
             global SERIAL_NUMBER_MACHINE
             global QR_LOADED
+            global DATE_FILTER_UPDATE
             global url_get_qr_code
             while True:
                 try:
                     # Получение URL для QR кода
                     params = {'serial_number_machine': SERIAL_NUMBER_MACHINE}
-                    response = requests.get(url_get_qr_code, params=params, timeout=3)
+                    response = requests.get(url_get_qr_code, params=params, timeout=5)
 
                     data = response.json()
                     logger.info(data)
 
                     # Загрузка изображения QR-кода по URL
                     if data['success']:
+                        #Получаем qr_code
                         qr_url = data['qr_code']
+                        #Получаем дату обновления фильтра
+                        DATE_FILTER_UPDATE = data['date_filter_update']
                         #Проверка наличия QR кода у аппарата
                         if qr_url == "":
                             QR_LOADED = False
                         else:
-                            response = requests.get(qr_url, timeout=3)
+                            response = requests.get(qr_url, timeout=5)
 
                             if response.status_code == 200:
                                 qr_image = Image.open(io.BytesIO(response.content))
@@ -263,8 +259,19 @@ def loop_get_qr_code():
                 except Exception as e:
                     QR_LOADED = False
                     logger.exception(f'get_qr_code_exception: {e}') 
-                sleep(5)                
+                sleep(10)                
 
+
+
+##################### FONT SIZE #####################
+FONT_SIZE = 120  # Размер шрифта
+FONT_small_SIZE = 80  # Размер шрифта
+
+BACKGROUND_COLOR = (0, 0, 128)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
+BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
+
+TEXT_COLOR = (255, 255, 255)  # Цвет шрифта белый (255, 255, 255)
+TEXT_COLOR_ALARM = (255, 255, 0)  # Цвет шрифта желтый
 
 
 ##################### INITIALIZATION PYGAME #####################
@@ -275,10 +282,10 @@ small_font = pygame.font.SysFont(None, FONT_small_SIZE)
 
 # Установка размера экрана
 screen_width = 1300
-screen_height = 500
+screen_height = 768
 
-screen = pygame.display.set_mode((screen_width, screen_height))
-#screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+#screen = pygame.display.set_mode((screen_width, screen_height))
+screen = pygame.display.set_mode((0, 0), FULLSCREEN)
 
 pygame.display.set_caption('Vending Machine Display')
 
@@ -406,9 +413,13 @@ while main_loop_running:
             screen.fill(BACKGROUND_COLOR) 
             render_text_pygame("Добро пожаловать!", font, TEXT_COLOR, (250, 50))
             render_text_pygame(f"Стоимость: 1 литра = {PRICE_WATER} сома", font, TEXT_COLOR, (70, 150))
-            render_text_pygame("Пожалуста, внесите оплату", font, TEXT_COLOR, (70, 250))
+            # Преобразование строки в объект datetime
+            date_obj = datetime.strptime(DATE_FILTER_UPDATE, "%Y-%m-%d")
+            # Преобразование объекта datetime в строку нужного формата
+            formatted_date = date_obj.strftime("%d.%m.%Y")
+            render_text_pygame(f"Последняя замена фильтров: {formatted_date}", small_font, TEXT_COLOR, (70, 250))
             render_text_pygame("QR-код для оплаты", small_font, TEXT_COLOR, (20, 500))
-        
+            print(DATE_FILTER_UPDATE)
             if QR_LOADED:
                 # Загрузка изображения QR-кода в Pygame
                 with file_lock:
