@@ -8,6 +8,7 @@ import os
 import time
 from datetime import datetime
 import io
+from pygame.locals import *
 import pygame
 import requests
 from PIL import Image
@@ -85,6 +86,9 @@ MILLILITRE_PULSE = 0.00222 #параметры датчика потока во�
 LIQUID_AVAILABLE = 0 # оплаченный обьем для выдачи
 
 AMOUNT_MWALLET = 0 # сумма оплаченная через Мобильный кошелек
+
+LIST_TRANSACTION_COIN_MWALLET = [] # список сумм транзакций внесенных через монетоприемник и валютоприемник
+
 
 ### VERIABLES ALARMS ###
 MAIN_POWER = 'true'
@@ -259,7 +263,25 @@ def loop_get_qr_code():
                 except Exception as e:
                     QR_LOADED = False
                     logger.exception(f'get_qr_code_exception: {e}') 
-                sleep(10)                
+                sleep(10)  
+
+
+def loop_send_transaction_coin_cash():
+    '''Функция записи транзакции на сервер в базуданных о сумме внесенной через монетоприемник/купюроприемник'''
+    global SERIAL_NUMBER_MACHINE
+    global url_create_coin_cash_transaction
+    global LIST_TRANSACTION_COIN_MWALLET    
+    while True:
+        if LIST_TRANSACTION_COIN_MWALLET:
+            try:
+                data = {"serial_number_machine": SERIAL_NUMBER_MACHINE, "cash_amount": LIST_TRANSACTION_COIN_MWALLET.pop()}   
+                response = requests.post(url_create_coin_cash_transaction, json=data)
+                logger.info(f'send_transaction_coin_cash: {response.json()}')
+            except Exception as e:
+                    logger.exception(f'send_transaction_coin_cash_exception: {e}') 
+        sleep(1)  
+
+
 
 
 
@@ -267,7 +289,7 @@ def loop_get_qr_code():
 FONT_SIZE = 120  # Размер шрифта
 FONT_small_SIZE = 80  # Размер шрифта
 
-BACKGROUND_COLOR = (0, 0, 128)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
+BACKGROUND_COLOR = (242, 242, 240)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
 BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
 
 TEXT_COLOR = (255, 255, 255)  # Цвет шрифта белый (255, 255, 255)
@@ -282,10 +304,10 @@ small_font = pygame.font.SysFont(None, FONT_small_SIZE)
 
 # Установка размера экрана
 screen_width = 1300
-screen_height = 768
+screen_height = 500
 
-#screen = pygame.display.set_mode((screen_width, screen_height))
-screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+screen = pygame.display.set_mode((screen_width, screen_height))
+#screen = pygame.display.set_mode((0, 0), FULLSCREEN)
 
 pygame.display.set_caption('Vending Machine Display')
 
@@ -306,6 +328,10 @@ system_loop_get_mwallet_push_alarm.start()
 system_loop_get_qr_code = threading.Thread(target=loop_get_qr_code)
 system_loop_get_qr_code.daemon = True
 system_loop_get_qr_code.start()
+
+system_loop_send_transaction_coin_cash = threading.Thread(target=loop_send_transaction_coin_cash)
+system_loop_send_transaction_coin_cash.daemon = True
+system_loop_send_transaction_coin_cash.start()
 
 
 # Основной цикл программы
@@ -357,8 +383,9 @@ while main_loop_running:
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
-        '''    
-        
+        ''' 
+        credit_coin='1'   
+        LIST_TRANSACTION_COIN_MWALLET.append(credit_coin)
             
         if(AMOUNT_MWALLET > 0):
             LIQUID_AVAILABLE = LIQUID_AVAILABLE + AMOUNT_MWALLET/PRICE_WATER
