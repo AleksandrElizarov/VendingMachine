@@ -61,7 +61,6 @@ else:
 
 ##################### VERIABLES GLOBAL #####################
 SERIAL_NUMBER_MACHINE = '1111111'
-PRICE_WATER = 3 #Цена за 1литр
 
 #URL get QR-code by GET-method query str 'serial_number_machine'
 url_get_qr_code = 'https://monitorvending.pythonanywhere.com/get_qr_code/'
@@ -95,8 +94,8 @@ MAIN_POWER = 'true'
 OPEN_DOOR = 'false'
 LOW_WATER = 'false'
 
-
-DATE_FILTER_UPDATE = '2024-06-01'
+PRICE_WATER = 3 #Цена за 1литр
+DATE_FILTER_UPDATE = '2024-06-01' # дата обновления фильтра
 QR_LOADED = False # Флаг успешной загрузки QR-кода
 
 
@@ -220,10 +219,11 @@ def loop_get_mwallet_push_alarm():
 
 
 def loop_get_qr_code():
-            '''Функция получения qr кода для оплаты'''
+            '''Функция получения qr кода для оплаты, дату обновления фильтра и цену за литр'''
             global SERIAL_NUMBER_MACHINE
             global QR_LOADED
             global DATE_FILTER_UPDATE
+            global PRICE_WATER
             global url_get_qr_code
             while True:
                 try:
@@ -240,6 +240,7 @@ def loop_get_qr_code():
                         qr_url = data['qr_code']
                         #Получаем дату обновления фильтра
                         DATE_FILTER_UPDATE = data['date_filter_update']
+                        PRICE_WATER = data['price']
                         #Проверка наличия QR кода у аппарата
                         if qr_url == "":
                             QR_LOADED = False
