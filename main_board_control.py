@@ -240,7 +240,7 @@ def loop_get_qr_code():
                         qr_url = data['qr_code']
                         #Получаем дату обновления фильтра
                         DATE_FILTER_UPDATE = data['date_filter_update']
-                        PRICE_WATER = data['price']
+                        PRICE_WATER = float(data['price'])
                         #Проверка наличия QR кода у аппарата
                         if qr_url == "":
                             QR_LOADED = False
