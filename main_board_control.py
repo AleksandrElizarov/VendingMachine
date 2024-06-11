@@ -1,7 +1,6 @@
 import threading
 from time import sleep
 from typing import Callable, Tuple
-import logging
 import json
 import sys
 import os
@@ -13,6 +12,7 @@ import pygame
 import requests
 from PIL import Image
 from loguru import logger
+logger.add('logs.log', rotation='10MB')
 
 import platform
 ##### Проверяем на какой операционной системе запущен скрипт, и соответственно импортируем модули #####
@@ -61,13 +61,14 @@ else:
 
 ##################### VERIABLES GLOBAL #####################
 SERIAL_NUMBER_MACHINE = '1111111'
+DOMAIN = 'https://monitorvending.pythonanywhere.com/'
 
 #URL get QR-code by GET-method query str 'serial_number_machine'
-url_get_qr_code = 'https://monitorvending.pythonanywhere.com/get_qr_code/'
+url_get_qr_code = f'{DOMAIN}get_qr_code/'
 #URL refresh states alarm and get info about amount mwallet GET-method query str 'serial_number_machine','main_power',open_door',low_water'
-url_refresh_states_alarm_get_mwallet_amount = 'https://monitorvending.pythonanywhere.com/refresh_states_alarm_machine/'
+url_refresh_states_alarm_get_mwallet_amount = f'{DOMAIN}refresh_states_alarm_machine/'
 #URL create coin/cash transaction in DataBase POST method {"serial_number_machine": "64-number", "cash_amount": cash_amount}
-url_create_coin_cash_transaction = 'https://monitorvending.pythonanywhere.com/create_transaction/'
+url_create_coin_cash_transaction = f'{DOMAIN}create_transaction/'
 
 COM_PORT = "/dev/ttyUSB0" # Название последовательного порта
 PIN_INPUT_SENSOR_FLOW = 32 # Пин датчика жидкости

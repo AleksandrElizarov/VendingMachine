@@ -1,0 +1,836 @@
+2024-06-11 15:37:02.014 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:02.423 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:37:02.729 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 231}
+2024-06-11 15:37:03.126 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:37:04.979 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:05.297 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 232}
+2024-06-11 15:37:07.144 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 233}
+2024-06-11 15:37:26.258 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:37:26.260 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:26.783 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:37:27.077 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 234}
+2024-06-11 15:37:28.820 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 235}
+2024-06-11 15:37:29.137 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:31.055 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 236}
+2024-06-11 15:37:32.021 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:32.815 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 237}
+2024-06-11 15:37:34.740 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 238}
+2024-06-11 15:37:35.067 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:36.656 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 239}
+2024-06-11 15:37:37.697 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:37:37.925 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:38.121 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:37:38.415 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 240}
+2024-06-11 15:37:40.228 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 241}
+2024-06-11 15:37:40.665 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:42.845 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 242}
+2024-06-11 15:37:43.398 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:44.816 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 243}
+2024-06-11 15:37:46.419 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:46.735 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 244}
+2024-06-11 15:37:48.757 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 245}
+2024-06-11 15:37:49.104 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:49.120 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:37:49.588 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:37:50.741 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 246}
+2024-06-11 15:37:51.926 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:52.497 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 247}
+2024-06-11 15:37:54.288 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 248}
+2024-06-11 15:37:54.644 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:37:56.741 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 249}
+2024-06-11 15:37:57.614 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:00.496 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:00.499 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:38:01.005 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:38:01.935 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 250}
+2024-06-11 15:38:03.536 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:03.857 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 251}
+2024-06-11 15:38:06.106 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 252}
+2024-06-11 15:38:06.418 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:08.337 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 253}
+2024-06-11 15:38:09.292 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:10.581 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 254}
+2024-06-11 15:38:11.871 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:38:12.151 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:12.376 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 255}
+2024-06-11 15:38:13.975 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:38:14.196 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 256}
+2024-06-11 15:38:15.057 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:16.018 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 257}
+2024-06-11 15:38:18.573 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 258}
+2024-06-11 15:38:19.216 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:20.492 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 259}
+2024-06-11 15:38:22.418 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 260}
+2024-06-11 15:38:22.420 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:24.584 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 261}
+2024-06-11 15:38:25.134 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:38:25.676 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:25.884 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:38:26.741 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 262}
+2024-06-11 15:38:28.745 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 263}
+2024-06-11 15:38:29.016 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:30.735 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 264}
+2024-06-11 15:38:32.654 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 265}
+2024-06-11 15:38:32.657 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:34.573 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 266}
+2024-06-11 15:38:36.182 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:36.817 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:38:36.818 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 267}
+2024-06-11 15:38:37.493 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:38:39.053 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 268}
+2024-06-11 15:38:39.297 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:41.298 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 269}
+2024-06-11 15:38:42.254 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:43.219 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 270}
+2024-06-11 15:38:45.139 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 271}
+2024-06-11 15:38:45.454 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:47.647 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 272}
+2024-06-11 15:38:48.175 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:38:48.195 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:38:48.771 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:38:49.545 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 273}
+2024-06-11 15:38:51.219 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:40:12.747 | ERROR    | __main__:loop_get_qr_code:267 - get_qr_code_exception: HTTPSConnectionPool(host='monitorvending.pythonanywhere.comget_qr_code', port=443): Max retries exceeded with url: /?serial_number_machine=1111111 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)"))
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           │          └ <function create_connection at 0x00000289A44C9A80>
+           └ <module 'urllib3.util.connection' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages...
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               │      │           │     │     │       │      └ <SocketKind.SOCK_STREAM: 1>
+               │      │           │     │     │       └ <module 'socket' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\socket.py'>
+               │      │           │     │     └ <AddressFamily.AF_UNSPEC: 0>
+               │      │           │     └ 443
+               │      │           └ 'monitorvending.pythonanywhere.comget_qr_code'
+               │      └ <function getaddrinfo at 0x00000289A3F0DB20>
+               └ <module 'socket' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\socket.py'>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\socket.py", line 961, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               │       │           │     │     │       │     │      └ 0
+               │       │           │     │     │       │     └ 0
+               │       │           │     │     │       └ <SocketKind.SOCK_STREAM: 1>
+               │       │           │     │     └ <AddressFamily.AF_UNSPEC: 0>
+               │       │           │     └ 443
+               │       │           └ 'monitorvending.pythonanywhere.comget_qr_code'
+               │       └ <built-in function getaddrinfo>
+               └ <module '_socket' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\_socket.pyd'>
+
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               │    └ <function HTTPConnectionPool._make_request at 0x00000289A45B89A0>
+               └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A521A790>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 491, in _make_request
+    raise new_e
+          └ NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>: Failed to resolve 'monitorvending.pyt...
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+    │    │              └ <urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>
+    │    └ <function HTTPSConnectionPool._validate_conn at 0x00000289A45B8F40>
+    └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A521A790>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 1099, in _validate_conn
+    conn.connect()
+    │    └ <function HTTPSConnection.connect at 0x00000289A45B4B80>
+    └ <urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 616, in connect
+    self.sock = sock = self._new_conn()
+    │    │             │    └ <function HTTPConnection._new_conn at 0x00000289A45B4220>
+    │    │             └ <urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>
+    │    └ None
+    └ <urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+          │                   │    │     └ <urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>
+          │                   │    └ <property object at 0x00000289A4575FD0>
+          │                   └ <urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>
+          └ <class 'urllib3.exceptions.NameResolutionError'>
+
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 564, in send
+    resp = conn.urlopen(
+           │    └ <function HTTPConnectionPool.urlopen at 0x00000289A45B8B80>
+           └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A521A790>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              │       └ <function Retry.increment at 0x00000289A44DC2C0>
+              └ Retry(total=0, connect=None, read=False, redirect=None, status=None)
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+          │             │      │    │            └ NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>: Failed to resolve 'monitorvending.pyt...
+          │             │      │    └ NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>: Failed to resolve 'monitorvending.pyt...
+          │             │      └ '/?serial_number_machine=1111111'
+          │             └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A521A790>
+          └ <class 'urllib3.exceptions.MaxRetryError'>
+
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='monitorvending.pythonanywhere.comget_qr_code', port=443): Max retries exceeded with url: /?serial_number_machine=1111111 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)"))
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 995, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x00000289A1675940>
+    └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1038, in _bootstrap_inner
+    self.run()
+    │    └ <function Thread.run at 0x00000289A1675620>
+    └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+    │    │        │    └ ()
+    │    │        └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+    │    └ <function loop_get_qr_code at 0x00000289A51F4860>
+    └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+
+> File "d:\VendingMachine\main_board_control.py", line 233, in loop_get_qr_code
+    response = requests.get(url_get_qr_code, params=params, timeout=5)
+               │        │   │                       └ {'serial_number_machine': '1111111'}
+               │        │   └ 'https://monitorvending.pythonanywhere.comget_qr_code/'
+               │        └ <function get at 0x00000289A4F019E0>
+               └ <module 'requests' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\requests\\__i...
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           │              │           │         └ {'timeout': 5}
+           │              │           └ {'serial_number_machine': '1111111'}
+           │              └ 'https://monitorvending.pythonanywhere.comget_qr_code/'
+           └ <function request at 0x00000289A4F03740>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           │       │              │           │      └ {'params': {'serial_number_machine': '1111111'}, 'timeout': 5}
+           │       │              │           └ 'https://monitorvending.pythonanywhere.comget_qr_code/'
+           │       │              └ 'get'
+           │       └ <function Session.request at 0x00000289A4F37C40>
+           └ <requests.sessions.Session object at 0x00000289A5211750>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           │    │    │       └ {'timeout': 5, 'allow_redirects': True, 'proxies': OrderedDict(), 'stream': False, 'verify': True, 'cert': None}
+           │    │    └ <PreparedRequest [GET]>
+           │    └ <function Session.send at 0x00000289A4F3C180>
+           └ <requests.sessions.Session object at 0x00000289A5211750>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        │       │    │          └ {'timeout': 5, 'proxies': OrderedDict(), 'stream': False, 'verify': True, 'cert': None}
+        │       │    └ <PreparedRequest [GET]>
+        │       └ <function HTTPAdapter.send at 0x00000289A4F374C0>
+        └ <requests.adapters.HTTPAdapter object at 0x00000289A5211E10>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 597, in send
+    raise ConnectionError(e, request=request)
+          │                          └ <PreparedRequest [GET]>
+          └ <class 'requests.exceptions.ConnectionError'>
+
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='monitorvending.pythonanywhere.comget_qr_code', port=443): Max retries exceeded with url: /?serial_number_machine=1111111 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A521AC90>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)"))
+2024-06-11 15:40:13.934 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:40:14.409 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 275}
+2024-06-11 15:40:16.212 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 276}
+2024-06-11 15:40:16.811 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:40:18.726 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 277}
+2024-06-11 15:40:20.648 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 278}
+2024-06-11 15:40:21.606 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:40:22.566 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 279}
+2024-06-11 15:40:22.896 | ERROR    | __main__:loop_get_qr_code:267 - get_qr_code_exception: HTTPSConnectionPool(host='monitorvending.pythonanywhere.comget_qr_code', port=443): Max retries exceeded with url: /?serial_number_machine=1111111 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A527A990>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)"))
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           │          └ <function create_connection at 0x00000289A44C9A80>
+           └ <module 'urllib3.util.connection' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages...
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               │      │           │     │     │       │      └ <SocketKind.SOCK_STREAM: 1>
+               │      │           │     │     │       └ <module 'socket' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\socket.py'>
+               │      │           │     │     └ <AddressFamily.AF_UNSPEC: 0>
+               │      │           │     └ 443
+               │      │           └ 'monitorvending.pythonanywhere.comget_qr_code'
+               │      └ <function getaddrinfo at 0x00000289A3F0DB20>
+               └ <module 'socket' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\socket.py'>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\socket.py", line 961, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               │       │           │     │     │       │     │      └ 0
+               │       │           │     │     │       │     └ 0
+               │       │           │     │     │       └ <SocketKind.SOCK_STREAM: 1>
+               │       │           │     │     └ <AddressFamily.AF_UNSPEC: 0>
+               │       │           │     └ 443
+               │       │           └ 'monitorvending.pythonanywhere.comget_qr_code'
+               │       └ <built-in function getaddrinfo>
+               └ <module '_socket' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\_socket.pyd'>
+
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               │    └ <function HTTPConnectionPool._make_request at 0x00000289A45B89A0>
+               └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A5279350>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 491, in _make_request
+    raise new_e
+          └ NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A527A990>: Failed to resolve 'monitorvending.pyt...
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+    │    │              └ <urllib3.connection.HTTPSConnection object at 0x00000289A527A990>
+    │    └ <function HTTPSConnectionPool._validate_conn at 0x00000289A45B8F40>
+    └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A5279350>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 1099, in _validate_conn
+    conn.connect()
+    │    └ <function HTTPSConnection.connect at 0x00000289A45B4B80>
+    └ <urllib3.connection.HTTPSConnection object at 0x00000289A527A990>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 616, in connect
+    self.sock = sock = self._new_conn()
+    │    │             │    └ <function HTTPConnection._new_conn at 0x00000289A45B4220>
+    │    │             └ <urllib3.connection.HTTPSConnection object at 0x00000289A527A990>
+    │    └ None
+    └ <urllib3.connection.HTTPSConnection object at 0x00000289A527A990>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+          │                   │    │     └ <urllib3.connection.HTTPSConnection object at 0x00000289A527A990>
+          │                   │    └ <property object at 0x00000289A4575FD0>
+          │                   └ <urllib3.connection.HTTPSConnection object at 0x00000289A527A990>
+          └ <class 'urllib3.exceptions.NameResolutionError'>
+
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x00000289A527A990>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 564, in send
+    resp = conn.urlopen(
+           │    └ <function HTTPConnectionPool.urlopen at 0x00000289A45B8B80>
+           └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A5279350>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              │       └ <function Retry.increment at 0x00000289A44DC2C0>
+              └ Retry(total=0, connect=None, read=False, redirect=None, status=None)
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+          │             │      │    │            └ NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A527A990>: Failed to resolve 'monitorvending.pyt...
+          │             │      │    └ NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A527A990>: Failed to resolve 'monitorvending.pyt...
+          │             │      └ '/?serial_number_machine=1111111'
+          │             └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A5279350>
+          └ <class 'urllib3.exceptions.MaxRetryError'>
+
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='monitorvending.pythonanywhere.comget_qr_code', port=443): Max retries exceeded with url: /?serial_number_machine=1111111 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A527A990>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)"))
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 995, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x00000289A1675940>
+    └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1038, in _bootstrap_inner
+    self.run()
+    │    └ <function Thread.run at 0x00000289A1675620>
+    └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+    │    │        │    └ ()
+    │    │        └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+    │    └ <function loop_get_qr_code at 0x00000289A51F4860>
+    └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+
+> File "d:\VendingMachine\main_board_control.py", line 233, in loop_get_qr_code
+    response = requests.get(url_get_qr_code, params=params, timeout=5)
+               │        │   │                       └ {'serial_number_machine': '1111111'}
+               │        │   └ 'https://monitorvending.pythonanywhere.comget_qr_code/'
+               │        └ <function get at 0x00000289A4F019E0>
+               └ <module 'requests' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\requests\\__i...
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           │              │           │         └ {'timeout': 5}
+           │              │           └ {'serial_number_machine': '1111111'}
+           │              └ 'https://monitorvending.pythonanywhere.comget_qr_code/'
+           └ <function request at 0x00000289A4F03740>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           │       │              │           │      └ {'params': {'serial_number_machine': '1111111'}, 'timeout': 5}
+           │       │              │           └ 'https://monitorvending.pythonanywhere.comget_qr_code/'
+           │       │              └ 'get'
+           │       └ <function Session.request at 0x00000289A4F37C40>
+           └ <requests.sessions.Session object at 0x00000289A44D5150>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           │    │    │       └ {'timeout': 5, 'allow_redirects': True, 'proxies': OrderedDict(), 'stream': False, 'verify': True, 'cert': None}
+           │    │    └ <PreparedRequest [GET]>
+           │    └ <function Session.send at 0x00000289A4F3C180>
+           └ <requests.sessions.Session object at 0x00000289A44D5150>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        │       │    │          └ {'timeout': 5, 'proxies': OrderedDict(), 'stream': False, 'verify': True, 'cert': None}
+        │       │    └ <PreparedRequest [GET]>
+        │       └ <function HTTPAdapter.send at 0x00000289A4F374C0>
+        └ <requests.adapters.HTTPAdapter object at 0x00000289A522F890>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 597, in send
+    raise ConnectionError(e, request=request)
+          │                          └ <PreparedRequest [GET]>
+          └ <class 'requests.exceptions.ConnectionError'>
+
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='monitorvending.pythonanywhere.comget_qr_code', port=443): Max retries exceeded with url: /?serial_number_machine=1111111 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A527A990>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)"))
+2024-06-11 15:40:24.497 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:40:24.498 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 280}
+2024-06-11 15:40:27.051 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 281}
+2024-06-11 15:40:28.339 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:40:28.969 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 282}
+2024-06-11 15:40:31.528 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 283}
+2024-06-11 15:40:31.533 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:40:33.038 | ERROR    | __main__:loop_get_qr_code:267 - get_qr_code_exception: HTTPSConnectionPool(host='monitorvending.pythonanywhere.comget_qr_code', port=443): Max retries exceeded with url: /?serial_number_machine=1111111 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A6677390>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)"))
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           │          └ <function create_connection at 0x00000289A44C9A80>
+           └ <module 'urllib3.util.connection' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages...
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               │      │           │     │     │       │      └ <SocketKind.SOCK_STREAM: 1>
+               │      │           │     │     │       └ <module 'socket' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\socket.py'>
+               │      │           │     │     └ <AddressFamily.AF_UNSPEC: 0>
+               │      │           │     └ 443
+               │      │           └ 'monitorvending.pythonanywhere.comget_qr_code'
+               │      └ <function getaddrinfo at 0x00000289A3F0DB20>
+               └ <module 'socket' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\socket.py'>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\socket.py", line 961, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               │       │           │     │     │       │     │      └ 0
+               │       │           │     │     │       │     └ 0
+               │       │           │     │     │       └ <SocketKind.SOCK_STREAM: 1>
+               │       │           │     │     └ <AddressFamily.AF_UNSPEC: 0>
+               │       │           │     └ 443
+               │       │           └ 'monitorvending.pythonanywhere.comget_qr_code'
+               │       └ <built-in function getaddrinfo>
+               └ <module '_socket' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\DLLs\\_socket.pyd'>
+
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               │    └ <function HTTPConnectionPool._make_request at 0x00000289A45B89A0>
+               └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A6676C50>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 491, in _make_request
+    raise new_e
+          └ NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A6677390>: Failed to resolve 'monitorvending.pyt...
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+    │    │              └ <urllib3.connection.HTTPSConnection object at 0x00000289A6677390>
+    │    └ <function HTTPSConnectionPool._validate_conn at 0x00000289A45B8F40>
+    └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A6676C50>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 1099, in _validate_conn
+    conn.connect()
+    │    └ <function HTTPSConnection.connect at 0x00000289A45B4B80>
+    └ <urllib3.connection.HTTPSConnection object at 0x00000289A6677390>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 616, in connect
+    self.sock = sock = self._new_conn()
+    │    │             │    └ <function HTTPConnection._new_conn at 0x00000289A45B4220>
+    │    │             └ <urllib3.connection.HTTPSConnection object at 0x00000289A6677390>
+    │    └ None
+    └ <urllib3.connection.HTTPSConnection object at 0x00000289A6677390>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+          │                   │    │     └ <urllib3.connection.HTTPSConnection object at 0x00000289A6677390>
+          │                   │    └ <property object at 0x00000289A4575FD0>
+          │                   └ <urllib3.connection.HTTPSConnection object at 0x00000289A6677390>
+          └ <class 'urllib3.exceptions.NameResolutionError'>
+
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x00000289A6677390>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 564, in send
+    resp = conn.urlopen(
+           │    └ <function HTTPConnectionPool.urlopen at 0x00000289A45B8B80>
+           └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A6676C50>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              │       └ <function Retry.increment at 0x00000289A44DC2C0>
+              └ Retry(total=0, connect=None, read=False, redirect=None, status=None)
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\util\retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+          │             │      │    │            └ NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A6677390>: Failed to resolve 'monitorvending.pyt...
+          │             │      │    └ NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A6677390>: Failed to resolve 'monitorvending.pyt...
+          │             │      └ '/?serial_number_machine=1111111'
+          │             └ <urllib3.connectionpool.HTTPSConnectionPool object at 0x00000289A6676C50>
+          └ <class 'urllib3.exceptions.MaxRetryError'>
+
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='monitorvending.pythonanywhere.comget_qr_code', port=443): Max retries exceeded with url: /?serial_number_machine=1111111 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A6677390>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)"))
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 995, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x00000289A1675940>
+    └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1038, in _bootstrap_inner
+    self.run()
+    │    └ <function Thread.run at 0x00000289A1675620>
+    └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 975, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+    │    │        │    └ ()
+    │    │        └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+    │    └ <function loop_get_qr_code at 0x00000289A51F4860>
+    └ <Thread(Thread-2 (loop_get_qr_code), started daemon 5236)>
+
+> File "d:\VendingMachine\main_board_control.py", line 233, in loop_get_qr_code
+    response = requests.get(url_get_qr_code, params=params, timeout=5)
+               │        │   │                       └ {'serial_number_machine': '1111111'}
+               │        │   └ 'https://monitorvending.pythonanywhere.comget_qr_code/'
+               │        └ <function get at 0x00000289A4F019E0>
+               └ <module 'requests' from 'D:\\Users\\aelizarov\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\requests\\__i...
+
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           │              │           │         └ {'timeout': 5}
+           │              │           └ {'serial_number_machine': '1111111'}
+           │              └ 'https://monitorvending.pythonanywhere.comget_qr_code/'
+           └ <function request at 0x00000289A4F03740>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           │       │              │           │      └ {'params': {'serial_number_machine': '1111111'}, 'timeout': 5}
+           │       │              │           └ 'https://monitorvending.pythonanywhere.comget_qr_code/'
+           │       │              └ 'get'
+           │       └ <function Session.request at 0x00000289A4F37C40>
+           └ <requests.sessions.Session object at 0x00000289A6674990>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           │    │    │       └ {'timeout': 5, 'allow_redirects': True, 'proxies': OrderedDict(), 'stream': False, 'verify': True, 'cert': None}
+           │    │    └ <PreparedRequest [GET]>
+           │    └ <function Session.send at 0x00000289A4F3C180>
+           └ <requests.sessions.Session object at 0x00000289A6674990>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        │       │    │          └ {'timeout': 5, 'proxies': OrderedDict(), 'stream': False, 'verify': True, 'cert': None}
+        │       │    └ <PreparedRequest [GET]>
+        │       └ <function HTTPAdapter.send at 0x00000289A4F374C0>
+        └ <requests.adapters.HTTPAdapter object at 0x00000289A6675610>
+  File "D:\Users\aelizarov\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\adapters.py", line 597, in send
+    raise ConnectionError(e, request=request)
+          │                          └ <PreparedRequest [GET]>
+          └ <class 'requests.exceptions.ConnectionError'>
+
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='monitorvending.pythonanywhere.comget_qr_code', port=443): Max retries exceeded with url: /?serial_number_machine=1111111 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000289A6677390>: Failed to resolve 'monitorvending.pythonanywhere.comget_qr_code' ([Errno 11001] getaddrinfo failed)"))
+2024-06-11 15:40:33.712 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 284}
+2024-06-11 15:40:34.901 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:42:42.981 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:42:42.983 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:42:43.522 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:42:43.635 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 285}
+2024-06-11 15:42:45.543 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 286}
+2024-06-11 15:42:45.790 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:42:47.549 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 287}
+2024-06-11 15:42:48.725 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:42:49.298 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 288}
+2024-06-11 15:42:51.077 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 289}
+2024-06-11 15:42:51.696 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:42:53.124 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 290}
+2024-06-11 15:42:54.749 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:42:54.749 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:42:54.979 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 291}
+2024-06-11 15:42:55.342 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:42:56.901 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 292}
+2024-06-11 15:42:57.935 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:42:58.901 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 293}
+2024-06-11 15:43:00.814 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 294}
+2024-06-11 15:43:00.817 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:02.734 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 295}
+2024-06-11 15:43:04.014 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:04.653 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 296}
+2024-06-11 15:43:06.177 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:43:06.423 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 297}
+2024-06-11 15:43:06.775 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:43:07.604 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:08.200 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 298}
+2024-06-11 15:43:09.949 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 299}
+2024-06-11 15:43:10.308 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:11.854 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 300}
+2024-06-11 15:43:13.456 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:14.414 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 301}
+2024-06-11 15:43:16.655 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 302}
+2024-06-11 15:43:16.899 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:17.838 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:43:18.314 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:43:18.359 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 303}
+2024-06-11 15:43:19.692 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:20.334 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 304}
+2024-06-11 15:43:22.265 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 305}
+2024-06-11 15:43:22.579 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:24.174 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 306}
+2024-06-11 15:43:25.460 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:26.093 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 307}
+2024-06-11 15:43:28.333 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:28.837 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 308}
+2024-06-11 15:43:29.773 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:43:30.418 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:43:30.639 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 309}
+2024-06-11 15:43:31.068 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:32.653 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 310}
+2024-06-11 15:43:33.934 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:34.572 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 311}
+2024-06-11 15:43:36.371 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 312}
+2024-06-11 15:43:37.306 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:38.186 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 313}
+2024-06-11 15:43:39.942 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 314}
+2024-06-11 15:43:40.024 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:41.652 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 315}
+2024-06-11 15:43:41.847 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:43:42.449 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:43:43.052 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:43.561 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 316}
+2024-06-11 15:43:45.457 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 317}
+2024-06-11 15:43:46.093 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:47.229 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 318}
+2024-06-11 15:43:48.794 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:48.952 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 319}
+2024-06-11 15:43:50.862 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 320}
+2024-06-11 15:43:51.693 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:52.582 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 321}
+2024-06-11 15:43:53.293 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:43:53.844 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:43:54.334 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 322}
+2024-06-11 15:43:54.410 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:56.653 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 323}
+2024-06-11 15:43:57.200 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:43:58.574 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 324}
+2024-06-11 15:44:00.493 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 325}
+2024-06-11 15:44:00.812 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:44:02.350 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 326}
+2024-06-11 15:44:03.692 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:44:04.199 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 327}
+2024-06-11 15:44:04.549 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:44:05.169 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:44:06.092 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 328}
+2024-06-11 15:44:06.734 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:44:08.652 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 329}
+2024-06-11 15:44:09.614 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:44:10.572 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 330}
+2024-06-11 15:44:12.494 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 331}
+2024-06-11 15:44:12.497 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:44:14.255 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 332}
+2024-06-11 15:44:15.300 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:44:15.899 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:44:16.009 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 333}
+2024-06-11 15:44:16.528 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:44:18.092 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:44:18.412 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 334}
+2024-06-11 15:44:20.654 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 335}
+2024-06-11 15:44:21.617 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:44:22.509 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 336}
+2024-06-11 15:44:24.337 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:44:24.973 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 337}
+2024-06-11 15:44:26.727 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 338}
+2024-06-11 15:44:27.025 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:44:28.012 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:44:28.527 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:44:28.827 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 339}
+2024-06-11 15:44:30.733 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 340}
+2024-06-11 15:44:31.053 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:00.310 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:00.321 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:45:00.782 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:45:01.273 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 342}
+2024-06-11 15:45:03.223 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 343}
+2024-06-11 15:45:03.226 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:05.132 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 344}
+2024-06-11 15:45:06.094 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:09.296 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 345}
+2024-06-11 15:45:09.636 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:11.096 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 346}
+2024-06-11 15:45:11.607 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:45:12.117 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:45:12.363 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:13.611 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 347}
+2024-06-11 15:45:15.219 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:15.468 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 348}
+2024-06-11 15:45:17.386 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 349}
+2024-06-11 15:45:17.933 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:19.213 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 350}
+2024-06-11 15:45:20.715 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:21.011 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 351}
+2024-06-11 15:45:22.749 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 352}
+2024-06-11 15:45:22.844 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:45:23.342 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:45:24.059 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:25.136 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 353}
+2024-06-11 15:45:26.763 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:26.804 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 354}
+2024-06-11 15:45:28.510 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 355}
+2024-06-11 15:45:29.491 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:30.823 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 356}
+2024-06-11 15:45:32.213 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:32.579 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 357}
+2024-06-11 15:45:34.319 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 358}
+2024-06-11 15:45:34.349 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:45:34.887 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:45:34.937 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:36.177 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 359}
+2024-06-11 15:45:37.638 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:37.905 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 360}
+2024-06-11 15:45:39.693 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 361}
+2024-06-11 15:45:40.753 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:41.544 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 362}
+2024-06-11 15:45:43.374 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 363}
+2024-06-11 15:45:43.616 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:45.058 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 364}
+2024-06-11 15:45:45.894 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:45:46.324 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:46.355 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:45:46.764 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 365}
+2024-06-11 15:45:49.293 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 366}
+2024-06-11 15:45:49.546 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:51.217 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 367}
+2024-06-11 15:45:52.258 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:52.980 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 368}
+2024-06-11 15:45:54.894 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 369}
+2024-06-11 15:45:55.167 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:56.672 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 370}
+2024-06-11 15:45:57.129 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:45:57.718 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:45:57.934 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:45:58.582 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 371}
+2024-06-11 15:46:00.371 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 372}
+2024-06-11 15:46:00.650 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:02.251 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 373}
+2024-06-11 15:46:03.531 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:04.172 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 374}
+2024-06-11 15:46:06.415 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 375}
+2024-06-11 15:46:06.418 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:08.348 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 376}
+2024-06-11 15:46:08.550 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:46:09.291 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:09.727 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:46:10.088 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 377}
+2024-06-11 15:46:11.856 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 378}
+2024-06-11 15:46:12.171 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:14.354 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 379}
+2024-06-11 15:46:14.854 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:16.333 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 380}
+2024-06-11 15:46:17.686 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:18.045 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 381}
+2024-06-11 15:46:20.095 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 382}
+2024-06-11 15:46:20.409 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:46:20.851 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:46:20.888 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:22.056 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 383}
+2024-06-11 15:46:23.699 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:24.012 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 384}
+2024-06-11 15:46:25.866 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 385}
+2024-06-11 15:46:26.378 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:27.692 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 386}
+2024-06-11 15:46:29.294 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:30.251 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 387}
+2024-06-11 15:46:31.698 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:46:31.992 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:32.007 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 388}
+2024-06-11 15:46:32.224 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:46:34.573 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 389}
+2024-06-11 15:46:34.894 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:36.489 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 390}
+2024-06-11 15:46:37.770 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:38.258 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 391}
+2024-06-11 15:46:40.093 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 392}
+2024-06-11 15:46:40.491 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:42.090 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 393}
+2024-06-11 15:46:42.963 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:46:43.466 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:46:43.494 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:43.860 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 394}
+2024-06-11 15:46:45.775 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 395}
+2024-06-11 15:46:46.953 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:47.532 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 396}
+2024-06-11 15:46:49.312 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 397}
+2024-06-11 15:46:49.682 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:51.535 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 398}
+2024-06-11 15:46:52.494 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:53.374 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 399}
+2024-06-11 15:46:54.409 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:46:54.969 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:46:55.129 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 400}
+2024-06-11 15:46:55.536 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:56.969 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 401}
+2024-06-11 15:46:58.484 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:46:59.530 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 402}
+2024-06-11 15:47:01.451 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 403}
+2024-06-11 15:47:01.452 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:03.373 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 404}
+2024-06-11 15:47:04.340 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:05.297 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 405}
+2024-06-11 15:47:05.769 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:47:06.610 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:47:07.227 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 406}
+2024-06-11 15:47:07.229 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:08.985 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 407}
+2024-06-11 15:47:10.259 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:10.897 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 408}
+2024-06-11 15:47:12.608 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 409}
+2024-06-11 15:47:13.130 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:15.194 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 410}
+2024-06-11 15:47:16.010 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:17.002 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 411}
+2024-06-11 15:47:18.063 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:47:18.609 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:47:18.894 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 412}
+2024-06-11 15:47:18.897 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:20.811 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 413}
+2024-06-11 15:47:21.769 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:22.733 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 414}
+2024-06-11 15:47:24.658 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 415}
+2024-06-11 15:47:24.659 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:26.587 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 416}
+2024-06-11 15:47:27.535 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:28.511 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 417}
+2024-06-11 15:47:29.450 | INFO     | __main__:loop_get_qr_code:236 - {'success': True, 'qr_code': 'https://test4-mwallet.dengi.kg/qr.php?wl=nur&type=emvQr&data=00020101021132490011qr.dengi.kg0102201112753241055802120211130212520473995303417540105907test%20UG63045C6E', 'date_filter_update': '2024-06-10', 'price': '5.00'}
+2024-06-11 15:47:30.155 | INFO     | __main__:loop_get_qr_code:262 - QR_image_SAVE
+2024-06-11 15:47:30.408 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:30.408 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 418}
+2024-06-11 15:47:32.366 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 419}
+2024-06-11 15:47:33.290 | INFO     | __main__:loop_get_mwallet_push_alarm:213 - {'success': True, 'm_transactions_amount': '0'}
+2024-06-11 15:47:34.260 | INFO     | __main__:loop_send_transaction_coin_cash:281 - send_transaction_coin_cash: {'success': True, 'transaction_id': 420}
