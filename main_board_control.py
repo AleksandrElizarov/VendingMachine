@@ -291,7 +291,7 @@ def loop_send_transaction_coin_cash():
 FONT_SIZE = 120  # Размер шрифта
 FONT_small_SIZE = 80  # Размер шрифта
 
-BACKGROUND_COLOR = (242, 242, 240)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
+BACKGROUND_COLOR = (0, 0, 128)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
 BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
 
 TEXT_COLOR = (255, 255, 255)  # Цвет шрифта белый (255, 255, 255)
@@ -308,8 +308,8 @@ small_font = pygame.font.SysFont(None, FONT_small_SIZE)
 screen_width = 1300
 screen_height = 500
 
-screen = pygame.display.set_mode((screen_width, screen_height))
-#screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+#screen = pygame.display.set_mode((screen_width, screen_height))
+screen = pygame.display.set_mode((0, 0), FULLSCREEN)
 
 pygame.display.set_caption('Vending Machine Display')
 
