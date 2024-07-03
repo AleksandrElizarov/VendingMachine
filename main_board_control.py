@@ -24,7 +24,7 @@ if os_name == "Linux":
     from eSSP.constants import Status
     from eSSP import eSSP
     import RPi.GPIO as GPIO
-    from CoinPulse import CoinPulse
+    from CoinInterface.CoinPulseHX916 import CoinPulseVN5
   
 elif os_name == "Windows":
     print("Скрипт запущен на Windows")
@@ -352,19 +352,13 @@ while main_loop_running:
     
     try:
 
-        '''
-        #Экемпляр монетоприемника
-        if coin_pulse is None:
-            coin_pulse = CoinPulse(GPIO_board_port=31)
-        
+        '''        
         #Экемпляр купюроприемника
         if(validator == None):
             validator = eSSP(com_port=COM_PORT, ssp_address="0", nv11=False, debug=True)
         else:
             if(validator.running == False):
                 raise Exception("Validator disconnected")
-                
-            
             
         #Если внесена оплата купюрой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_cash = validator.get_last_credit_cash()
@@ -375,19 +369,23 @@ while main_loop_running:
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
-            
+        '''
+
+        #Экемпляр монетоприемника
+        if coin_pulse is None:
+            coin_pulse = CoinPulseVN5(GPIO_board_port=31)    
+                
         #Если внесена оплата монетой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_coin = coin_pulse.get_last_credit_coin()
         if(credit_coin > 0):
             LIQUID_AVAILABLE = LIQUID_AVAILABLE + credit_coin/PRICE_WATER
+            LIST_TRANSACTION_COIN_MWALLET.append(credit_coin)
             screen.fill(BACKGROUND_COLOR)
             render_text_pygame(f"ВНЕСЕНО:  {credit_coin} сом", font, TEXT_COLOR, (130, 300))
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
-        ''' 
-        credit_coin='1'   
-        LIST_TRANSACTION_COIN_MWALLET.append(credit_coin)
+            
             
         if(AMOUNT_MWALLET > 0):
             LIQUID_AVAILABLE = LIQUID_AVAILABLE + AMOUNT_MWALLET/PRICE_WATER

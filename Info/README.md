@@ -20,7 +20,7 @@ pip install numpy
 pip install pygame
 pip install loguru
 ````
-Для работы купюроприемника, в директории заменить содержимое файла eSSP.py из файла CoinInterface/for_change_eSSP.py
+В директории заменить содержимое файла eSSP.py из файла CoinInterface/for_change_eSSP.py
 ````bash
 /home/pi/.local/lib/python3.9/site-packages/eSSP
 ````

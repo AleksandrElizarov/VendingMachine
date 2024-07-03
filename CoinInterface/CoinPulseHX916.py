@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 
 
 
-class CoinPulse(object):
+class CoinPulseVN5(object):
     '''Pulse protocol to connected with coin acceptor'''
     def __init__(self, GPIO_board_port):
         self.GPIO_board_port = GPIO_board_port
@@ -15,10 +15,9 @@ class CoinPulse(object):
         
         self.coin_running = False
         self.count_pulse = 0
-        self.duration_pulses = 1.7 # Максимальная длительность в течение, которой поступают импульсы
-        self.last_time_pulse = 0
-
+        self.duration_pulses = 1.7 # Максимальная длительность в течение, которой поступают импульсы(секунд)
         self.start_time_from_pulse = 0
+        self.last_time_pulse = 0
         
         # Инициализация GPIO
         GPIO.setmode(GPIO.BOARD)
