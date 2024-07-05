@@ -1,0 +1,17 @@
+        
+        #Экемпляр купюроприемника
+        if(validator == None):
+            validator = eSSP(com_port=COM_PORT, ssp_address="0", nv11=False, debug=True)
+        else:
+            if(validator.running == False):
+                raise Exception("Validator disconnected")
+            
+        #Если внесена оплата купюрой, то вывести на дисплей сумму и увеличить доступный обьем
+        credit_cash = validator.get_last_credit_cash()
+        if(credit_cash > 0):
+            LIQUID_AVAILABLE = LIQUID_AVAILABLE + credit_cash/PRICE_WATER
+            screen.fill(BACKGROUND_COLOR)
+            render_text_pygame(f"ВНЕСЕНО:  {credit_cash} сом", font, TEXT_COLOR, (130, 300))
+            # Обновление экрана
+            pygame.display.flip()
+            sleep(2)

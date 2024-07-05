@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 
 
 
-class CoinPulseVN5(object):
+class CoinPulseHX916(object):
     '''Pulse protocol to connected with coin acceptor'''
     def __init__(self, GPIO_board_port):
         self.GPIO_board_port = GPIO_board_port

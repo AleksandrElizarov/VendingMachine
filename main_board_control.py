@@ -11,6 +11,7 @@ from pygame.locals import *
 import pygame
 import requests
 from PIL import Image
+import psutil
 from loguru import logger
 logger.add('logs.log', rotation='10MB')
 
@@ -24,7 +25,8 @@ if os_name == "Linux":
     from eSSP.constants import Status
     from eSSP import eSSP
     import RPi.GPIO as GPIO
-    from CoinInterface.CoinPulseHX916 import CoinPulseVN5
+    from CoinInterface.CoinPulseHX916 import CoinPulseHX916
+    coin_pulse = CoinPulseHX916(GPIO_board_port=31) 
   
 elif os_name == "Windows":
     print("Скрипт запущен на Windows")
@@ -53,10 +55,16 @@ elif os_name == "Windows":
         def input(pin_input):
             print(f'input GPIO работает заглушка ')
             return False
+        
+    class CoinPulseHX916():
+        '''Класс заглушка для CoinPulseVN5'''
+        def get_last_credit_coin():
+            return 1
+    coin_pulse = CoinPulseHX916    
+
 
 else:
     print("Скрипт запущен на другой операционной системе")    
-
 
 
 ##################### VERIABLES GLOBAL #####################
@@ -67,8 +75,8 @@ DOMAIN = 'https://monitorvending.pythonanywhere.com/'
 url_get_qr_code = f'{DOMAIN}get_qr_code/'
 #URL refresh states alarm and get info about amount mwallet GET-method query str 'serial_number_machine','main_power',open_door',low_water'
 url_refresh_states_alarm_get_mwallet_amount = f'{DOMAIN}refresh_states_alarm_machine/'
-#URL create coin/cash transaction in DataBase POST method {"serial_number_machine": "64-number", "cash_amount": cash_amount}
-url_create_coin_cash_transaction = f'{DOMAIN}create_transaction/'
+#URL create coin transaction in DataBase POST method {"serial_number_machine": "64-number", "coin_amount": coin_amount}
+url_create_coin_transaction = f'{DOMAIN}create_transaction/'
 
 COM_PORT = "/dev/ttyUSB0" # Название последовательного порта
 PIN_INPUT_SENSOR_FLOW = 32 # Пин датчика жидкости
@@ -87,7 +95,7 @@ LIQUID_AVAILABLE = 0 # оплаченный обьем для выдачи
 
 AMOUNT_MWALLET = 0 # сумма оплаченная через Мобильный кошелек
 
-LIST_TRANSACTION_COIN_MWALLET = [] # список сумм транзакций внесенных через монетоприемник и валютоприемник
+LIST_TRANSACTION_COIN = [] # список сумм транзакций внесенных через монетоприемник
 
 
 ### VERIABLES ALARMS ###
@@ -99,9 +107,6 @@ PRICE_WATER = 3 #Цена за 1литр
 DATE_FILTER_UPDATE = '2024-06-01' # дата обновления фильтра
 QR_LOADED = False # Флаг успешной загрузки QR-кода
 
-
-#validator = None
-coin_pulse = None
 
 ozon_running = False # Флаг включения Озонатора
 duration_ozon_running = 10 #Время в секундах работы озонатора
@@ -199,13 +204,34 @@ def loop_get_mwallet_push_alarm():
         global MAIN_POWER
         global OPEN_DOOR 
         global LOW_WATER
+        cpu_percent = 0.0
+        cpu_temperature = 0.0
+        virtual_memory = 0.0
         while True:
+            ### Получение температуры и загрузки CPU и использование оперативной памяти
+            try:
+                cpu_percent = psutil.cpu_percent(interval=1)
+                virtual_memory = psutil.virtual_memory()
+                if os_name == "Linux":
+                    # Температура процессора из системного файла
+                    with open("/sys/class/thermal/thermal_zone0/temp") as f:
+                        temp = f.read()
+                    cpu_temperature = float(temp) / 1000.0  
+                else:
+                    cpu_temperature = 0.0
+            except Exception as e:
+                logger.exception(f'get_CPUparametrs_exception: {e}')
+
+            ### Передача состояние аварий с сухих контактов и информации по CPU на сервер
             try:
                 params = {
                 'serial_number_machine': SERIAL_NUMBER_MACHINE,
                     'main_power': MAIN_POWER,
                     'open_door': OPEN_DOOR,
-                    'low_water': LOW_WATER
+                    'low_water': LOW_WATER,
+                    'cpu_percent': cpu_percent,
+                    'cpu_temperature': cpu_temperature,
+                    'virtual_memory': virtual_memory
                 }
                 response = requests.get(url_refresh_states_alarm_get_mwallet_amount, params=params, timeout=5)
                 data = response.json()
@@ -268,19 +294,20 @@ def loop_get_qr_code():
                 sleep(10)  
 
 
-def loop_send_transaction_coin_cash():
-    '''Функция записи транзакции на сервер в базуданных о сумме внесенной через монетоприемник/купюроприемник'''
+def loop_send_transaction_coin():
+    '''Функция записи транзакции на сервер в базу данных о сумме внесенной через монетоприемник'''
     global SERIAL_NUMBER_MACHINE
-    global url_create_coin_cash_transaction
-    global LIST_TRANSACTION_COIN_MWALLET    
+    global url_create_coin_transaction
+    global LIST_TRANSACTION_COIN    
     while True:
-        if LIST_TRANSACTION_COIN_MWALLET:
+        if LIST_TRANSACTION_COIN:
             try:
-                data = {"serial_number_machine": SERIAL_NUMBER_MACHINE, "cash_amount": LIST_TRANSACTION_COIN_MWALLET.pop()}   
-                response = requests.post(url_create_coin_cash_transaction, json=data)
-                logger.info(f'send_transaction_coin_cash: {response.json()}')
+                data = {"serial_number_machine": SERIAL_NUMBER_MACHINE, "coin_amount": LIST_TRANSACTION_COIN[len(LIST_TRANSACTION_COIN)-1]}   
+                response = requests.post(url_create_coin_transaction, json=data)
+                LIST_TRANSACTION_COIN.pop()
+                logger.info(f'send_transaction_coin: {response.json()}')
             except Exception as e:
-                    logger.exception(f'send_transaction_coin_cash_exception: {e}') 
+                    logger.exception(f'send_transaction_coin_exception: {e}') 
         sleep(1)  
 
 
@@ -305,11 +332,11 @@ font = pygame.font.SysFont(None, FONT_SIZE)
 small_font = pygame.font.SysFont(None, FONT_small_SIZE)
 
 # Установка размера экрана
-screen_width = 800
-screen_height = 480
+screen_width = 200
+screen_height = 200
 
-#screen = pygame.display.set_mode((screen_width, screen_height))
-screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+screen = pygame.display.set_mode((screen_width, screen_height))
+#screen = pygame.display.set_mode((0, 0), FULLSCREEN)
 
 # Получение размеров экрана
 screen_width, screen_height = screen.get_size()
@@ -336,9 +363,9 @@ system_loop_get_qr_code = threading.Thread(target=loop_get_qr_code)
 system_loop_get_qr_code.daemon = True
 system_loop_get_qr_code.start()
 
-system_loop_send_transaction_coin_cash = threading.Thread(target=loop_send_transaction_coin_cash)
-system_loop_send_transaction_coin_cash.daemon = True
-system_loop_send_transaction_coin_cash.start()
+system_loop_send_transaction_coin = threading.Thread(target=loop_send_transaction_coin)
+system_loop_send_transaction_coin.daemon = True
+system_loop_send_transaction_coin.start()
 
 
 # Основной цикл программы
@@ -356,42 +383,19 @@ while main_loop_running:
                 main_loop_running = False    
     
     try:
-
-        '''        
-        #Экемпляр купюроприемника
-        if(validator == None):
-            validator = eSSP(com_port=COM_PORT, ssp_address="0", nv11=False, debug=True)
-        else:
-            if(validator.running == False):
-                raise Exception("Validator disconnected")
-            
-        #Если внесена оплата купюрой, то вывести на дисплей сумму и увеличить доступный обьем
-        credit_cash = validator.get_last_credit_cash()
-        if(credit_cash > 0):
-            LIQUID_AVAILABLE = LIQUID_AVAILABLE + credit_cash/PRICE_WATER
-            screen.fill(BACKGROUND_COLOR)
-            render_text_pygame(f"ВНЕСЕНО:  {credit_cash} сом", font, TEXT_COLOR, (130, 300))
-            # Обновление экрана
-            pygame.display.flip()
-            sleep(2)
-        '''
-
-        #Экемпляр монетоприемника
-        if coin_pulse is None:
-            coin_pulse = CoinPulseVN5(GPIO_board_port=31)    
-                
+        
         #Если внесена оплата монетой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_coin = coin_pulse.get_last_credit_coin()
         if(credit_coin > 0):
             LIQUID_AVAILABLE = LIQUID_AVAILABLE + credit_coin/PRICE_WATER
-            LIST_TRANSACTION_COIN_MWALLET.append(credit_coin)
+            LIST_TRANSACTION_COIN.append(credit_coin)
             screen.fill(BACKGROUND_COLOR)
             render_text_pygame(f"ВНЕСЕНО:  {credit_coin} сом", font, TEXT_COLOR, (100, 200))
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
             
-            
+        #Если внесена оплата Q-код, то вывести на дисплей сумму и увеличить доступный обьем   
         if(AMOUNT_MWALLET > 0):
             LIQUID_AVAILABLE = LIQUID_AVAILABLE + AMOUNT_MWALLET/PRICE_WATER
             screen.fill(BACKGROUND_COLOR)
