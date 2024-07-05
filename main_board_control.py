@@ -255,7 +255,7 @@ def loop_get_qr_code():
                                 QR_LOADED = False
 
                             # Изменение размера изображения до 40x40 пикселей
-                            qr_image = qr_image.resize((350,350), Image.Resampling.BICUBIC)
+                            qr_image = qr_image.resize((250,250), Image.Resampling.BICUBIC)
                             
                             with file_lock:
                                 qr_image.save("resized_qrcode.png")
@@ -288,8 +288,8 @@ def loop_send_transaction_coin_cash():
 
 
 ##################### FONT SIZE #####################
-FONT_SIZE = 120  # Размер шрифта
-FONT_small_SIZE = 80  # Размер шрифта
+FONT_SIZE = 80  # Размер шрифта
+FONT_small_SIZE = 56  # Размер шрифта
 
 BACKGROUND_COLOR = (0, 0, 128)  # Цвет фона синий (0, 0, 128) серый 242, 242, 240) 
 BACKGROUND_COLOR_ALARM = (128, 128, 128)  # Цвет фона серый
@@ -305,11 +305,16 @@ font = pygame.font.SysFont(None, FONT_SIZE)
 small_font = pygame.font.SysFont(None, FONT_small_SIZE)
 
 # Установка размера экрана
-screen_width = 1300
-screen_height = 500
+screen_width = 800
+screen_height = 480
 
 #screen = pygame.display.set_mode((screen_width, screen_height))
 screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+
+# Получение размеров экрана
+screen_width, screen_height = screen.get_size()
+# Вывод размеров экрана
+print(f'Ширина экрана: {screen_width}, Высота экрана: {screen_height}')
 
 pygame.display.set_caption('Vending Machine Display')
 
@@ -381,7 +386,7 @@ while main_loop_running:
             LIQUID_AVAILABLE = LIQUID_AVAILABLE + credit_coin/PRICE_WATER
             LIST_TRANSACTION_COIN_MWALLET.append(credit_coin)
             screen.fill(BACKGROUND_COLOR)
-            render_text_pygame(f"ВНЕСЕНО:  {credit_coin} сом", font, TEXT_COLOR, (130, 300))
+            render_text_pygame(f"ВНЕСЕНО:  {credit_coin} сом", font, TEXT_COLOR, (100, 200))
             # Обновление экрана
             pygame.display.flip()
             sleep(2)
@@ -390,7 +395,7 @@ while main_loop_running:
         if(AMOUNT_MWALLET > 0):
             LIQUID_AVAILABLE = LIQUID_AVAILABLE + AMOUNT_MWALLET/PRICE_WATER
             screen.fill(BACKGROUND_COLOR)
-            render_text_pygame(f"ВНЕСЕНО:  {AMOUNT_MWALLET} сом", font, TEXT_COLOR, (130, 300))
+            render_text_pygame(f"ВНЕСЕНО:  {AMOUNT_MWALLET} сом", font, TEXT_COLOR, (100, 250))
             AMOUNT_MWALLET = 0
             # Обновление экрана
             pygame.display.flip()
@@ -410,19 +415,19 @@ while main_loop_running:
                 sleep(0.1) #Дребезг контактов
                 
             if(ozon_running):
-                render_text_pygame(f"Озонатор работает, {time_ozon} сек.", font, TEXT_COLOR, (130, 150))
+                render_text_pygame(f"Озонатор работает, {time_ozon} сек.", font, TEXT_COLOR, (80, 130))
                 time_ozon = time_ozon - 1
                 if(time_ozon < 0):
                     ozon_running = False
                     set_output_GPIO(PIN_OUTPUT_OZON, 'LOW') #Выключаем Озонатор
                 sleep(1)    
             else:
-                render_text_pygame("Используйте озонатор", font, TEXT_COLOR, (130, 150))
+                render_text_pygame("Используйте озонатор", font, TEXT_COLOR, (100, 130))
 
-            render_text_pygame(f"ДОСТУПНО:  {round(LIQUID_AVAILABLE, 2)} л.", font, TEXT_COLOR, (130, 300))
+            render_text_pygame(f"ДОСТУПНО:  {round(LIQUID_AVAILABLE, 2)} л.", font, TEXT_COLOR, (100, 250))
             #Если используется debug_flow_sensor_vision, то можно видеть количество импульсов с датчика жидкости 
             if(debug_flow_sensor_vision):
-                render_text_pygame(f"Импульсы: {number_pulse_sensor}", font, TEXT_COLOR, (130, 500))
+                render_text_pygame(f"Импульсы: {number_pulse_sensor}", font, TEXT_COLOR, (100, 400))
             
             # Обновление экрана
             pygame.display.flip()
@@ -438,21 +443,21 @@ while main_loop_running:
                         
                 
             screen.fill(BACKGROUND_COLOR) 
-            render_text_pygame("Добро пожаловать!", font, TEXT_COLOR, (250, 50))
-            render_text_pygame(f"Стоимость: 1 литра = {PRICE_WATER} сома", font, TEXT_COLOR, (70, 150))
+            render_text_pygame("Добро пожаловать!", font, TEXT_COLOR, (125, 25))
+            render_text_pygame(f"Стоимость: 1 литра = {PRICE_WATER} сом", font, TEXT_COLOR, (15, 95))
             # Преобразование строки в объект datetime
             date_obj = datetime.strptime(DATE_FILTER_UPDATE, "%Y-%m-%d")
             # Преобразование объекта datetime в строку нужного формата
             formatted_date = date_obj.strftime("%d.%m.%Y")
-            render_text_pygame(f"Последняя замена фильтров: {formatted_date}", small_font, TEXT_COLOR, (70, 250))
-            render_text_pygame("QR-код для оплаты", small_font, TEXT_COLOR, (20, 500))
+            render_text_pygame(f"Последняя замена фильтров: {formatted_date}", small_font, TEXT_COLOR, (10, 170))
+            render_text_pygame("QR-код для оплаты", small_font, TEXT_COLOR, (10, 320))
             print(DATE_FILTER_UPDATE)
             if QR_LOADED:
                 # Загрузка изображения QR-кода в Pygame
                 with file_lock:
                     qr_surface = pygame.image.load("resized_qrcode.png")
                     # Отображение изображения QR-кода 
-                    screen.blit(qr_surface, (700, 350))
+                    screen.blit(qr_surface, (500, 225))
                 
 
             # Обновление экрана
