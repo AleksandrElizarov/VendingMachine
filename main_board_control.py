@@ -212,6 +212,7 @@ def loop_get_mwallet_push_alarm():
             try:
                 cpu_percent = psutil.cpu_percent(interval=1)
                 virtual_memory = psutil.virtual_memory()
+                virtual_memory = virtual_memory.percent
                 if os_name == "Linux":
                     # Температура процессора из системного файла
                     with open("/sys/class/thermal/thermal_zone0/temp") as f:
@@ -223,6 +224,7 @@ def loop_get_mwallet_push_alarm():
                 logger.exception(f'get_CPUparametrs_exception: {e}')
 
             ### Передача состояние аварий с сухих контактов и информации по CPU на сервер
+            print(f'cpu_percent: {cpu_percent}, cpu_temperature: {cpu_temperature}, virtual_memory: {virtual_memory}')
             try:
                 params = {
                 'serial_number_machine': SERIAL_NUMBER_MACHINE,
@@ -335,8 +337,8 @@ small_font = pygame.font.SysFont(None, FONT_small_SIZE)
 screen_width = 200
 screen_height = 200
 
-screen = pygame.display.set_mode((screen_width, screen_height))
-#screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+#screen = pygame.display.set_mode((screen_width, screen_height))
+screen = pygame.display.set_mode((0, 0), FULLSCREEN)
 
 # Получение размеров экрана
 screen_width, screen_height = screen.get_size()
