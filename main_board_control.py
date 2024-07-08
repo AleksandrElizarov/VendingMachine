@@ -351,8 +351,8 @@ pygame.mouse.set_visible(False)
  
 init_GPIO()
 add_event_detect_GPIO(pin_input_board=PIN_INPUT_SENSOR_FLOW, edge='FALLING', callback=count_liquid, bouncetime=5)
-add_event_detect_GPIO(pin_input_board=PIN_INPUT_START, edge='FALLING', callback=count_liquid, bouncetime=300)
-add_event_detect_GPIO(pin_input_board=PIN_INPUT_STOP, edge='FALLING', callback=count_liquid, bouncetime=300)
+add_event_detect_GPIO(pin_input_board=PIN_INPUT_START, edge='FALLING', callback=start_flow, bouncetime=300)
+add_event_detect_GPIO(pin_input_board=PIN_INPUT_STOP, edge='FALLING', callback=stop_flow, bouncetime=300)
 
 ####### LOOP THREADS #######
 system_loop_get_mwallet_push_alarm = threading.Thread(target=loop_get_mwallet_push_alarm)
