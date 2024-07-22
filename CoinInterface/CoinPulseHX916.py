@@ -42,23 +42,24 @@ class CoinPulseHX916(object):
     def system_loop(self):  
         while True:
             if(self.coin_running):
-                if(time.time() - self.start_time_from_pulse >= self.duration_pulses):
+                duration_all_pulse = time.time() - self.start_time_from_pulse
+                if( duration_all_pulse >= self.duration_pulses):
                     #1 импульс = монете номинал 1
                     if(self.count_pulse == 1):
                         self.credit_coin_list.append(1)
-                        print(f"Поступила монета номиналом: 1")
-                    #5 импульсов = монете номинал 3
-                    if(self.count_pulse == 5):
+                        print(f"Поступила монета номиналом: 1, время ожидания: {duration_all_pulse} сек.")
+                    #2 импульса = монете номинал 3
+                    if(self.count_pulse == 2):
                         self.credit_coin_list.append(3)
-                        print(f"Поступила монета номиналом: 3")
-                    #10 импульсов = монете номинал 5
-                    if(self.count_pulse == 10):
+                        print(f"Поступила монета номиналом: 3, время ожидания: {duration_all_pulse} сек.")
+                    #3 импульса = монете номинал 5
+                    if(self.count_pulse == 3):
                         self.credit_coin_list.append(5)
-                        print(f"Поступила монета номиналом: 5")
-                    #20 импульсов = монете номинал 10
-                    if(self.count_pulse == 20):
+                        print(f"Поступила монета номиналом: 5, время ожидания: {duration_all_pulse} сек.")
+                    #4 импульса = монете номинал 10
+                    if(self.count_pulse == 4):
                         self.credit_coin_list.append(10)
-                        print(f"Поступила монета номиналом: 10")    
+                        print(f"Поступила монета номиналом: 10, время ожидания: {duration_all_pulse} сек.")    
                         
                     self.start_time_from_pulse = 0
                     self.count_pulse = 0

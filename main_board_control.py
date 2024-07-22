@@ -22,53 +22,23 @@ os_name = platform.system()
 
 if os_name == "Linux":
     print("Скрипт запущен на Linux")
-    from eSSP.constants import Status
-    from eSSP import eSSP
     import RPi.GPIO as GPIO
     from CoinInterface.CoinPulseHX916 import CoinPulseHX916
     coin_pulse = CoinPulseHX916(GPIO_board_port=31) 
   
 elif os_name == "Windows":
     print("Скрипт запущен на Windows")
-    class GPIO():
-        '''Класс заглушка для RP.GPIO'''
-        HIGH = 1
-        LOW = 0
-        BOARD = 1
-        IN = 1
-        OUT = 0
-        PUD_UP = 1
-        PUD_DOWN = 0
-        FALLING = 0
-        RISING = 1
+    from Stub_Win_GPIO_Coin.GPIO import GPIO
+    from Stub_Win_GPIO_Coin.CoinPulseHX916 import CoinPulseHX916
 
-        def output(pin, state):
-            print(f'output GPIO работает заглушка ')
-        def setmode(board):
-            print(f'setmode GPIO работает заглушка ')
-        def setwarnings(boolean):
-            print(f'setwarnings GPIO работает заглушка ')
-        def setup(pin, pin_in_out, pull_up_down=PUD_DOWN):
-            print(f'setup GPIO работает заглушка ')
-        def add_event_detect(pin, edge, callbacb, bouncetime):
-            print(f'add_event_detect GPIO работает заглушка ')
-        def input(pin_input):
-            print(f'input GPIO работает заглушка ')
-            return False
-        
-    class CoinPulseHX916():
-        '''Класс заглушка для CoinPulseVN5'''
-        def get_last_credit_coin():
-            return 1
-    coin_pulse = CoinPulseHX916    
-
+    coin_pulse = CoinPulseHX916 
 
 else:
     print("Скрипт запущен на другой операционной системе")    
 
 
 ##################### VERIABLES GLOBAL #####################
-SERIAL_NUMBER_MACHINE = '1111111'
+SERIAL_NUMBER_MACHINE = '2222222'
 DOMAIN = 'https://monitorvending.pythonanywhere.com/'
 
 #URL get QR-code by GET-method query str 'serial_number_machine'
@@ -80,7 +50,6 @@ url_create_coin_transaction = f'{DOMAIN}create_transaction/'
 
 COM_PORT = "/dev/ttyUSB0" # Название последовательного порта
 PIN_INPUT_SENSOR_FLOW = 32 # Пин датчика жидкости
-PIN_INPUT_COIN_ACCEPTOR = 31 # Пин монетоприемника
 
 PIN_INPUT_OZON = 40 # Пин кнопки Озонатора
 PIN_INPUT_START = 38 # Пин кнопки старт
@@ -306,8 +275,8 @@ def loop_send_transaction_coin():
             try:
                 data = {"serial_number_machine": SERIAL_NUMBER_MACHINE, "coin_amount": LIST_TRANSACTION_COIN[len(LIST_TRANSACTION_COIN)-1]}   
                 response = requests.post(url_create_coin_transaction, json=data)
+                logger.info(f'send_transaction_coin: data:{data}, response:{response.json()}')
                 LIST_TRANSACTION_COIN.pop()
-                logger.info(f'send_transaction_coin: {response.json()}')
             except Exception as e:
                     logger.exception(f'send_transaction_coin_exception: {e}') 
         sleep(1)  
@@ -337,8 +306,11 @@ small_font = pygame.font.SysFont(None, FONT_small_SIZE)
 screen_width = 200
 screen_height = 200
 
-#screen = pygame.display.set_mode((screen_width, screen_height))
-screen = pygame.display.set_mode((0, 0), FULLSCREEN)
+if os_name == "Linux":
+                screen = pygame.display.set_mode((0, 0), FULLSCREEN) 
+else:
+    screen = pygame.display.set_mode((screen_width, screen_height))
+
 
 # Получение размеров экрана
 screen_width, screen_height = screen.get_size()
