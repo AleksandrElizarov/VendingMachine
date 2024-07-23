@@ -44,20 +44,20 @@ class CoinPulseHX916(object):
             if(self.coin_running):
                 duration_all_pulse = time.time() - self.start_time_from_pulse
                 if( duration_all_pulse >= self.duration_pulses):
-                    #1 импульс = монете номинал 1
-                    if(self.count_pulse == 1):
+                    #2 импульса = монете номинал 1
+                    if(self.count_pulse == 2):
                         self.credit_coin_list.append(1)
                         print(f"Поступила монета номиналом: 1, время ожидания: {duration_all_pulse} сек.")
-                    #2 импульса = монете номинал 3
-                    if(self.count_pulse == 2):
+                    #3 импульса = монете номинал 3
+                    if(self.count_pulse == 3):
                         self.credit_coin_list.append(3)
                         print(f"Поступила монета номиналом: 3, время ожидания: {duration_all_pulse} сек.")
-                    #3 импульса = монете номинал 5
-                    if(self.count_pulse == 3):
+                    #4 импульса = монете номинал 5
+                    if(self.count_pulse == 4):
                         self.credit_coin_list.append(5)
                         print(f"Поступила монета номиналом: 5, время ожидания: {duration_all_pulse} сек.")
-                    #4 импульса = монете номинал 10
-                    if(self.count_pulse == 4):
+                    #5 импульса = монете номинал 10
+                    if(self.count_pulse == 5):
                         self.credit_coin_list.append(10)
                         print(f"Поступила монета номиналом: 10, время ожидания: {duration_all_pulse} сек.")    
                         

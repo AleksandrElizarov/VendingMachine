@@ -60,6 +60,8 @@ PIN_OUTPUT_OZON = 35 # Пин включения озонатора
 
 MILLILITRE_PULSE = 0.00222 #параметры датчика потока воды 1000мл=450пульов или 0,0022мл=1пульс
 
+TOTAL_AMOUNT_AVAILABLE = 0 # общая сумма, внесенная через монетоприемник/Мобильный кошелек
+
 LIQUID_AVAILABLE = 0 # оплаченный обьем для выдачи
 
 AMOUNT_MWALLET = 0 # сумма оплаченная через Мобильный кошелек
@@ -361,6 +363,7 @@ while main_loop_running:
         #Если внесена оплата монетой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_coin = coin_pulse.get_last_credit_coin()
         if(credit_coin > 0):
+            TOTAL_AMOUNT_AVAILABLE = TOTAL_AMOUNT_AVAILABLE + credit_coin
             LIQUID_AVAILABLE = LIQUID_AVAILABLE + credit_coin/PRICE_WATER
             LIST_TRANSACTION_COIN.append(credit_coin)
             screen.fill(BACKGROUND_COLOR)
@@ -371,6 +374,7 @@ while main_loop_running:
             
         #Если внесена оплата Q-код, то вывести на дисплей сумму и увеличить доступный обьем   
         if(AMOUNT_MWALLET > 0):
+            TOTAL_AMOUNT_AVAILABLE = TOTAL_AMOUNT_AVAILABLE + AMOUNT_MWALLET
             LIQUID_AVAILABLE = LIQUID_AVAILABLE + AMOUNT_MWALLET/PRICE_WATER
             screen.fill(BACKGROUND_COLOR)
             render_text_pygame(f"ВНЕСЕНО:  {AMOUNT_MWALLET} сом", font, TEXT_COLOR, (100, 250))
@@ -393,15 +397,16 @@ while main_loop_running:
                 sleep(0.1) #Дребезг контактов
                 
             if(ozon_running):
-                render_text_pygame(f"Озонатор работает, {time_ozon} сек.", font, TEXT_COLOR, (80, 130))
+                render_text_pygame(f"Озонатор работает, {time_ozon} сек.", font, TEXT_COLOR, (80, 30))
                 time_ozon = time_ozon - 1
                 if(time_ozon < 0):
                     ozon_running = False
                     set_output_GPIO(PIN_OUTPUT_OZON, 'LOW') #Выключаем Озонатор
                 sleep(1)    
             else:
-                render_text_pygame("Используйте озонатор", font, TEXT_COLOR, (100, 130))
-
+                render_text_pygame("Используйте озонатор", font, TEXT_COLOR, (100, 30))
+            
+            render_text_pygame(f"СУММА:  {TOTAL_AMOUNT_AVAILABLE} сом", font, TEXT_COLOR, (100, 110))
             render_text_pygame(f"ДОСТУПНО:  {round(LIQUID_AVAILABLE, 2)} л.", font, TEXT_COLOR, (100, 250))
             #Если используется debug_flow_sensor_vision, то можно видеть количество импульсов с датчика жидкости 
             if(debug_flow_sensor_vision):
@@ -416,10 +421,9 @@ while main_loop_running:
                 print("Скрипт запущен на Linux")
                 set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW') 
                 set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
-    
 
-                        
-                
+      
+            TOTAL_AMOUNT_AVAILABLE = 0  
             screen.fill(BACKGROUND_COLOR) 
             render_text_pygame("Добро пожаловать!", font, TEXT_COLOR, (125, 25))
             render_text_pygame(f"Стоимость: 1 литра = {PRICE_WATER} сом", font, TEXT_COLOR, (15, 95))
