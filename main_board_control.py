@@ -38,7 +38,7 @@ else:
 
 
 ##################### VERIABLES GLOBAL #####################
-SERIAL_NUMBER_MACHINE = '2222222'
+SERIAL_NUMBER_MACHINE = '1111111'
 DOMAIN = 'https://monitorvending.pythonanywhere.com/'
 
 #URL get QR-code by GET-method query str 'serial_number_machine'
