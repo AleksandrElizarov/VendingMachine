@@ -406,7 +406,7 @@ while main_loop_running:
             else:
                 render_text_pygame("Используйте озонатор", font, TEXT_COLOR, (100, 30))
             
-            render_text_pygame(f"СУММА:  {TOTAL_AMOUNT_AVAILABLE} сом", font, TEXT_COLOR, (100, 110))
+            render_text_pygame(f"СУММА:  {TOTAL_AMOUNT_AVAILABLE} сом", font, TEXT_COLOR, (100, 150))
             render_text_pygame(f"ДОСТУПНО:  {round(LIQUID_AVAILABLE, 2)} л.", font, TEXT_COLOR, (100, 250))
             #Если используется debug_flow_sensor_vision, то можно видеть количество импульсов с датчика жидкости 
             if(debug_flow_sensor_vision):

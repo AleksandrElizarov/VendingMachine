@@ -15,7 +15,7 @@ class CoinPulseHX916(object):
         
         self.coin_running = False
         self.count_pulse = 0
-        self.duration_pulses = 2.7 # Максимальная длительность в течение, которой поступают импульсы(секунд)
+        self.duration_pulses = 1 # Максимальная длительность в течение, которой поступают импульсы(секунд)
         self.start_time_from_pulse = 0
         self.last_time_pulse = 0
         
