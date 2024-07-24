@@ -13,7 +13,7 @@ import requests
 from PIL import Image
 import psutil
 from loguru import logger
-logger.add('logs.log', rotation='10MB')
+logger.add('logs/logs.log', rotation='10MB')
 
 import platform
 ##### Проверяем на какой операционной системе запущен скрипт, и соответственно импортируем модули #####
