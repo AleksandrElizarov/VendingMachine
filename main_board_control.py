@@ -21,20 +21,20 @@ import platform
 os_name = platform.system()
 
 if os_name == "Linux":
-    print("Скрипт запущен на Linux")
+    logger.info("Скрипт запущен на Linux")
     import RPi.GPIO as GPIO
     from CoinInterface.CoinPulseHX916 import CoinPulseHX916
     coin_pulse = CoinPulseHX916(GPIO_board_port=31) 
   
 elif os_name == "Windows":
-    print("Скрипт запущен на Windows")
+    logger.info("Скрипт запущен на Windows")
     from Stub_Win_GPIO_Coin.GPIO import GPIO
     from Stub_Win_GPIO_Coin.CoinPulseHX916 import CoinPulseHX916
 
     coin_pulse = CoinPulseHX916 
 
 else:
-    print("Скрипт запущен на другой операционной системе")    
+    logger.info("Скрипт запущен на другой операционной системе")    
 
 
 ##################### VERIABLES GLOBAL #####################
@@ -195,7 +195,7 @@ def loop_get_mwallet_push_alarm():
                 logger.exception(f'get_CPUparametrs_exception: {e}')
 
             ### Передача состояние аварий с сухих контактов и информации по CPU на сервер
-            print(f'cpu_percent: {cpu_percent}, cpu_temperature: {cpu_temperature}, virtual_memory: {virtual_memory}')
+            logger.info(f'cpu_percent: {cpu_percent}, cpu_temperature: {cpu_temperature}, virtual_memory: {virtual_memory}')
             try:
                 params = {
                 'serial_number_machine': SERIAL_NUMBER_MACHINE,
@@ -317,7 +317,7 @@ else:
 # Получение размеров экрана
 screen_width, screen_height = screen.get_size()
 # Вывод размеров экрана
-print(f'Ширина экрана: {screen_width}, Высота экрана: {screen_height}')
+logger.info(f'Ширина экрана: {screen_width}, Высота экрана: {screen_height}')
 
 pygame.display.set_caption('Vending Machine Display')
 
@@ -418,7 +418,7 @@ while main_loop_running:
         else:
             #Выключаем нагрузки
             if os_name == "Linux":
-                print("Скрипт запущен на Linux")
+                logger.info("Скрипт запущен на Linux")
                 set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW') 
                 set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
 
@@ -433,7 +433,7 @@ while main_loop_running:
             formatted_date = date_obj.strftime("%d.%m.%Y")
             render_text_pygame(f"Последняя замена фильтров: {formatted_date}", small_font, TEXT_COLOR, (10, 170))
             render_text_pygame("QR-код для оплаты", small_font, TEXT_COLOR, (10, 320))
-            print(DATE_FILTER_UPDATE)
+            logger.info(DATE_FILTER_UPDATE)
             if QR_LOADED:
                 # Загрузка изображения QR-кода в Pygame
                 with file_lock:
