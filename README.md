@@ -151,5 +151,49 @@ sudo ./LCD35-show
 ````
 Разрешение экрана 1280*720
 
+Установка PYTHON3.12
+
+Убедитесь, что установлены необходимые библиотеки для SSL
+````bash
+sudo apt-get update
+sudo apt-get install libssl-dev libffi-dev
+sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+sudo apt-get install -y libsmpeg-dev libportmidi-dev libavformat-dev libswscale-dev libjpeg-dev libfreetype6-dev
+
+
+````
+Пересоберите Python с поддержкой SSL
+````bash
+cd Python-3.12.0
+sudo make clean
+./configure --enable-optimizations --with-ssl
+make -j$(nproc)
+sudo make altinstall
+````
+Добавление новой версии Python в переменную PATH
+````bash
+nano ~/.bashrc
+export PATH="/usr/local/bin:$PATH"
+source ~/.bashrc
+python3 --version
+````
+Установка PIP
+
+````bash
+wget https://bootstrap.pypa.io/get-pip.py
+````
+
+````bash
+python3.12 get-pip.py
+````
+
+````bash
+python3.12 -m pip --version
+````
+
+
+
+
+
 
 
