@@ -23,4 +23,6 @@ class GPIO():
     def input(pin_input):
         print(f'input GPIO работает заглушка ')
         return False
+    def cleanup():
+        print(f'cleanup GPIO работает заглушка ')
     

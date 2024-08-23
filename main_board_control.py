@@ -55,6 +55,10 @@ PIN_INPUT_OZON = 40 # Пин кнопки Озонатора
 PIN_INPUT_START = 38 # Пин кнопки старт
 PIN_INPUT_STOP = 36 # Пин кнопики стоп
 
+PIN_INPUT_MAIN_POWER = 33 # Пин входа оценки электропитания
+PIN_INPUT_OPEN_DOOR = 28 # Пин открытия двери
+PIN_INPUT_LOW_WATER = 29 # Пин оценки уровня воды
+
 PIN_OUTPUT_VALVE = 37 # Пин клапана для выдачи воды
 PIN_OUTPUT_OZON = 35 # Пин включения озонатора
 
@@ -105,6 +109,9 @@ def init_GPIO():
     GPIO.setup(PIN_INPUT_OZON, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки Озонатора
     GPIO.setup(PIN_INPUT_START, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки СТАРТ
     GPIO.setup(PIN_INPUT_STOP, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин кнопки СТОП
+    GPIO.setup(PIN_INPUT_MAIN_POWER, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Пин электропитания
+    GPIO.setup(PIN_INPUT_OPEN_DOOR, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин двери
+    GPIO.setup(PIN_INPUT_LOW_WATER, GPIO.IN, pull_up_down=GPIO.PUD_UP) # Пин уровня воды
 
     # Настройка пина как выход
     GPIO.setup(PIN_OUTPUT_VALVE, GPIO.OUT) # Пин клапана для выдачи воды
@@ -359,7 +366,14 @@ while main_loop_running:
                 main_loop_running = False    
     
     try:
+        #Электропитание - обработка состояния input_state_bt_ozon = GPIO.input(PIN_INPUT_OZON)
+        input_state_main_power = GPIO.input(PIN_INPUT_MAIN_POWER)
+        if(input_state_main_power == False):
+            
         
+        
+
+
         #Если внесена оплата монетой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_coin = coin_pulse.get_last_credit_coin()
         if(credit_coin > 0):
@@ -454,26 +468,21 @@ while main_loop_running:
         #GPIO.cleanup();  
         # Заполнение экрана
         screen.fill(BACKGROUND_COLOR_ALARM)
-        render_text_pygame("Временные", font, TEXT_COLOR, (380, 200))
-        render_text_pygame("технические", font, TEXT_COLOR, (380, 300))
-        render_text_pygame("неполадки", font, TEXT_COLOR, (380, 400))
+        render_text_pygame("Аппарат", font, TEXT_COLOR, (380, 200))
+        render_text_pygame("временно", font, TEXT_COLOR, (380, 300))
+        render_text_pygame("не работает", font, TEXT_COLOR, (380, 400))
         
         # Обновление экрана
         pygame.display.flip()
         logger.exception(f'Exception-{e}')
-    '''    
-    # Проверка времени работы программы
-    if time.time() - start_time >= duration:
-        break
-    '''
+   
 #Выключаем нагрузки   
 set_output_GPIO(PIN_OUTPUT_VALVE, 'LOW')
 set_output_GPIO(PIN_OUTPUT_OZON, 'LOW')
 
-#GPIO.cleanup();
+GPIO.cleanup()
 pygame.quit()
 sys.exit()
-validator.close()  # Close the connection with the validator
     
 
 
