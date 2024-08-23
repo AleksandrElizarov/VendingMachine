@@ -366,13 +366,29 @@ while main_loop_running:
                 main_loop_running = False    
     
     try:
-        #Электропитание - обработка состояния input_state_bt_ozon = GPIO.input(PIN_INPUT_OZON)
-        input_state_main_power = GPIO.input(PIN_INPUT_MAIN_POWER)
-        if(input_state_main_power == False):
-            
-        
-        
 
+        #Открытие двери - обработка состояния
+        input_state_open_door = GPIO.input(PIN_INPUT_OPEN_DOOR)
+        if(input_state_open_door == True):
+            OPEN_DOOR = 'true'
+        else:
+            OPEN_DOOR = 'false' 
+
+        #Электропитание/Уровень воды в баке - обработка состояния
+        input_state_main_power = GPIO.input(PIN_INPUT_MAIN_POWER)
+        input_state_low_water = GPIO.input(PIN_INPUT_LOW_WATER)
+        if input_state_main_power:
+            MAIN_POWER = 'true'
+        else:
+            MAIN_POWER = 'false'
+
+        if input_state_low_water:
+            LOW_WATER = 'true'
+        else:
+            LOW_WATER = 'false'
+
+        if(input_state_main_power == False or input_state_low_water == True):
+            raise Exception("Нет электропитания или Низкий уровень воды в баке")
 
         #Если внесена оплата монетой, то вывести на дисплей сумму и увеличить доступный обьем
         credit_coin = coin_pulse.get_last_credit_coin()
