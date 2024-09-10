@@ -48,7 +48,6 @@ url_refresh_states_alarm_get_mwallet_amount = f'{DOMAIN}refresh_states_alarm_mac
 #URL create coin transaction in DataBase POST method {"serial_number_machine": "64-number", "coin_amount": coin_amount}
 url_create_coin_transaction = f'{DOMAIN}create_transaction/'
 
-COM_PORT = "/dev/ttyUSB0" # Название последовательного порта
 PIN_INPUT_SENSOR_FLOW = 32 # Пин датчика жидкости
 
 PIN_INPUT_OZON = 40 # Пин кнопки Озонатора
@@ -388,6 +387,7 @@ while main_loop_running:
             LOW_WATER = 'false'
 
         if(input_state_main_power == False or input_state_low_water == True):
+            sleep(3)
             raise Exception("Нет электропитания или Низкий уровень воды в баке")
 
         #Если внесена оплата монетой, то вывести на дисплей сумму и увеличить доступный обьем
